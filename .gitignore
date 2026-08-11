@@ -42,3 +42,13 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment variables — copy .env.example and fill in real values
+.env
+.env.*.local
+
+# Reference documents — internal use only, never committed
+/backend_agents.md
+/prompt_restaurant_frontend.md
+/ui-directions-preview.html
+/PLAN.md

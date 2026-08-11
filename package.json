@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:restaurant-directory": "node dist/restaurant-directory/server/server.mjs",
+    "serve:ssr:restaurant-directory": "node --env-file-if-exists=.env dist/restaurant-directory/server/server.mjs",
     "lint": "ng lint",
     "prepare": "husky"
   },

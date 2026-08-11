@@ -17,6 +17,18 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": {
+          "code": "en",
+          "subPath": "en"
+        },
+        "locales": {
+          "es": {
+            "translation": "src/locale/messages.es.xlf",
+            "subPath": "es"
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -42,6 +54,8 @@
           },
           "configurations": {
             "production": {
+              "localize": true,
+              "i18nMissingTranslation": "error",
               "budgets": [
                 {
                   "type": "initial",
@@ -57,6 +71,13 @@
               "outputHashing": "all"
             },
             "development": {
+              "localize": false,
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
+            "development-es": {
+              "localize": ["es"],
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
@@ -72,6 +93,9 @@
             },
             "development": {
               "buildTarget": "restaurant-directory:build:development"
+            },
+            "development-es": {
+              "buildTarget": "restaurant-directory:build:development-es"
             }
           },
           "defaultConfiguration": "development"

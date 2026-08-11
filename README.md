@@ -85,10 +85,7 @@ Deployed on [Render](https://render.com) as a Node.js web service. The backend A
 Render configuration:
 
 - **Build command**: `npm ci && npm run build`
-- **Start command**: the generated SSR server entry (`node dist/restaurant-directory/server/server.mjs` — confirm the exact path against your build output, since it is derived from the project name in `angular.json`)
-- **Environment**: set `API_BASE_URL`, `ALLOWED_HOSTS` (the Render-assigned or custom domain), and any Cloudinary-adjacent variables the backend itself requires. `PORT` is provided by Render automatically.
+- **Start command**: `npm run serve:ssr:restaurant-directory`, which runs `node --env-file-if-exists=.env dist/restaurant-directory/server/server.mjs` (verified against a real production build). The `--env-file-if-exists` flag is a no-op on Render, where environment variables are injected into the process directly rather than via a `.env` file — it exists purely so the same command also works for a local production-build preview.
+- **Environment**: set `API_BASE_URL` and `ALLOWED_HOSTS` (the Render-assigned or custom domain) in the Render dashboard, plus any Cloudinary-adjacent variables the backend itself requires. `PORT` is provided by Render automatically.
 
-Two things that will produce a `400` or a broken refresh flow if skipped:
-
-- The production hostname must be present in `ALLOWED_HOSTS` / the builder's `security.allowedHosts` — `@angular/ssr` rejects requests for unlisted hosts.
-- Render terminates TLS and proxies the request — the server must trust forwarded proxy headers for correct protocol/host resolution.
+One thing that will produce a `400` on every request if skipped: **`ALLOWED_HOSTS` must include the exact request host** — verified empirically against a real build: `@angular/ssr` rejects any `Host`/`X-Forwarded-Host` not on this list, and `localhost` is not allowed by default even in local testing.
