@@ -56,6 +56,18 @@ Native `@angular/localize`, compiled once and inlined per locale (`I18nInliner`,
 
 Full detail: `prompt_restaurant_frontend.md` § Internationalization (not committed — internal reference only).
 
+## Models
+
+Each resource has one `*.model.ts` file in `core/models/` holding three things together: the raw `*Dto` interface (snake_case, matching the API's wire format exactly — decimals and dates as strings), the app-facing model (camelCase, decimals parsed to `number`, timestamps parsed to `Date`), and a `to*()` mapper function between them. Resources whose write shape differs from their read shape (`RestaurantWrite` vs. `Restaurant`, `ReviewCreate`/`ReviewUpdate` vs. `Review`) get separate write types rather than one interface with optional fields — see `docs/API.md` for which resources this applies to.
+
+`core/utils/decimal.ts` (`parseDecimal`) and `core/utils/date.ts` (`parseApiDate`) back every mapper and throw on invalid input rather than silently producing `NaN`/`Invalid Date`. `core/utils/error-mapper.ts` (`mapApiError`) normalizes every DRF error shape into one discriminated `ApiError` union, branching on response shape and status code, never on message text. `core/utils/api-url.builder.ts` handles query serialization for the page-number and limit/offset pagination styles (structurally identical, both `{ count, next, previous, results }`); cursor pagination is deliberately unsupported there — a `cursor` value must only ever come from a `next`/`previous` URL the API already returned.
+
+## Environment configuration
+
+`environment.ts` (dev) hardcodes `apiBaseUrl: 'http://localhost:8000/api'` — a conventional local default, not a deployment secret. `environment.prod.ts` reads a bare global identifier, `NG_APP_API_BASE_URL` (declared in `environments/ng-app-globals.d.ts`), swapped in via `fileReplacements` on the `production` build configuration.
+
+That identifier is not `process.env.API_BASE_URL`: `@types/node`'s ambient `process` types every env value as `string | undefined`, which would force a non-null assertion on every read despite the build guaranteeing a literal string. Since `angular.json` is static JSON and can't embed a shell-interpolated value, `scripts/build.mjs` wraps `ng build` — it loads `.env` via `process.loadEnvFile()` when present (a no-op on Render, which injects env vars into the process directly), fails fast if `API_BASE_URL` is unset, and passes `--define=NG_APP_API_BASE_URL=<value>` so esbuild replaces the identifier with a literal string at build time, in both the browser and server bundles. `npm run build` runs this wrapper; `npm run watch` (the `development` configuration) never references the identifier at all, so it needs no wrapper.
+
 ## Auth
 
 `AuthStore` holds the access token and current user as signals, never persisted. `auth.interceptor.ts` attaches the bearer token and `withCredentials: true`. `error.interceptor.ts` implements 401-retry-once via `auth/refresh/`, excluding `auth/login/`, `auth/register/`, and `auth/refresh/` itself from the retry (see `docs/API.md`). Guards (`auth.guard.ts`, `owner.guard.ts`, `guest.guard.ts`) gate routes; `role` on `UserProfile` is treated as UX convenience only, never a security boundary, since the backend enforces the same rule independently.

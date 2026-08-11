@@ -85,6 +85,8 @@ _(Preserved from the project's original Angular conventions — these apply to e
 - **No `any`.** Use `unknown` and narrow explicitly.
 - Presentational components never inject a data service, never perform HTTP, and communicate only through `input()`/`output()`/`model()`.
 - Every list page owns exactly one query for its primary resource.
+- **Import style**: use the path aliases (`@core/*`, `@shared/*`, `@features/*`, `@layout/*`, `@environments/*`) when crossing into another top-level directory; use plain relative imports (`./`) for same-folder siblings. Don't mix — a cross-directory relative import (`../../../core/models/x`) should always be an alias instead.
+- **Never reference `process.env.*` in code that ships to the browser.** `@types/node`'s ambient `process` typing makes this compile, but `process` doesn't exist client-side and the reference will crash at runtime unless esbuild's `define` statically replaces it — and only `environment.prod.ts` is wired for that (see `NG_APP_API_BASE_URL` in `environments/ng-app-globals.d.ts`, injected by `scripts/build.mjs`). Server-only code (`server.ts`, interceptors that only run there) is the one place `process.env` is safe to read directly.
 
 ## 4. API contract rules
 

@@ -46,6 +46,8 @@ npm run build
 
 Production builds compile once and inline translations per locale (`"localize": true`), emitting separate browser/server bundles for `es` and `en` under `dist/`. `@angular/ssr`'s `AngularAppEngine` serves both locales from a single Node process — see [Deployment](#deployment).
 
+`npm run build` requires `API_BASE_URL` — it loads `.env` automatically if present and fails immediately with a clear message if the variable is unset anywhere (see [Environment variables](#environment-variables)). This is intentional: the production API URL is injected into the bundle at build time rather than hardcoded, so a missing value must stop the build, not silently ship a broken bundle.
+
 ## Testing
 
 ```bash
