@@ -39,6 +39,24 @@ Components inject `inject(RESTAURANT_DATA)` and never learn which implementation
 
 Both implementations reuse the same implementation-agnostic pieces: `ApiUrlBuilder` (query serialization), `ApiErrorMapper` (DRF error shapes → a discriminated `ApiError` union), the three pagination-envelope decoders, and the DTO↔model mappers that parse decimal strings and ISO timestamps. The only thing that differs between the two implementations is the fetching mechanism itself — which is also why both are tested against one shared contract suite rather than duplicated test files.
 
+### `httpResource()` implementation — implemented and verified
+
+`core/services/http-resource/http-resource.adapter.ts` holds the two pieces every one of the five resource services (`core/services/http-resource/*.http-resource.service.ts`) builds on:
+
+- **`toAsyncResource()`** adapts an `httpResource()` ref to `AsyncResource<T>`. It takes a `ResourceLike<T>` — a structural subset of `HttpResourceRef<T>` (just `value`/`isLoading`/`error`/`reload`) — rather than `HttpResourceRef<T>` itself. `WritableResource.set`/`update` take `T` in a contravariant (input) position, so `HttpResourceRef<Restaurant>` (built with a `defaultValue`, used by `list()`/`mine()`) structurally fails to satisfy a parameter typed `HttpResourceRef<Restaurant | undefined>` (built without one, used by `byId()`) even though both are equally valid to _read_ — reading only the four members this adapter touches sidesteps that.
+- **`createMutation()`** builds an `AsyncMutation<TInput, TResult>` from a one-shot `HttpClient` call (`firstValueFrom` + local `isPending`/`error` signals) for every `create()`/`update()`/`remove()`/`toggle()` method. Deliberately not `httpResource()`-based — mutations are imperative, one-shot calls, not reactive signal-driven queries.
+
+**Verified finding that corrected an initial wrong assumption:** reading `@angular/core/fesm2022/_resource-chunk.mjs` suggested `resource()`'s `encapsulateResourceError` wraps any thrown non-`Error`-like value (no string `.name`/`.message`) in a `ResourceWrappedError`, putting the original on `.cause` — since `error.interceptor.ts` throws the mapped `ApiError` object directly (never an `Error` instance), the adapter was first written to unwrap `.cause`. A real `HttpTestingController` 404 response proved this wrong for `httpResource()` specifically: `resource.error()` holds the exact `ApiError` object, completely unwrapped, no `.cause` involved. The adapter now casts `resource.error()` straight through `unknown` to `ApiError | undefined` — the `Signal<Error | undefined>` type is misleading at runtime for this resource factory. Caught by writing the test first and getting a genuine failure, not by re-reading the source harder.
+
+**Query mapping** (`core/utils/query-params.ts`, one `to*Params()` function per resource) and **pagination-envelope mapping** (`core/utils/pagination-mapper.ts`, `mapCountedPage`/`mapCursorPage`) are both implementation-agnostic and will be reused by the TanStack implementation in commit 8 — only the fetching mechanism differs, per the section above.
+
+**Cursor pagination's "load more" is not signal-driven.** `ReviewDataService.loadMore(url: string): Promise<CursorPage<Review>>` takes the API's own opaque `next`/`previous` URL verbatim and returns a plain `Promise` — never a `cursor` query param reconstructed from a `ReviewQuery`. Accumulating pages into one growing list is the calling feature page's job (commit 12), not the data layer's — the data layer's only responsibility is fetching and normalizing one page at a time.
+
+**Testing `httpResource()`-backed resources requires two things beyond a normal `HttpTestingController` test**, both confirmed empirically, not assumed:
+
+1. `TestBed.runInInjectionContext(() => service.list(query))` to call the resource-creating method — `httpResource()` is an `@initializerApiFunction` requiring an active injection context, same rule as `inject()`. Calling a method on an already-constructed service instance is not automatically in one.
+2. `TestBed.tick()` after creation triggers the resource's initial effect and issues the HTTP request; after `req.flush(...)`, the signal write does **not** happen synchronously inside `flush()` — `ResourceImpl#loadEffect` (`_resource-chunk.mjs`) is an `async` method, and JS guarantees the code after any `await` runs on a microtask, never synchronously, regardless of how fast the awaited value resolves. `await TestBed.inject(ApplicationRef).whenStable()` (a real, documented Angular primitive for "wait for pending async work to settle" — not a bare `Promise.resolve()` guess) is required before asserting on the resolved state.
+
 ## Rendering strategy
 
 | Route                                                     | Render mode | Why                                                     |
