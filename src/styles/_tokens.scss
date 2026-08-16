@@ -1,0 +1,21 @@
+// App-specific design tokens layered on top of Angular Material's system
+// variables (`--mat-sys-*`, set by `mat.theme()` in `_theme.scss`). Kept
+// separate from `_theme.scss`: this file holds values the M3 palette
+// generator doesn't produce on its own, not Material-specific theming calls.
+
+// Exact surface/ink hex values from the approved palette (see PLAN.md § UI/UX)
+// — the M3 generator's own neutral tones (derived algorithmically from the
+// terracotta seed) land close but not exactly on these, so they're set
+// explicitly rather than accepting the generator's approximation.
+$surface-light: #fdfbf7;
+$ink-light: #1c1917;
+// Dark scheme swaps the roles rather than reusing the light values — plain
+// black-on-cream would invert to cream-on-black, which is correct here since
+// both are already high-contrast, near-neutral tones.
+$surface-dark: $ink-light;
+$ink-dark: $surface-light;
+
+@mixin surface-overrides($surface, $on-surface) {
+  --mat-sys-surface: #{$surface};
+  --mat-sys-on-surface: #{$on-surface};
+}

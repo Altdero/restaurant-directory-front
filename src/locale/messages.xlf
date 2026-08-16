@@ -3,10 +3,50 @@
   <file id="ngi18n" original="ng.template">
     <unit id="error.throttled">
       <notes>
-        <note category="location">src/app/core/interceptors/error.interceptor.ts:63</note>
+        <note category="location">src/app/core/interceptors/error.interceptor.ts:65</note>
       </notes>
       <segment>
         <source>Too many requests. Please try again in a moment.</source>
+      </segment>
+    </unit>
+    <unit id="nav.wordmark">
+      <notes>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:17,18</note>
+      </notes>
+      <segment>
+        <source>Restaurant Directory</source>
+      </segment>
+    </unit>
+    <unit id="footer.tagline">
+      <notes>
+        <note category="location">src/app/layout/site-footer/site-footer.ts:14,18</note>
+      </notes>
+      <segment>
+        <source>Discover restaurants near you.</source>
+      </segment>
+    </unit>
+    <unit id="nav.switchLanguage">
+      <notes>
+        <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:30</note>
+      </notes>
+      <segment>
+        <source>Switch language to <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></source>
+      </segment>
+    </unit>
+    <unit id="theme.switchToLight">
+      <notes>
+        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:36</note>
+      </notes>
+      <segment>
+        <source>Switch to light mode</source>
+      </segment>
+    </unit>
+    <unit id="theme.switchToDark">
+      <notes>
+        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:37</note>
+      </notes>
+      <segment>
+        <source>Switch to dark mode</source>
       </segment>
     </unit>
   </file>

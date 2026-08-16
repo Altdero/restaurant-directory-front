@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+// Fraunces (display) and Inter (body/UI), self-hosted via @fontsource-variable
+// rather than a Google Fonts <link> — removes a render-blocking third-party
+// request and keeps SSR fast (PLAN.md § UI/UX). Imported here as plain CSS
+// `@use` rather than listed in angular.json's `styles` array: that array's
+// schema (`@angular/build:application`) requires every entry to be an actual
+// file path ending in a recognized extension, not a bare package specifier —
+// verified by a real build failing schema validation on the bare form.
+@use '@fontsource-variable/inter/index.css' as inter;
+@use '@fontsource-variable/fraunces/index.css' as fraunces;
+@use 'styles/theme';
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Fraunces Variable', serif;
+}

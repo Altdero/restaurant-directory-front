@@ -1,0 +1,63 @@
+// Terracotta/teal M3 theme (PLAN.md § UI/UX, "Option A — Warm appetite-forward").
+// `_theme-colors.scss` was generated once via:
+//   ng generate @angular/material:m3-theme --primary-color="#C2410C" \
+//     --tertiary-color="#0F766E" --directory=src/styles --defaults
+// and is committed as a static file, not regenerated on every build — the
+// generator computes a full M3 tonal palette from the seed colors using
+// Material Color Utilities, which has no pure-Sass equivalent `mat.theme()`
+// can call directly; `mat.theme()` itself only accepts an already-computed
+// palette map, never a bare hex string (verified against
+// `@angular/material/core/theming/_definition.scss`).
+@use '@angular/material' as mat;
+@use './theme-colors' as theme-colors;
+@use './tokens';
+
+@mixin _color-scheme($type) {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: $type,
+        primary: theme-colors.$primary-palette,
+        tertiary: theme-colors.$tertiary-palette,
+      ),
+    )
+  );
+}
+
+html {
+  // Defers to the OS by default; an explicit `data-theme` attribute (set by
+  // `ThemeService`, persisted in a cookie so SSR can render the right scheme
+  // on first paint) overrides it via higher selector specificity below.
+  color-scheme: light dark;
+
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: theme-colors.$primary-palette,
+        tertiary: theme-colors.$tertiary-palette,
+      ),
+      typography: (
+        plain-family: 'Inter Variable',
+        brand-family: 'Fraunces Variable',
+      ),
+      density: 0,
+    )
+  );
+  @include tokens.surface-overrides(tokens.$surface-light, tokens.$ink-light);
+
+  @media (prefers-color-scheme: dark) {
+    @include _color-scheme(dark);
+    @include tokens.surface-overrides(tokens.$surface-dark, tokens.$ink-dark);
+  }
+
+  &[data-theme='light'] {
+    @include _color-scheme(light);
+    @include tokens.surface-overrides(tokens.$surface-light, tokens.$ink-light);
+  }
+
+  &[data-theme='dark'] {
+    @include _color-scheme(dark);
+    @include tokens.surface-overrides(tokens.$surface-dark, tokens.$ink-dark);
+  }
+}

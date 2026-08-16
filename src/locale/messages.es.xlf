@@ -7,5 +7,35 @@
         <target>Demasiadas solicitudes. Inténtalo de nuevo en un momento.</target>
       </segment>
     </unit>
+    <unit id="nav.wordmark">
+      <segment>
+        <source>Restaurant Directory</source>
+        <target>Directorio de Restaurantes</target>
+      </segment>
+    </unit>
+    <unit id="footer.tagline">
+      <segment>
+        <source>Discover restaurants near you.</source>
+        <target>Descubre restaurantes cerca de ti.</target>
+      </segment>
+    </unit>
+    <unit id="nav.switchLanguage">
+      <segment>
+        <source>Switch language to <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></source>
+        <target>Cambiar idioma a <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></target>
+      </segment>
+    </unit>
+    <unit id="theme.switchToLight">
+      <segment>
+        <source>Switch to light mode</source>
+        <target>Cambiar a modo claro</target>
+      </segment>
+    </unit>
+    <unit id="theme.switchToDark">
+      <segment>
+        <source>Switch to dark mode</source>
+        <target>Cambiar a modo oscuro</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
