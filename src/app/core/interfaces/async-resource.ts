@@ -17,7 +17,16 @@ export interface AsyncResource<T> {
   reload(): void;
 }
 
-/** Implementation-agnostic write contract for create/update/delete flows. */
+/**
+ * Implementation-agnostic write contract for create/update/delete flows.
+ *
+ * Must also be created during an active injection context, same as
+ * `AsyncResource` — the `httpResource()` family's mutations happen not to
+ * need this (they're plain `HttpClient` calls), but the TanStack family's
+ * `injectMutation()` does, and the calling convention must be uniform
+ * across both implementations for a component to stay agnostic of which
+ * one it received.
+ */
 export interface AsyncMutation<TInput, TResult> {
   readonly isPending: Signal<boolean>;
   readonly error: Signal<ApiError | undefined>;

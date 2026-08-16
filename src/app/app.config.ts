@@ -6,6 +6,8 @@ import { authInterceptor } from '@core/interceptors/auth.interceptor';
 import { errorInterceptor } from '@core/interceptors/error.interceptor';
 import { loggingInterceptor } from '@core/interceptors/logging.interceptor';
 import { provideHttpResourceDataLayer } from '@core/services/http-resource/provide-http-resource-data-layer';
+import { provideTanStackDataLayer } from '@core/services/tanstack/provide-tanstack-data-layer';
+import { environment } from '@environments/environment';
 
 import { routes } from './app.routes';
 
@@ -15,6 +17,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withInterceptors([loggingInterceptor, authInterceptor, errorInterceptor])),
-    provideHttpResourceDataLayer(),
+    environment.dataLayer === 'tanstack'
+      ? provideTanStackDataLayer()
+      : provideHttpResourceDataLayer(),
   ],
 };

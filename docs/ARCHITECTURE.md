@@ -29,13 +29,15 @@ export const RESTAURANT_DATA = new InjectionToken<RestaurantDataService>('RESTAU
 
 ```ts
 providers: [
-  ...(environment.dataLayer === 'tanstack'
+  environment.dataLayer === 'tanstack'
     ? provideTanStackDataLayer()
-    : provideHttpResourceDataLayer()),
+    : provideHttpResourceDataLayer(),
 ];
 ```
 
 Components inject `inject(RESTAURANT_DATA)` and never learn which implementation they received. Adding a sixth resource means adding one interface and two implementations — no existing file changes.
+
+**Both implementations ship in the browser bundle regardless of the switch — a known, accepted tradeoff, not an oversight.** `environment.dataLayer` is a plain runtime object property, not a build-time constant substituted via `--define` (unlike `NG_APP_API_BASE_URL`), so esbuild's dead-code elimination cannot prove which branch of the ternary above actually runs and keeps both. This pushed the production initial-bundle size from ~420 kB to ~627 kB (commit 8), which required raising `angular.json`'s `budgets[0].maximumWarning` from `500kB` to `650kB` — a deliberate, documented change, not a silenced warning. The whole point of this architecture is demonstrating two interchangeable, fully-implemented data layers side by side, so shipping both is consistent with that goal for a project at this stage. If bundle size becomes a real concern later, the upgrade path mirrors `NG_APP_API_BASE_URL`: promote `dataLayer` to a build-time `--define`'d global, so only the selected branch survives tree-shaking — an additive change, not a re-plan.
 
 Both implementations reuse the same implementation-agnostic pieces: `ApiUrlBuilder` (query serialization), `ApiErrorMapper` (DRF error shapes → a discriminated `ApiError` union), the three pagination-envelope decoders, and the DTO↔model mappers that parse decimal strings and ISO timestamps. The only thing that differs between the two implementations is the fetching mechanism itself — which is also why both are tested against one shared contract suite rather than duplicated test files.
 
@@ -48,7 +50,7 @@ Both implementations reuse the same implementation-agnostic pieces: `ApiUrlBuild
 
 **Verified finding that corrected an initial wrong assumption:** reading `@angular/core/fesm2022/_resource-chunk.mjs` suggested `resource()`'s `encapsulateResourceError` wraps any thrown non-`Error`-like value (no string `.name`/`.message`) in a `ResourceWrappedError`, putting the original on `.cause` — since `error.interceptor.ts` throws the mapped `ApiError` object directly (never an `Error` instance), the adapter was first written to unwrap `.cause`. A real `HttpTestingController` 404 response proved this wrong for `httpResource()` specifically: `resource.error()` holds the exact `ApiError` object, completely unwrapped, no `.cause` involved. The adapter now casts `resource.error()` straight through `unknown` to `ApiError | undefined` — the `Signal<Error | undefined>` type is misleading at runtime for this resource factory. Caught by writing the test first and getting a genuine failure, not by re-reading the source harder.
 
-**Query mapping** (`core/utils/query-params.ts`, one `to*Params()` function per resource) and **pagination-envelope mapping** (`core/utils/pagination-mapper.ts`, `mapCountedPage`/`mapCursorPage`) are both implementation-agnostic and will be reused by the TanStack implementation in commit 8 — only the fetching mechanism differs, per the section above.
+**Query mapping** (`core/utils/query-params.ts`, one `to*Params()` function per resource) and **pagination-envelope mapping** (`core/utils/pagination-mapper.ts`, `mapCountedPage`/`mapCursorPage`) are both implementation-agnostic and reused by the TanStack implementation below — only the fetching mechanism differs, per the section above.
 
 **Cursor pagination's "load more" is not signal-driven.** `ReviewDataService.loadMore(url: string): Promise<CursorPage<Review>>` takes the API's own opaque `next`/`previous` URL verbatim and returns a plain `Promise` — never a `cursor` query param reconstructed from a `ReviewQuery`. Accumulating pages into one growing list is the calling feature page's job (commit 12), not the data layer's — the data layer's only responsibility is fetching and normalizing one page at a time.
 
@@ -56,6 +58,20 @@ Both implementations reuse the same implementation-agnostic pieces: `ApiUrlBuild
 
 1. `TestBed.runInInjectionContext(() => service.list(query))` to call the resource-creating method — `httpResource()` is an `@initializerApiFunction` requiring an active injection context, same rule as `inject()`. Calling a method on an already-constructed service instance is not automatically in one.
 2. `TestBed.tick()` after creation triggers the resource's initial effect and issues the HTTP request; after `req.flush(...)`, the signal write does **not** happen synchronously inside `flush()` — `ResourceImpl#loadEffect` (`_resource-chunk.mjs`) is an `async` method, and JS guarantees the code after any `await` runs on a microtask, never synchronously, regardless of how fast the awaited value resolves. `await TestBed.inject(ApplicationRef).whenStable()` (a real, documented Angular primitive for "wait for pending async work to settle" — not a bare `Promise.resolve()` guess) is required before asserting on the resolved state.
+
+### TanStack Query implementation — implemented and verified
+
+`core/services/tanstack/tanstack.adapter.ts` mirrors the httpResource adapter's shape (`toAsyncResource()`, plus `toAsyncMutation()` for writes) but the mechanics underneath are genuinely different, each one verified rather than assumed:
+
+- **No error-wrapping to undo, unlike `httpResource()`.** TanStack Query does not run thrown values through anything like Angular's `encapsulateResourceError` — `query.error()` holds exactly what `error.interceptor.ts` threw. The only real adaptation is `null` → `undefined`, since `QueryObserverBaseResult.error` is typed `TError | null` (TanStack's own convention) against `AsyncResource.error: ApiError | undefined`.
+- **`injectMutation()` requires an active injection context, unlike the httpResource family's `createMutation()`.** The httpResource mutations are plain `HttpClient` calls with no such requirement; TanStack's are not. Since a component must call `create()`/`update()`/etc. the same way regardless of which implementation it received, `AsyncMutation`'s doc comment in `core/interfaces/async-resource.ts` now states the stricter (TanStack) requirement as the contract for both.
+- **`retry: false` is set on the shared `QueryClient`** (`provide-tanstack-data-layer.ts`) for both queries and mutations. TanStack's default (3 retries, exponential backoff) would silently re-attempt failures this app treats as final (a 400 or 404 isn't transient), and the one genuinely retryable case — an expired access token — is already handled once, synchronously, inside `error.interceptor.ts`, before TanStack ever observes a failure.
+
+**Testing TanStack-backed resources needed real investigation into `@tanstack/query-core`'s actual source** (shipped as readable TypeScript in `node_modules/@tanstack/query-core/src/`, not just `.d.ts`), because the first two testing approaches that worked for `httpResource()` did not transfer:
+
+1. `ApplicationRef.whenStable()` alone resolved _before_ the query's state ever settled. Cause, confirmed by reading `create-base-query.mjs`: the Angular `PendingTasks` entry `whenStable()` waits for is only registered _inside_ the callback passed to `observer.subscribe(notifyManager.batchCalls(...))`, and `notifyManager`'s default scheduler (`@tanstack/query-core`'s `systemSetTimeoutZero`) dispatches that callback via a real `setTimeout(0)` — a macrotask, not a microtask. `whenStable()`, called immediately after a synchronous `HttpTestingController.flush()`, checks stability before that macrotask has ever fired, so nothing is pending yet and it resolves immediately.
+2. The fix is **not** to await a real `setTimeout(0)` in every test (workable, but it litters every test with a timing detail and a small real delay). Instead, `notifyManager.setScheduler((callback) => callback())` in `beforeEach` (restored to the real default in `afterEach`) makes TanStack's own notification dispatch synchronous for the whole suite — a one-line, documented override rather than a per-test tactical wait.
+3. Even with that override, one `await Promise.resolve()` per query assertion was _still_ not always sufficient — `Mutation#execute`/the query fetch path cross more than one microtask boundary internally (`createRetryer`, `firstValueFrom`), and the exact number isn't a contract worth hardcoding against. `await vi.waitFor(() => { TestBed.tick(); if (resource.isLoading()) throw new Error(...); })` — Vitest's poll-until-it-passes helper — is used for query assertions instead, so the test doesn't depend on TanStack's internal call-stack depth. Mutations only ever needed one `await Promise.resolve()` before the HTTP request appeared (`Mutation#execute` is a single `async` method, so exactly one hop), and the mutation's own returned `Promise` can just be awaited directly for the result, sidestepping the polling question entirely for that half of the test.
 
 ## Rendering strategy
 
