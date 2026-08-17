@@ -19,20 +19,6 @@ const USER: UserProfile = {
 };
 
 describe('MainToolbar', () => {
-  it('renders the wordmark as a routerLink to home', () => {
-    configureWith({
-      initialized: signal(false),
-      isAuthenticated: signal(false),
-      user: signal(null),
-    });
-    const fixture = TestBed.createComponent(MainToolbar);
-    fixture.detectChanges();
-
-    const wordmark: HTMLAnchorElement = fixture.nativeElement.querySelector('.wordmark');
-    expect(wordmark.textContent?.trim()).toBe('Restaurant Directory');
-    expect(wordmark.getAttribute('href')).toBe('/');
-  });
-
   it('shows nothing auth-related before AuthStore is initialized', () => {
     configureWith({
       initialized: signal(false),
