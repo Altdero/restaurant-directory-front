@@ -9,12 +9,156 @@
         <source>Too many requests. Please try again in a moment.</source>
       </segment>
     </unit>
+    <unit id="error.generic">
+      <notes>
+        <note category="location">src/app/core/utils/api-error-message.ts:17</note>
+      </notes>
+      <segment>
+        <source>Something went wrong. Please try again.</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.title">
+      <notes>
+        <note category="location">src/app/features/auth/login-page/login-page.ts:26</note>
+      </notes>
+      <segment>
+        <source>Log in</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.username">
+      <notes>
+        <note category="location">src/app/features/auth/login-page/login-page.ts:29,30</note>
+      </notes>
+      <segment>
+        <source>Username</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.password">
+      <notes>
+        <note category="location">src/app/features/auth/login-page/login-page.ts:34,36</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.submit">
+      <notes>
+        <note category="location">src/app/features/auth/login-page/login-page.ts:51,53</note>
+      </notes>
+      <segment>
+        <source>Log in</source>
+      </segment>
+    </unit>
+    <unit id="auth.login.noAccount">
+      <notes>
+        <note category="location">src/app/features/auth/login-page/login-page.ts:57,58</note>
+      </notes>
+      <segment>
+        <source> Don&apos;t have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/register&quot;&gt;" dispEnd="&lt;/a&gt;">Register</pc></source>
+      </segment>
+    </unit>
+    <unit id="auth.register.title">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:1</note>
+      </notes>
+      <segment>
+        <source>Register</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.username">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:4,5</note>
+      </notes>
+      <segment>
+        <source>Username</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.email">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:9,10</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.firstName">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:14,15</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.lastName">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:19,20</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.password">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:24,25</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.passwordConfirm">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:29,32</note>
+      </notes>
+      <segment>
+        <source>Confirm password</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.passwordMismatch">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:40,44</note>
+      </notes>
+      <segment>
+        <source> Passwords do not match. </source>
+      </segment>
+    </unit>
+    <unit id="auth.register.submit">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:52,55</note>
+      </notes>
+      <segment>
+        <source>Create account</source>
+      </segment>
+    </unit>
+    <unit id="auth.register.hasAccount">
+      <notes>
+        <note category="location">src/app/features/auth/register-page/register-page.html:58,60</note>
+      </notes>
+      <segment>
+        <source> Already have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/login&quot;&gt;" dispEnd="&lt;/a&gt;">Log in</pc></source>
+      </segment>
+    </unit>
     <unit id="nav.wordmark">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:17,18</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:23,24</note>
       </notes>
       <segment>
         <source>Restaurant Directory</source>
+      </segment>
+    </unit>
+    <unit id="nav.login">
+      <notes>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:29,30</note>
+      </notes>
+      <segment>
+        <source>Log in</source>
+      </segment>
+    </unit>
+    <unit id="nav.register">
+      <notes>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:30,33</note>
+      </notes>
+      <segment>
+        <source>Register</source>
       </segment>
     </unit>
     <unit id="footer.tagline">
@@ -25,9 +169,33 @@
         <source>Discover restaurants near you.</source>
       </segment>
     </unit>
+    <unit id="userMenu.profile">
+      <notes>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:14,16</note>
+      </notes>
+      <segment>
+        <source>Profile</source>
+      </segment>
+    </unit>
+    <unit id="userMenu.myRestaurants">
+      <notes>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:17,20</note>
+      </notes>
+      <segment>
+        <source> My restaurants </source>
+      </segment>
+    </unit>
+    <unit id="userMenu.logout">
+      <notes>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:20,22</note>
+      </notes>
+      <segment>
+        <source>Log out</source>
+      </segment>
+    </unit>
     <unit id="nav.switchLanguage">
       <notes>
-        <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:30</note>
+        <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:35</note>
       </notes>
       <segment>
         <source>Switch language to <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></source>
@@ -35,7 +203,7 @@
     </unit>
     <unit id="theme.switchToLight">
       <notes>
-        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:36</note>
+        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:41</note>
       </notes>
       <segment>
         <source>Switch to light mode</source>
@@ -43,7 +211,7 @@
     </unit>
     <unit id="theme.switchToDark">
       <notes>
-        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:37</note>
+        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:42</note>
       </notes>
       <segment>
         <source>Switch to dark mode</source>

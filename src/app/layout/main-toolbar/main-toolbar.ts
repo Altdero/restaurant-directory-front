@@ -1,21 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
+import { AuthStore } from '@core/services/auth/auth.store';
 import { LanguageSwitcher } from '@shared/components/language-switcher/language-switcher';
 import { ThemeToggle } from '@shared/components/theme-toggle/theme-toggle';
 
+import { UserMenu } from '../user-menu/user-menu';
+
 /**
- * Auth-aware content (login/register links, then a `UserMenu` once signed
- * in) is commit 10's job — `AuthStore` doesn't exist yet, and a link to a
- * route that doesn't exist yet would be worse than no link at all.
+ * Gated on `authStore.initialized()` so the toolbar doesn't flash
+ * logged-out links before the silent session-rehydration attempt (see
+ * `auth.store.ts`) resolves. SSR/prerendered output always renders the
+ * logged-out branch — there is no browser cookie jar to rehydrate from on
+ * the server — matching the same accepted single-frame-flash tradeoff
+ * already documented for dark mode on prerendered routes.
  */
 @Component({
   selector: 'app-main-toolbar',
-  imports: [MatToolbarModule, RouterLink, LanguageSwitcher, ThemeToggle],
+  imports: [MatToolbarModule, RouterLink, LanguageSwitcher, ThemeToggle, UserMenu],
   template: `
     <mat-toolbar>
       <a routerLink="/" class="wordmark" i18n="@@nav.wordmark">Restaurant Directory</a>
       <span class="spacer"></span>
+      @if (authStore.initialized()) {
+        @if (authStore.isAuthenticated() && authStore.user(); as user) {
+          <app-user-menu [user]="user" (logout)="authStore.logout()" />
+        } @else {
+          <a routerLink="/login" i18n="@@nav.login">Log in</a>
+          <a routerLink="/register" i18n="@@nav.register">Register</a>
+        }
+      }
       <app-theme-toggle />
       <app-language-switcher />
     </mat-toolbar>
@@ -34,4 +48,6 @@ import { ThemeToggle } from '@shared/components/theme-toggle/theme-toggle';
     }
   `,
 })
-export class MainToolbar {}
+export class MainToolbar {
+  protected readonly authStore = inject(AuthStore);
+}

@@ -1,0 +1,60 @@
+<app-auth-card title="Register" i18n-title="@@auth.register.title">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@auth.register.username">Username</mat-label>
+      <input matInput formControlName="username" autocomplete="username" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@auth.register.email">Email</mat-label>
+      <input matInput type="email" formControlName="email" autocomplete="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@auth.register.firstName">First name</mat-label>
+      <input matInput formControlName="first_name" autocomplete="given-name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@auth.register.lastName">Last name</mat-label>
+      <input matInput formControlName="last_name" autocomplete="family-name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@auth.register.password">Password</mat-label>
+      <input matInput type="password" formControlName="password" autocomplete="new-password" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label i18n="@@auth.register.passwordConfirm">Confirm password</mat-label>
+      <input
+        matInput
+        type="password"
+        formControlName="password_confirm"
+        autocomplete="new-password"
+      />
+    </mat-form-field>
+
+    @if (form.errors?.['passwordMismatch']) {
+      <p class="error" role="alert" i18n="@@auth.register.passwordMismatch">
+        Passwords do not match.
+      </p>
+    }
+
+    @if (topLevelError(); as message) {
+      <p class="error" role="alert">{{ message }}</p>
+    }
+
+    <button mat-flat-button type="submit" [disabled]="form.invalid || isSubmitting()">
+      @if (isSubmitting()) {
+        <mat-progress-spinner diameter="20" mode="indeterminate" />
+      } @else {
+        <span i18n="@@auth.register.submit">Create account</span>
+      }
+    </button>
+  </form>
+
+  <span footer i18n="@@auth.register.hasAccount">
+    Already have an account? <a routerLink="/login">Log in</a>
+  </span>
+</app-auth-card>

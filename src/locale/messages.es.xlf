@@ -37,5 +37,131 @@
         <target>Cambiar a modo oscuro</target>
       </segment>
     </unit>
+    <unit id="error.generic">
+      <segment>
+        <source>Something went wrong. Please try again.</source>
+        <target>Algo salió mal. Inténtalo de nuevo.</target>
+      </segment>
+    </unit>
+    <unit id="nav.login">
+      <segment>
+        <source>Log in</source>
+        <target>Iniciar sesión</target>
+      </segment>
+    </unit>
+    <unit id="nav.register">
+      <segment>
+        <source>Register</source>
+        <target>Registrarse</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.title">
+      <segment>
+        <source>Log in</source>
+        <target>Iniciar sesión</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.username">
+      <segment>
+        <source>Username</source>
+        <target>Nombre de usuario</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.password">
+      <segment>
+        <source>Password</source>
+        <target>Contraseña</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.submit">
+      <segment>
+        <source>Log in</source>
+        <target>Iniciar sesión</target>
+      </segment>
+    </unit>
+    <unit id="auth.login.noAccount">
+      <segment>
+        <source> Don&apos;t have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/register&quot;&gt;" dispEnd="&lt;/a&gt;">Register</pc></source>
+        <target> ¿No tienes una cuenta? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/register&quot;&gt;" dispEnd="&lt;/a&gt;">Regístrate</pc></target>
+      </segment>
+    </unit>
+    <unit id="auth.register.title">
+      <segment>
+        <source>Register</source>
+        <target>Registrarse</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.username">
+      <segment>
+        <source>Username</source>
+        <target>Nombre de usuario</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.email">
+      <segment>
+        <source>Email</source>
+        <target>Correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.firstName">
+      <segment>
+        <source>First name</source>
+        <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.lastName">
+      <segment>
+        <source>Last name</source>
+        <target>Apellido</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.password">
+      <segment>
+        <source>Password</source>
+        <target>Contraseña</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.passwordConfirm">
+      <segment>
+        <source>Confirm password</source>
+        <target>Confirmar contraseña</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.passwordMismatch">
+      <segment>
+        <source> Passwords do not match. </source>
+        <target> Las contraseñas no coinciden. </target>
+      </segment>
+    </unit>
+    <unit id="auth.register.submit">
+      <segment>
+        <source>Create account</source>
+        <target>Crear cuenta</target>
+      </segment>
+    </unit>
+    <unit id="auth.register.hasAccount">
+      <segment>
+        <source> Already have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/login&quot;&gt;" dispEnd="&lt;/a&gt;">Log in</pc></source>
+        <target> ¿Ya tienes una cuenta? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/login&quot;&gt;" dispEnd="&lt;/a&gt;">Inicia sesión</pc></target>
+      </segment>
+    </unit>
+    <unit id="userMenu.profile">
+      <segment>
+        <source>Profile</source>
+        <target>Perfil</target>
+      </segment>
+    </unit>
+    <unit id="userMenu.myRestaurants">
+      <segment>
+        <source> My restaurants </source>
+        <target> Mis restaurantes </target>
+      </segment>
+    </unit>
+    <unit id="userMenu.logout">
+      <segment>
+        <source>Log out</source>
+        <target>Cerrar sesión</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
