@@ -21,6 +21,7 @@ import { UserMenu } from '../user-menu/user-menu';
   template: `
     <mat-toolbar>
       <a routerLink="/" class="wordmark" i18n="@@nav.wordmark">Restaurant Directory</a>
+      <a routerLink="/restaurants" i18n="@@nav.restaurants">Restaurants</a>
       <span class="spacer"></span>
       @if (authStore.initialized()) {
         @if (authStore.isAuthenticated() && authStore.user(); as user) {

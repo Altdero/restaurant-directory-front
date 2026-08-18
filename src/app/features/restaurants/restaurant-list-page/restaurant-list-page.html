@@ -1,0 +1,29 @@
+<div class="restaurant-list-page">
+  <h1 i18n="@@restaurantListPage.title">Restaurants</h1>
+
+  <app-restaurant-filters
+    [categories]="categories.value()?.results ?? []"
+    [category]="category()"
+    [city]="city()"
+    [priceRange]="priceRange()"
+    [minRating]="minRating()"
+    [search]="search()"
+    (filtersChange)="onFiltersChange($event)"
+  />
+
+  <app-restaurant-grid
+    [restaurants]="restaurants.value()?.results ?? []"
+    [isLoading]="restaurants.isLoading()"
+    [error]="restaurants.error()"
+    (retry)="restaurants.reload()"
+  />
+
+  @if ((restaurants.value()?.count ?? 0) > pageSize) {
+    <app-paginator-bar
+      [count]="restaurants.value()?.count ?? 0"
+      [pageSize]="pageSize"
+      [page]="page()"
+      (pageChange)="onPageChange($event)"
+    />
+  }
+</div>

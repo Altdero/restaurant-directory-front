@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="restaurant-filters">
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@restaurantFilters.search">Search</mat-label>
+    <input matInput formControlName="search" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@restaurantFilters.category">Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option i18n="@@restaurantFilters.anyCategory">Any category</mat-option>
+      @for (category of categories(); track category.id) {
+        <mat-option [value]="category.id">{{ category.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@restaurantFilters.city">City</mat-label>
+    <input matInput formControlName="city" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@restaurantFilters.priceRange">Price</mat-label>
+    <mat-select formControlName="priceRange">
+      <mat-option i18n="@@restaurantFilters.anyPrice">Any price</mat-option>
+      @for (price of priceRanges; track price) {
+        <mat-option [value]="price">{{ price }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@restaurantFilters.minRating">Minimum rating</mat-label>
+    <mat-select formControlName="minRating">
+      <mat-option i18n="@@restaurantFilters.anyRating">Any rating</mat-option>
+      @for (rating of ratings; track rating) {
+        <mat-option [value]="rating">{{ rating }}+</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-flat-button type="submit" i18n="@@restaurantFilters.apply">Apply</button>
+    <button mat-button type="button" (click)="reset()" i18n="@@restaurantFilters.clear">
+      Clear
+    </button>
+  </div>
+</form>

@@ -137,6 +137,110 @@
         <source> Already have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/login&quot;&gt;" dispEnd="&lt;/a&gt;">Log in</pc></source>
       </segment>
     </unit>
+    <unit id="restaurantFilters.search">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Search</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.category">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:8,9</note>
+      </notes>
+      <segment>
+        <source>Category</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.anyCategory">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:10,11</note>
+      </notes>
+      <segment>
+        <source>Any category</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.city">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:18,19</note>
+      </notes>
+      <segment>
+        <source>City</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.priceRange">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:23,24</note>
+      </notes>
+      <segment>
+        <source>Price</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.anyPrice">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:25,26</note>
+      </notes>
+      <segment>
+        <source>Any price</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.minRating">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:33,34</note>
+      </notes>
+      <segment>
+        <source>Minimum rating</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.anyRating">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:35,36</note>
+      </notes>
+      <segment>
+        <source>Any rating</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.apply">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:43,44</note>
+      </notes>
+      <segment>
+        <source>Apply</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.clear">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:45,49</note>
+      </notes>
+      <segment>
+        <source> Clear </source>
+      </segment>
+    </unit>
+    <unit id="restaurantGrid.emptyMessage">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-grid/restaurant-grid.ts:51</note>
+      </notes>
+      <segment>
+        <source>No restaurants match your filters.</source>
+      </segment>
+    </unit>
+    <unit id="restaurantGrid.errorMessage">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-grid/restaurant-grid.ts:57</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t load restaurants. Please try again.</source>
+      </segment>
+    </unit>
+    <unit id="restaurantListPage.title">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.html:2,5</note>
+      </notes>
+      <segment>
+        <source>Restaurants</source>
+      </segment>
+    </unit>
     <unit id="nav.wordmark">
       <notes>
         <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:23,24</note>
@@ -145,9 +249,17 @@
         <source>Restaurant Directory</source>
       </segment>
     </unit>
+    <unit id="nav.restaurants">
+      <notes>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:24,25</note>
+      </notes>
+      <segment>
+        <source>Restaurants</source>
+      </segment>
+    </unit>
     <unit id="nav.login">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:29,30</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:30,31</note>
       </notes>
       <segment>
         <source>Log in</source>
@@ -155,7 +267,7 @@
     </unit>
     <unit id="nav.register">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:30,33</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:31,34</note>
       </notes>
       <segment>
         <source>Register</source>
@@ -193,12 +305,68 @@
         <source>Log out</source>
       </segment>
     </unit>
+    <unit id="errorState.retry">
+      <notes>
+        <note category="location">src/app/shared/components/error-state/error-state.ts:12,14</note>
+      </notes>
+      <segment>
+        <source> Try again </source>
+      </segment>
+    </unit>
+    <unit id="errorState.defaultMessage">
+      <notes>
+        <note category="location">src/app/shared/components/error-state/error-state.ts:26</note>
+      </notes>
+      <segment>
+        <source>Something went wrong loading this content.</source>
+      </segment>
+    </unit>
     <unit id="nav.switchLanguage">
       <notes>
         <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:35</note>
       </notes>
       <segment>
         <source>Switch language to <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></source>
+      </segment>
+    </unit>
+    <unit id="paginatorBar.previous">
+      <notes>
+        <note category="location">src/app/shared/components/paginator-bar/paginator-bar.ts:24,28</note>
+      </notes>
+      <segment>
+        <source>Previous page</source>
+      </segment>
+    </unit>
+    <unit id="paginatorBar.pageIndicator">
+      <notes>
+        <note category="location">src/app/shared/components/paginator-bar/paginator-bar.ts:29,31</note>
+      </notes>
+      <segment>
+        <source> Page <ph id="0" equiv="INTERPOLATION" disp="{{ page() }}"/> of <ph id="1" equiv="INTERPOLATION_1" disp="{{ pageCount() }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="paginatorBar.next">
+      <notes>
+        <note category="location">src/app/shared/components/paginator-bar/paginator-bar.ts:37,40</note>
+      </notes>
+      <segment>
+        <source>Next page</source>
+      </segment>
+    </unit>
+    <unit id="ratingStars.label">
+      <notes>
+        <note category="location">src/app/shared/components/rating-stars/rating-stars.ts:59</note>
+      </notes>
+      <segment>
+        <source>Rated <ph id="0" equiv="PH" disp="this.clamp(this.rating())"/> out of 5</source>
+      </segment>
+    </unit>
+    <unit id="restaurantCard.reviewCount">
+      <notes>
+        <note category="location">src/app/shared/components/restaurant-card/restaurant-card.html:21,23</note>
+      </notes>
+      <segment>
+        <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/>) </source>
       </segment>
     </unit>
     <unit id="theme.switchToLight">

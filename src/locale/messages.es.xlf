@@ -163,5 +163,131 @@
         <target>Cerrar sesión</target>
       </segment>
     </unit>
+    <unit id="nav.restaurants">
+      <segment>
+        <source>Restaurants</source>
+        <target>Restaurantes</target>
+      </segment>
+    </unit>
+    <unit id="restaurantListPage.title">
+      <segment>
+        <source>Restaurants</source>
+        <target>Restaurantes</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.search">
+      <segment>
+        <source>Search</source>
+        <target>Buscar</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.category">
+      <segment>
+        <source>Category</source>
+        <target>Categoría</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.anyCategory">
+      <segment>
+        <source>Any category</source>
+        <target>Cualquier categoría</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.city">
+      <segment>
+        <source>City</source>
+        <target>Ciudad</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.priceRange">
+      <segment>
+        <source>Price</source>
+        <target>Precio</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.anyPrice">
+      <segment>
+        <source>Any price</source>
+        <target>Cualquier precio</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.minRating">
+      <segment>
+        <source>Minimum rating</source>
+        <target>Calificación mínima</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.anyRating">
+      <segment>
+        <source>Any rating</source>
+        <target>Cualquier calificación</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.apply">
+      <segment>
+        <source>Apply</source>
+        <target>Aplicar</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFilters.clear">
+      <segment>
+        <source> Clear </source>
+        <target> Limpiar </target>
+      </segment>
+    </unit>
+    <unit id="restaurantGrid.emptyMessage">
+      <segment>
+        <source>No restaurants match your filters.</source>
+        <target>Ningún restaurante coincide con tus filtros.</target>
+      </segment>
+    </unit>
+    <unit id="restaurantGrid.errorMessage">
+      <segment>
+        <source>Couldn&apos;t load restaurants. Please try again.</source>
+        <target>No se pudieron cargar los restaurantes. Inténtalo de nuevo.</target>
+      </segment>
+    </unit>
+    <unit id="errorState.retry">
+      <segment>
+        <source> Try again </source>
+        <target> Inténtalo de nuevo </target>
+      </segment>
+    </unit>
+    <unit id="errorState.defaultMessage">
+      <segment>
+        <source>Something went wrong loading this content.</source>
+        <target>Algo salió mal al cargar este contenido.</target>
+      </segment>
+    </unit>
+    <unit id="ratingStars.label">
+      <segment>
+        <source>Rated <ph id="0" equiv="PH" disp="this.clamp(this.rating())"/> out of 5</source>
+        <target>Calificación de <ph id="0" equiv="PH" disp="this.clamp(this.rating())"/> de 5</target>
+      </segment>
+    </unit>
+    <unit id="restaurantCard.reviewCount">
+      <segment>
+        <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/>) </source>
+        <target> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/>) </target>
+      </segment>
+    </unit>
+    <unit id="paginatorBar.previous">
+      <segment>
+        <source>Previous page</source>
+        <target>Página anterior</target>
+      </segment>
+    </unit>
+    <unit id="paginatorBar.next">
+      <segment>
+        <source>Next page</source>
+        <target>Página siguiente</target>
+      </segment>
+    </unit>
+    <unit id="paginatorBar.pageIndicator">
+      <segment>
+        <source> Page <ph id="0" equiv="INTERPOLATION" disp="{{ page() }}"/> of <ph id="1" equiv="INTERPOLATION_1" disp="{{ pageCount() }}"/> </source>
+        <target> Página <ph id="0" equiv="INTERPOLATION" disp="{{ page() }}"/> de <ph id="1" equiv="INTERPOLATION_1" disp="{{ pageCount() }}"/> </target>
+      </segment>
+    </unit>
   </file>
 </xliff>

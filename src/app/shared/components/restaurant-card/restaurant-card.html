@@ -1,0 +1,22 @@
+<article class="restaurant-card">
+  @if (restaurant().coverImage) {
+    <img class="cover" [ngSrc]="restaurant().coverImage" width="400" height="240" alt="" />
+  } @else {
+    <div class="cover placeholder" aria-hidden="true"></div>
+  }
+
+  <div class="body">
+    <h3>{{ restaurant().name }}</h3>
+    <p class="location">{{ restaurant().city }}</p>
+
+    <div class="meta">
+      <app-rating-stars [rating]="restaurant().averageRating" />
+      <span class="review-count" i18n="@@restaurantCard.reviewCount">
+        ({{ restaurant().totalReviews }})
+      </span>
+      <app-price-range-badge [priceRange]="restaurant().priceRange" />
+    </div>
+
+    <app-category-chips [categories]="restaurant().categories" />
+  </div>
+</article>
