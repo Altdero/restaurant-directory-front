@@ -10,6 +10,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'restaurants/:id',
+    loadComponent: () =>
+      import('./features/restaurants/restaurant-detail-page/restaurant-detail-page').then(
+        (m) => m.RestaurantDetailPage,
+      ),
+  },
+  {
     path: 'login',
     canActivate: [guestGuard],
     loadComponent: () => import('./features/auth/login-page/login-page').then((m) => m.LoginPage),

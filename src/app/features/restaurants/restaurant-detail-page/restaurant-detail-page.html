@@ -1,0 +1,24 @@
+<div class="restaurant-detail-page">
+  @if (restaurant.error(); as apiError) {
+    <app-error-state [message]="apiErrorMessage(apiError)" (retry)="restaurant.reload()" />
+  } @else if (restaurant.isLoading()) {
+    <p i18n="@@restaurantDetailPage.loading">Loading restaurant…</p>
+  } @else if (restaurant.value(); as loadedRestaurant) {
+    <app-restaurant-hero [restaurant]="loadedRestaurant" />
+
+    <app-menu-section
+      [menuItems]="menuItems.value()?.results ?? []"
+      [isLoading]="menuItems.isLoading()"
+      [error]="menuItems.error()"
+    />
+
+    <app-reviews-section
+      [reviews]="reviews()"
+      [isLoading]="reviewsIsLoading()"
+      [error]="reviewsError()"
+      [hasMore]="hasMoreReviews()"
+      [isLoadingMore]="isLoadingMoreReviews()"
+      (loadMore)="loadMoreReviews()"
+    />
+  }
+</div>

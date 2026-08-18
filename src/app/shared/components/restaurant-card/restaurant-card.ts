@@ -1,25 +1,26 @@
 import { Component, input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { Restaurant } from '@core/models/restaurant.model';
 import { CategoryChips } from '@shared/components/category-chips/category-chips';
 import { PriceRangeBadge } from '@shared/components/price-range-badge/price-range-badge';
 import { RatingStars } from '@shared/components/rating-stars/rating-stars';
 
-/**
- * Not yet a `routerLink` to `/restaurants/:id` — that route lands in
- * commit 12. A card that visibly does nothing on click is worse than a
- * static one (same reasoning `MainToolbar` used for deferring auth links
- * in commit 9 until `/login`/`/register` existed).
- */
 @Component({
   selector: 'app-restaurant-card',
-  imports: [NgOptimizedImage, RatingStars, PriceRangeBadge, CategoryChips],
+  imports: [NgOptimizedImage, RouterLink, RatingStars, PriceRangeBadge, CategoryChips],
   templateUrl: './restaurant-card.html',
   styles: `
     .restaurant-card {
       border-radius: var(--mat-sys-corner-medium);
       overflow: hidden;
       background-color: var(--mat-sys-surface-container-low);
+    }
+
+    .card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
     }
 
     .cover {

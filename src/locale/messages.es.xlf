@@ -289,5 +289,149 @@
         <target> Página <ph id="0" equiv="INTERPOLATION" disp="{{ page() }}"/> de <ph id="1" equiv="INTERPOLATION_1" disp="{{ pageCount() }}"/> </target>
       </segment>
     </unit>
+    <unit id="menuSection.title">
+      <segment>
+        <source>Menu</source>
+        <target>Menú</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.loading">
+      <segment>
+        <source>Loading menu…</source>
+        <target>Cargando menú…</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.unavailable">
+      <segment>
+        <source>(Unavailable)</source>
+        <target>(No disponible)</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.appetizer">
+      <segment>
+        <source>Appetizers</source>
+        <target>Entradas</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.mainCourse">
+      <segment>
+        <source>Main Courses</source>
+        <target>Platos fuertes</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.beverage">
+      <segment>
+        <source>Beverages</source>
+        <target>Bebidas</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.dessert">
+      <segment>
+        <source>Desserts</source>
+        <target>Postres</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.other">
+      <segment>
+        <source>Other</source>
+        <target>Otros</target>
+      </segment>
+    </unit>
+    <unit id="menuSection.emptyMessage">
+      <segment>
+        <source>This restaurant hasn&apos;t added a menu yet.</source>
+        <target>Este restaurante aún no ha agregado un menú.</target>
+      </segment>
+    </unit>
+    <unit id="restaurantDetailPage.loading">
+      <segment>
+        <source>Loading restaurant…</source>
+        <target>Cargando restaurante…</target>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.reviewCount">
+      <segment>
+        <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/> reviews) </source>
+        <target> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/> reseñas) </target>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.openInMaps">
+      <segment>
+        <source> Open in Maps </source>
+        <target> Abrir en Maps </target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.title">
+      <segment>
+        <source>Reviews</source>
+        <target>Reseñas</target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.loading">
+      <segment>
+        <source>Loading reviews…</source>
+        <target>Cargando reseñas…</target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.emptyMessage">
+      <segment>
+        <source>No reviews yet.</source>
+        <target>Aún no hay reseñas.</target>
+      </segment>
+    </unit>
+    <unit id="cursorLoadMore.label">
+      <segment>
+        <source>Load more</source>
+        <target>Cargar más</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.monday">
+      <segment>
+        <source>Monday</source>
+        <target>Lunes</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.tuesday">
+      <segment>
+        <source>Tuesday</source>
+        <target>Martes</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.wednesday">
+      <segment>
+        <source>Wednesday</source>
+        <target>Miércoles</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.thursday">
+      <segment>
+        <source>Thursday</source>
+        <target>Jueves</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.friday">
+      <segment>
+        <source>Friday</source>
+        <target>Viernes</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.saturday">
+      <segment>
+        <source>Saturday</source>
+        <target>Sábado</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.sunday">
+      <segment>
+        <source>Sunday</source>
+        <target>Domingo</target>
+      </segment>
+    </unit>
+    <unit id="openingHours.closed">
+      <segment>
+        <source>Closed</source>
+        <target>Cerrado</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -137,6 +137,86 @@
         <source> Already have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/login&quot;&gt;" dispEnd="&lt;/a&gt;">Log in</pc></source>
       </segment>
     </unit>
+    <unit id="menuSection.title">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.html:1,3</note>
+      </notes>
+      <segment>
+        <source>Menu</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.loading">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.html:6,7</note>
+      </notes>
+      <segment>
+        <source>Loading menu…</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.unavailable">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.html:19,21</note>
+      </notes>
+      <segment>
+        <source>(Unavailable)</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.appetizer">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:24</note>
+      </notes>
+      <segment>
+        <source>Appetizers</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.mainCourse">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:26</note>
+      </notes>
+      <segment>
+        <source>Main Courses</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.beverage">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:28</note>
+      </notes>
+      <segment>
+        <source>Beverages</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.dessert">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:30</note>
+      </notes>
+      <segment>
+        <source>Desserts</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.other">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:32</note>
+      </notes>
+      <segment>
+        <source>Other</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.emptyMessage">
+      <notes>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:97</note>
+      </notes>
+      <segment>
+        <source>This restaurant hasn&apos;t added a menu yet.</source>
+      </segment>
+    </unit>
+    <unit id="restaurantDetailPage.loading">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.html:5,6</note>
+      </notes>
+      <segment>
+        <source>Loading restaurant…</source>
+      </segment>
+    </unit>
     <unit id="restaurantFilters.search">
       <notes>
         <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:3,4</note>
@@ -233,12 +313,52 @@
         <source>Couldn&apos;t load restaurants. Please try again.</source>
       </segment>
     </unit>
+    <unit id="restaurantHero.reviewCount">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:12,14</note>
+      </notes>
+      <segment>
+        <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/> reviews) </source>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.openInMaps">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:29,32</note>
+      </notes>
+      <segment>
+        <source> Open in Maps </source>
+      </segment>
+    </unit>
     <unit id="restaurantListPage.title">
       <notes>
         <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.html:2,5</note>
       </notes>
       <segment>
         <source>Restaurants</source>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.title">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:1,3</note>
+      </notes>
+      <segment>
+        <source>Reviews</source>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.loading">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:6,7</note>
+      </notes>
+      <segment>
+        <source>Loading reviews…</source>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.emptyMessage">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.ts:68</note>
+      </notes>
+      <segment>
+        <source>No reviews yet.</source>
       </segment>
     </unit>
     <unit id="nav.wordmark">
@@ -305,20 +425,28 @@
         <source>Log out</source>
       </segment>
     </unit>
-    <unit id="errorState.retry">
+    <unit id="cursorLoadMore.label">
       <notes>
-        <note category="location">src/app/shared/components/error-state/error-state.ts:12,14</note>
+        <note category="location">src/app/shared/components/cursor-load-more/cursor-load-more.ts:15,18</note>
       </notes>
       <segment>
-        <source> Try again </source>
+        <source>Load more</source>
       </segment>
     </unit>
     <unit id="errorState.defaultMessage">
       <notes>
-        <note category="location">src/app/shared/components/error-state/error-state.ts:26</note>
+        <note category="location">src/app/shared/components/error-state/error-state.ts:4</note>
       </notes>
       <segment>
         <source>Something went wrong loading this content.</source>
+      </segment>
+    </unit>
+    <unit id="errorState.retry">
+      <notes>
+        <note category="location">src/app/shared/components/error-state/error-state.ts:19,21</note>
+      </notes>
+      <segment>
+        <source> Try again </source>
       </segment>
     </unit>
     <unit id="nav.switchLanguage">
@@ -327,6 +455,70 @@
       </notes>
       <segment>
         <source>Switch language to <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></source>
+      </segment>
+    </unit>
+    <unit id="openingHours.monday">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:9</note>
+      </notes>
+      <segment>
+        <source>Monday</source>
+      </segment>
+    </unit>
+    <unit id="openingHours.tuesday">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:11</note>
+      </notes>
+      <segment>
+        <source>Tuesday</source>
+      </segment>
+    </unit>
+    <unit id="openingHours.wednesday">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:13</note>
+      </notes>
+      <segment>
+        <source>Wednesday</source>
+      </segment>
+    </unit>
+    <unit id="openingHours.thursday">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:15</note>
+      </notes>
+      <segment>
+        <source>Thursday</source>
+      </segment>
+    </unit>
+    <unit id="openingHours.friday">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:17</note>
+      </notes>
+      <segment>
+        <source>Friday</source>
+      </segment>
+    </unit>
+    <unit id="openingHours.saturday">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:19</note>
+      </notes>
+      <segment>
+        <source>Saturday</source>
+      </segment>
+    </unit>
+    <unit id="openingHours.sunday">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:21</note>
+      </notes>
+      <segment>
+        <source>Sunday</source>
+      </segment>
+    </unit>
+    <unit id="openingHours.closed">
+      <notes>
+        <note category="location">src/app/shared/components/opening-hours-table/opening-hours-table.ts:37,39</note>
+      </notes>
+      <segment>
+        <source>Closed</source>
       </segment>
     </unit>
     <unit id="paginatorBar.previous">
@@ -339,7 +531,7 @@
     </unit>
     <unit id="paginatorBar.pageIndicator">
       <notes>
-        <note category="location">src/app/shared/components/paginator-bar/paginator-bar.ts:29,31</note>
+        <note category="location">src/app/shared/components/paginator-bar/paginator-bar.ts:28,29</note>
       </notes>
       <segment>
         <source> Page <ph id="0" equiv="INTERPOLATION" disp="{{ page() }}"/> of <ph id="1" equiv="INTERPOLATION_1" disp="{{ pageCount() }}"/> </source>
@@ -347,7 +539,7 @@
     </unit>
     <unit id="paginatorBar.next">
       <notes>
-        <note category="location">src/app/shared/components/paginator-bar/paginator-bar.ts:37,40</note>
+        <note category="location">src/app/shared/components/paginator-bar/paginator-bar.ts:35,38</note>
       </notes>
       <segment>
         <source>Next page</source>
@@ -355,7 +547,7 @@
     </unit>
     <unit id="ratingStars.label">
       <notes>
-        <note category="location">src/app/shared/components/rating-stars/rating-stars.ts:59</note>
+        <note category="location">src/app/shared/components/rating-stars/rating-stars.ts:58</note>
       </notes>
       <segment>
         <source>Rated <ph id="0" equiv="PH" disp="this.clamp(this.rating())"/> out of 5</source>
@@ -363,7 +555,7 @@
     </unit>
     <unit id="restaurantCard.reviewCount">
       <notes>
-        <note category="location">src/app/shared/components/restaurant-card/restaurant-card.html:21,23</note>
+        <note category="location">src/app/shared/components/restaurant-card/restaurant-card.html:16,18</note>
       </notes>
       <segment>
         <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/>) </source>

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { Restaurant } from '@core/models/restaurant.model';
 
 import { RestaurantGrid } from './restaurant-grid';
@@ -7,6 +8,7 @@ const RESTAURANT = { id: 'r-1', name: 'La Trattoria' } as Restaurant;
 
 describe('RestaurantGrid', () => {
   function createFixture() {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
     return TestBed.createComponent(RestaurantGrid);
   }
 

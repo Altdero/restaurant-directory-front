@@ -1,0 +1,31 @@
+<h2 i18n="@@menuSection.title">Menu</h2>
+
+@if (error(); as apiError) {
+  <app-error-state [message]="apiErrorMessage(apiError)" />
+} @else if (isLoading()) {
+  <p i18n="@@menuSection.loading">Loading menu…</p>
+} @else if (groups().length === 0) {
+  <app-empty-state [message]="emptyMessage()" />
+} @else {
+  @for (group of groups(); track group.category) {
+    <h3>{{ categoryLabel(group.category) }}</h3>
+    <ul>
+      @for (item of group.items; track item.id) {
+        <li class="item" [class.unavailable]="!item.isAvailable">
+          <div>
+            <div class="item-name">
+              {{ item.name }}
+              @if (!item.isAvailable) {
+                <span i18n="@@menuSection.unavailable">(Unavailable)</span>
+              }
+            </div>
+            @if (item.description) {
+              <p class="item-description">{{ item.description }}</p>
+            }
+          </div>
+          <span class="price">${{ item.price.toFixed(2) }}</span>
+        </li>
+      }
+    </ul>
+  }
+}

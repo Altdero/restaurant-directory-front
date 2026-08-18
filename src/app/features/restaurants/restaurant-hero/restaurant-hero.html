@@ -1,0 +1,50 @@
+@if (restaurant().coverImage) {
+  <img class="cover" [ngSrc]="restaurant().coverImage" priority width="1200" height="512" alt="" />
+} @else {
+  <div class="cover placeholder" aria-hidden="true"></div>
+}
+
+<h1>{{ restaurant().name }}</h1>
+
+<div class="meta">
+  <app-rating-stars [rating]="restaurant().averageRating" />
+  <span i18n="@@restaurantHero.reviewCount"> ({{ restaurant().totalReviews }} reviews) </span>
+  <app-price-range-badge [priceRange]="restaurant().priceRange" />
+</div>
+
+<app-category-chips [categories]="restaurant().categories" />
+
+<p>{{ restaurant().description }}</p>
+
+<div class="details">
+  <div>
+    <address>
+      {{ restaurant().address }}<br />
+      {{ restaurant().city }}, {{ restaurant().state }} {{ restaurant().postalCode }}<br />
+      {{ restaurant().country }}
+    </address>
+    <a [href]="mapsUrl()" target="_blank" rel="noopener" i18n="@@restaurantHero.openInMaps">
+      Open in Maps
+    </a>
+
+    @if (restaurant().phone) {
+      <p>
+        <a [href]="'tel:' + restaurant().phone">{{ restaurant().phone }}</a>
+      </p>
+    }
+    @if (restaurant().email) {
+      <p>
+        <a [href]="'mailto:' + restaurant().email">{{ restaurant().email }}</a>
+      </p>
+    }
+    @if (restaurant().website) {
+      <p>
+        <a [href]="restaurant().website" target="_blank" rel="noopener">{{
+          restaurant().website
+        }}</a>
+      </p>
+    }
+  </div>
+
+  <app-opening-hours-table [openingHours]="restaurant().openingHours" />
+</div>

@@ -160,3 +160,15 @@ A standing `effect()` inside `AuthStore` clears the user profile whenever `Acces
 `PriceRangeBadge` (not `PriceRange`, PLAN.md §2's original name) — a component named `PriceRange` would collide with `core/models/restaurant.model.ts`'s existing `PriceRange` type in any file needing both, e.g. `RestaurantCard`.
 
 `RestaurantCard` doesn't yet link to `/restaurants/:id` — that route lands in commit 12; same reasoning as `MainToolbar` deferring auth links in commit 9 until `/login`/`/register` existed.
+
+## Restaurant detail
+
+`/restaurants/:id` (`RestaurantDetailPage`) is display-only in this commit — `RestaurantHero`, `MenuSection`, `ReviewsSection`. Creating/editing/deleting a review (`ReviewForm`) is commit 13's job, per PLAN.md's commit plan.
+
+**Verified end-to-end against the live backend.** A `curl` against the built-and-served app returns the restaurant's name/address/city already server-rendered for a real id; a nonexistent id correctly server-renders `ErrorState` with the API's actual `"No Restaurant matches the given query."` message (via `mapApiError`/`apiErrorMessage`), not a crash or a generic fallback. The outer HTTP status stays `200` for that case — only `/**` is required to carry a real `404` per the rendering-strategy table above; an in-page not-found inside an otherwise-`200` SSR shell is ordinary SPA behavior, unchanged here.
+
+`ReviewDataService.loadMore(url)` (defined in commit 7/8, exercised for the first time here): `RestaurantDetailPage` seeds an accumulator signal from the first cursor page (via an `effect()` watching the base resource, same pattern as `AuthStore`'s rehydration sync), appends each `loadMore()` result, and always uses the API's own opaque `next` URL verbatim — the standing "never construct a cursor" rule from `docs/API.md`.
+
+`MenuSection.groupMenuItems()` is exported as a plain function, not template logic, specifically so it's unit-testable directly — groups a flat menu-item list into a fixed category order (appetizer → main course → beverage → dessert → other), dropping empty categories.
+
+`ErrorState.message` widened from `input<string>(defaultText)` to `input<string | undefined>()`, with the fallback now applied in the template (`message() ?? defaultMessage`) instead of as the input's default value — needed so `MenuSection`/`ReviewsSection`/`RestaurantDetailPage` can pass `apiErrorMessage()`'s `string | undefined` result straight through instead of each duplicating a ternary. Strictly widens the type; commit 11's `RestaurantGrid` usage (which always passes a definite string) is unaffected.

@@ -1,0 +1,28 @@
+<h2 i18n="@@reviewsSection.title">Reviews</h2>
+
+@if (error(); as apiError) {
+  <app-error-state [message]="apiErrorMessage(apiError)" />
+} @else if (isLoading()) {
+  <p i18n="@@reviewsSection.loading">Loading reviews…</p>
+} @else if (reviews().length === 0) {
+  <app-empty-state [message]="emptyMessage()" />
+} @else {
+  <ul>
+    @for (review of reviews(); track review.id) {
+      <li>
+        <div class="review-header">
+          <span class="username">{{ review.username }}</span>
+          <app-rating-stars [rating]="review.rating" />
+          <span class="date">{{ review.createdAt | date: 'mediumDate' }}</span>
+        </div>
+        <p class="comment">{{ review.comment }}</p>
+      </li>
+    }
+  </ul>
+
+  <app-cursor-load-more
+    [hasMore]="hasMore()"
+    [isLoading]="isLoadingMore()"
+    (loadMore)="loadMore.emit()"
+  />
+}
