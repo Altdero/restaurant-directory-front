@@ -36,6 +36,10 @@ import { UserMenu } from '../user-menu/user-menu';
     </mat-toolbar>
   `,
   styles: `
+    mat-toolbar {
+      gap: 1rem;
+    }
+
     .wordmark {
       font-family: 'Fraunces Variable', serif;
       font-weight: 600;
