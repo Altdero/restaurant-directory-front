@@ -1,14 +1,66 @@
 <h2 i18n="@@reviewsSection.title">Reviews</h2>
 
+@if (isFormOpen()) {
+  <app-review-form
+    [review]="myReview()"
+    [isPending]="formPending()"
+    [error]="formError()"
+    (save)="submitForm.emit($event)"
+    (cancelled)="cancelForm.emit()"
+  />
+} @else if (isAuthenticated()) {
+  @if (myReview(); as mine) {
+    <div class="my-review">
+      <div class="review-header">
+        <span class="username" i18n="@@reviewsSection.yourReview">Your review</span>
+        <app-rating-stars [rating]="mine.rating" />
+      </div>
+      <p class="comment">{{ mine.comment }}</p>
+      <div class="actions">
+        <button mat-button type="button" (click)="openForm.emit()" i18n="@@reviewsSection.edit">
+          Edit
+        </button>
+        <button
+          mat-button
+          type="button"
+          (click)="deleteReview.emit()"
+          i18n="@@reviewsSection.delete"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  } @else {
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="openForm.emit()"
+      i18n="@@reviewsSection.writeReview"
+    >
+      Write a review
+    </button>
+  }
+} @else {
+  <p>
+    <a
+      [routerLink]="['/login']"
+      [queryParams]="{ returnUrl: loginReturnUrl() }"
+      i18n="@@reviewsSection.loginPrompt"
+    >
+      Log in to write a review
+    </a>
+  </p>
+}
+
 @if (error(); as apiError) {
   <app-error-state [message]="apiErrorMessage(apiError)" />
 } @else if (isLoading()) {
   <p i18n="@@reviewsSection.loading">Loading reviews…</p>
-} @else if (reviews().length === 0) {
+} @else if (otherReviews().length === 0 && !myReview()) {
   <app-empty-state [message]="emptyMessage()" />
 } @else {
   <ul>
-    @for (review of reviews(); track review.id) {
+    @for (review of otherReviews(); track review.id) {
       <li>
         <div class="review-header">
           <span class="username">{{ review.username }}</span>

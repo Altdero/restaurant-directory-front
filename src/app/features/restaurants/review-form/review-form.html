@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@reviewForm.rating">Rating</mat-label>
+    <mat-select formControlName="rating">
+      @for (rating of ratings; track rating) {
+        <mat-option [value]="rating">{{ rating }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@reviewForm.comment">Comment</mat-label>
+    <textarea matInput formControlName="comment" rows="4"></textarea>
+  </mat-form-field>
+
+  @if (error(); as apiError) {
+    <p class="error" role="alert">{{ apiErrorMessage(apiError) }}</p>
+  }
+
+  <div class="actions">
+    <button mat-flat-button type="submit" [disabled]="form.invalid || isPending()">
+      @if (isPending()) {
+        <mat-progress-spinner diameter="20" mode="indeterminate" />
+      } @else if (review()) {
+        <span i18n="@@reviewForm.saveEdit">Save changes</span>
+      } @else {
+        <span i18n="@@reviewForm.submit">Post review</span>
+      }
+    </button>
+    <button mat-button type="button" (click)="cancelled.emit()" i18n="@@reviewForm.cancel">
+      Cancel
+    </button>
+  </div>
+</form>

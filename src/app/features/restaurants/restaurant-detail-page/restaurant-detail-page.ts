@@ -1,11 +1,16 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MENU_ITEM_DATA, RESTAURANT_DATA, REVIEW_DATA } from '@core/interfaces/tokens';
 import { Review } from '@core/models/review.model';
+import { AuthStore } from '@core/services/auth/auth.store';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { MenuSection } from '@features/restaurants/menu-section/menu-section';
+import { ReviewFormValue } from '@features/restaurants/review-form/review-form';
 import { RestaurantHero } from '@features/restaurants/restaurant-hero/restaurant-hero';
 import { ReviewsSection } from '@features/restaurants/reviews-section/reviews-section';
+import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
 import { ErrorState } from '@shared/components/error-state/error-state';
+import { firstValueFrom } from 'rxjs';
 
 /**
  * Menu items are fetched with `limit: 100` — a full menu in one request,
@@ -31,6 +36,8 @@ export class RestaurantDetailPage {
   private readonly restaurantData = inject(RESTAURANT_DATA);
   private readonly menuItemData = inject(MENU_ITEM_DATA);
   private readonly reviewData = inject(REVIEW_DATA);
+  private readonly authStore = inject(AuthStore);
+  private readonly dialog = inject(MatDialog);
 
   readonly id = input<string>();
 
@@ -55,6 +62,24 @@ export class RestaurantDetailPage {
 
   protected readonly apiErrorMessage = apiErrorMessage;
 
+  private readonly createReviewMutation = this.reviewData.create();
+  private readonly updateReviewMutation = this.reviewData.update();
+  private readonly removeReviewMutation = this.reviewData.remove();
+
+  protected readonly isAuthenticated = this.authStore.isAuthenticated;
+  protected readonly myReview = computed(() => {
+    const userId = this.authStore.user()?.id;
+    return userId ? this.reviews().find((review) => review.userId === userId) : undefined;
+  });
+  protected readonly loginReturnUrl = computed(() => `/restaurants/${this.id()}`);
+  protected readonly isReviewFormOpen = signal(false);
+  protected readonly reviewFormPending = computed(
+    () => this.createReviewMutation.isPending() || this.updateReviewMutation.isPending(),
+  );
+  protected readonly reviewFormError = computed(
+    () => this.createReviewMutation.error() ?? this.updateReviewMutation.error(),
+  );
+
   constructor() {
     effect(() => {
       const page = this.reviewsResource.value();
@@ -78,5 +103,47 @@ export class RestaurantDetailPage {
     } finally {
       this.isLoadingMoreReviews.set(false);
     }
+  }
+
+  protected async submitReview(value: ReviewFormValue): Promise<void> {
+    const restaurantId = this.id();
+    if (!restaurantId) {
+      return;
+    }
+    const existing = this.myReview();
+    try {
+      if (existing) {
+        await this.updateReviewMutation.mutate({ id: existing.id, body: value });
+      } else {
+        await this.createReviewMutation.mutate({ restaurant: restaurantId, ...value });
+      }
+    } catch {
+      return;
+    }
+    this.isReviewFormOpen.set(false);
+    this.reviewsResource.reload();
+  }
+
+  protected async confirmDeleteReview(): Promise<void> {
+    const existing = this.myReview();
+    if (!existing) {
+      return;
+    }
+    const ref = this.dialog.open(ConfirmDialog, {
+      data: {
+        title: $localize`:@@restaurantDetailPage.deleteReviewTitle:Delete your review?`,
+        message: $localize`:@@restaurantDetailPage.deleteReviewMessage:This can't be undone.`,
+      },
+    });
+    const confirmed = await firstValueFrom(ref.afterClosed());
+    if (!confirmed) {
+      return;
+    }
+    try {
+      await this.removeReviewMutation.mutate(existing.id);
+    } catch {
+      return;
+    }
+    this.reviewsResource.reload();
   }
 }

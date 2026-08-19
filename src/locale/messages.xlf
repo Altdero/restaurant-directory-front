@@ -217,6 +217,22 @@
         <source>Loading restaurant…</source>
       </segment>
     </unit>
+    <unit id="restaurantDetailPage.deleteReviewTitle">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:134</note>
+      </notes>
+      <segment>
+        <source>Delete your review?</source>
+      </segment>
+    </unit>
+    <unit id="restaurantDetailPage.deleteReviewMessage">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:135</note>
+      </notes>
+      <segment>
+        <source>This can&apos;t be undone.</source>
+      </segment>
+    </unit>
     <unit id="restaurantFilters.search">
       <notes>
         <note category="location">src/app/features/restaurants/restaurant-filters/restaurant-filters.html:3,4</note>
@@ -315,7 +331,7 @@
     </unit>
     <unit id="restaurantHero.reviewCount">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:12,14</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:11,12</note>
       </notes>
       <segment>
         <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/> reviews) </source>
@@ -323,7 +339,7 @@
     </unit>
     <unit id="restaurantHero.openInMaps">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:29,32</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:27,30</note>
       </notes>
       <segment>
         <source> Open in Maps </source>
@@ -337,17 +353,97 @@
         <source>Restaurants</source>
       </segment>
     </unit>
+    <unit id="reviewForm.rating">
+      <notes>
+        <note category="location">src/app/features/restaurants/review-form/review-form.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Rating</source>
+      </segment>
+    </unit>
+    <unit id="reviewForm.comment">
+      <notes>
+        <note category="location">src/app/features/restaurants/review-form/review-form.html:12,13</note>
+      </notes>
+      <segment>
+        <source>Comment</source>
+      </segment>
+    </unit>
+    <unit id="reviewForm.saveEdit">
+      <notes>
+        <note category="location">src/app/features/restaurants/review-form/review-form.html:25,27</note>
+      </notes>
+      <segment>
+        <source>Save changes</source>
+      </segment>
+    </unit>
+    <unit id="reviewForm.submit">
+      <notes>
+        <note category="location">src/app/features/restaurants/review-form/review-form.html:27,30</note>
+      </notes>
+      <segment>
+        <source>Post review</source>
+      </segment>
+    </unit>
+    <unit id="reviewForm.cancel">
+      <notes>
+        <note category="location">src/app/features/restaurants/review-form/review-form.html:31,34</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
+      </segment>
+    </unit>
     <unit id="reviewsSection.title">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:1,3</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:1,4</note>
       </notes>
       <segment>
         <source>Reviews</source>
       </segment>
     </unit>
+    <unit id="reviewsSection.yourReview">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:15,16</note>
+      </notes>
+      <segment>
+        <source>Your review</source>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.edit">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:21,23</note>
+      </notes>
+      <segment>
+        <source> Edit </source>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.delete">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:29,31</note>
+      </notes>
+      <segment>
+        <source> Delete </source>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.writeReview">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:40,45</note>
+      </notes>
+      <segment>
+        <source> Write a review </source>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.loginPrompt">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:50,55</note>
+      </notes>
+      <segment>
+        <source> Log in to write a review </source>
+      </segment>
+    </unit>
     <unit id="reviewsSection.loading">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:6,7</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:58,59</note>
       </notes>
       <segment>
         <source>Loading reviews…</source>
@@ -355,7 +451,7 @@
     </unit>
     <unit id="reviewsSection.emptyMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.ts:68</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.ts:108</note>
       </notes>
       <segment>
         <source>No reviews yet.</source>
@@ -423,6 +519,22 @@
       </notes>
       <segment>
         <source>Log out</source>
+      </segment>
+    </unit>
+    <unit id="confirmDialog.cancel">
+      <notes>
+        <note category="location">src/app/shared/components/confirm-dialog/confirm-dialog.ts:31</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="confirmDialog.confirm">
+      <notes>
+        <note category="location">src/app/shared/components/confirm-dialog/confirm-dialog.ts:32</note>
+      </notes>
+      <segment>
+        <source>Confirm</source>
       </segment>
     </unit>
     <unit id="cursorLoadMore.label">

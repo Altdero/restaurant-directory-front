@@ -1,23 +1,36 @@
 import { DatePipe } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 import { ApiError } from '@core/models/api-error.model';
 import { Review } from '@core/models/review.model';
 import { apiErrorMessage } from '@core/utils/api-error-message';
+import { ReviewForm, ReviewFormValue } from '@features/restaurants/review-form/review-form';
 import { CursorLoadMore } from '@shared/components/cursor-load-more/cursor-load-more';
 import { EmptyState } from '@shared/components/empty-state/empty-state';
 import { ErrorState } from '@shared/components/error-state/error-state';
 import { RatingStars } from '@shared/components/rating-stars/rating-stars';
 
 /**
- * Display only — creating/editing/deleting a review is commit 13's job
- * (`ReviewForm`, per PLAN.md's commit plan). `loadMore` is a plain output:
- * the smart `RestaurantDetailPage` owns the accumulated list and the
- * `ReviewDataService.loadMore()` call, since a cursor URL must be used
- * verbatim, never reconstructed (see docs/API.md).
+ * Presentational — `RestaurantDetailPage` owns `myReview` (a user has at
+ * most one review per restaurant, see docs/API.md), the create/update/
+ * remove mutations, and the "is the form open" toggle; this component only
+ * derives which reviews are "the other ones" (excluding `myReview`, so it
+ * isn't shown twice) and renders whichever of the three write states
+ * (log in prompt / write-or-edit card / open form) applies.
  */
 @Component({
   selector: 'app-reviews-section',
-  imports: [RatingStars, DatePipe, EmptyState, ErrorState, CursorLoadMore],
+  imports: [
+    RatingStars,
+    DatePipe,
+    EmptyState,
+    ErrorState,
+    CursorLoadMore,
+    ReviewForm,
+    MatButtonModule,
+    RouterLink,
+  ],
   templateUrl: './reviews-section.html',
   styles: `
     h2 {
@@ -51,6 +64,19 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
     .comment {
       margin: 0.25rem 0 0;
     }
+
+    .my-review {
+      background-color: var(--mat-sys-surface-container);
+      border-radius: var(--mat-sys-corner-medium);
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
   `,
 })
 export class ReviewsSection {
@@ -60,8 +86,22 @@ export class ReviewsSection {
   readonly hasMore = input<boolean>(false);
   readonly isLoadingMore = input<boolean>(false);
 
-  readonly loadMore = output<void>();
+  readonly isAuthenticated = input<boolean>(false);
+  readonly myReview = input<Review>();
+  readonly loginReturnUrl = input<string>('/');
+  readonly isFormOpen = input<boolean>(false);
+  readonly formPending = input<boolean>(false);
+  readonly formError = input<ApiError | undefined>(undefined);
 
+  readonly loadMore = output<void>();
+  readonly openForm = output<void>();
+  readonly cancelForm = output<void>();
+  readonly submitForm = output<ReviewFormValue>();
+  readonly deleteReview = output<void>();
+
+  protected readonly otherReviews = computed(() =>
+    this.reviews().filter((review) => review.id !== this.myReview()?.id),
+  );
   protected readonly apiErrorMessage = apiErrorMessage;
 
   protected emptyMessage(): string {

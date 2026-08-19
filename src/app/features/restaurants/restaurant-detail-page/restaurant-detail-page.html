@@ -18,7 +18,17 @@
       [error]="reviewsError()"
       [hasMore]="hasMoreReviews()"
       [isLoadingMore]="isLoadingMoreReviews()"
+      [isAuthenticated]="isAuthenticated()"
+      [myReview]="myReview()"
+      [loginReturnUrl]="loginReturnUrl()"
+      [isFormOpen]="isReviewFormOpen()"
+      [formPending]="reviewFormPending()"
+      [formError]="reviewFormError()"
       (loadMore)="loadMoreReviews()"
+      (openForm)="isReviewFormOpen.set(true)"
+      (cancelForm)="isReviewFormOpen.set(false)"
+      (submitForm)="submitReview($event)"
+      (deleteReview)="confirmDeleteReview()"
     />
   }
 </div>

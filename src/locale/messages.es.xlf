@@ -433,5 +433,89 @@
         <target>Cerrado</target>
       </segment>
     </unit>
+    <unit id="restaurantDetailPage.deleteReviewTitle">
+      <segment>
+        <source>Delete your review?</source>
+        <target>¿Eliminar tu reseña?</target>
+      </segment>
+    </unit>
+    <unit id="restaurantDetailPage.deleteReviewMessage">
+      <segment>
+        <source>This can&apos;t be undone.</source>
+        <target>Esto no se puede deshacer.</target>
+      </segment>
+    </unit>
+    <unit id="reviewForm.rating">
+      <segment>
+        <source>Rating</source>
+        <target>Calificación</target>
+      </segment>
+    </unit>
+    <unit id="reviewForm.comment">
+      <segment>
+        <source>Comment</source>
+        <target>Comentario</target>
+      </segment>
+    </unit>
+    <unit id="reviewForm.saveEdit">
+      <segment>
+        <source>Save changes</source>
+        <target>Guardar cambios</target>
+      </segment>
+    </unit>
+    <unit id="reviewForm.submit">
+      <segment>
+        <source>Post review</source>
+        <target>Publicar reseña</target>
+      </segment>
+    </unit>
+    <unit id="reviewForm.cancel">
+      <segment>
+        <source> Cancel </source>
+        <target> Cancelar </target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.yourReview">
+      <segment>
+        <source>Your review</source>
+        <target>Tu reseña</target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.edit">
+      <segment>
+        <source> Edit </source>
+        <target> Editar </target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.delete">
+      <segment>
+        <source> Delete </source>
+        <target> Eliminar </target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.writeReview">
+      <segment>
+        <source> Write a review </source>
+        <target> Escribir una reseña </target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.loginPrompt">
+      <segment>
+        <source> Log in to write a review </source>
+        <target> Inicia sesión para escribir una reseña </target>
+      </segment>
+    </unit>
+    <unit id="confirmDialog.cancel">
+      <segment>
+        <source>Cancel</source>
+        <target>Cancelar</target>
+      </segment>
+    </unit>
+    <unit id="confirmDialog.confirm">
+      <segment>
+        <source>Confirm</source>
+        <target>Confirmar</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
