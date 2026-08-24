@@ -91,6 +91,6 @@ Render configuration:
 
 - **Build command**: `npm ci && npm run build`
 - **Start command**: `npm run serve:ssr:restaurant-directory`, which runs `node --env-file-if-exists=.env dist/restaurant-directory/server/server.mjs` (verified against a real production build). The `--env-file-if-exists` flag is a no-op on Render, where environment variables are injected into the process directly rather than via a `.env` file — it exists purely so the same command also works for a local production-build preview.
-- **Environment**: set `API_BASE_URL` and `ALLOWED_HOSTS` (the Render-assigned or custom domain) in the Render dashboard, plus any Cloudinary-adjacent variables the backend itself requires. `PORT` is provided by Render automatically.
+- **Environment**: set `API_BASE_URL`, `SITE_URL` and `ALLOWED_HOSTS` (the Render-assigned or custom domain — `SITE_URL` and `ALLOWED_HOSTS` will name the same domain) in the Render dashboard, plus any Cloudinary-adjacent variables the backend itself requires. `PORT` is provided by Render automatically.
 
 One thing that will produce a `400` on every request if skipped: **`ALLOWED_HOSTS` must include the exact request host** — verified empirically against a real build: `@angular/ssr` rejects any `Host`/`X-Forwarded-Host` not on this list, and `localhost` is not allowed by default even in local testing.
