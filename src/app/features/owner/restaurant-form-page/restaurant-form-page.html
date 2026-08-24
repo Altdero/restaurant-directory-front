@@ -1,0 +1,20 @@
+<div class="restaurant-form-page">
+  @if (id()) {
+    <h1 i18n="@@restaurantFormPage.editTitle">Edit restaurant</h1>
+  } @else {
+    <h1 i18n="@@restaurantFormPage.createTitle">Add restaurant</h1>
+  }
+
+  @if (id() && restaurant.error(); as apiError) {
+    <app-error-state [message]="apiErrorMessage(apiError)" (retry)="restaurant.reload()" />
+  } @else {
+    <app-restaurant-form
+      [restaurant]="restaurantValue()"
+      [categories]="categoriesPage()?.results ?? []"
+      [isPending]="isPending()"
+      [error]="formError()"
+      (save)="submit($event)"
+      (cancelled)="cancel()"
+    />
+  }
+</div>

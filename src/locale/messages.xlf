@@ -11,7 +11,7 @@
     </unit>
     <unit id="favoritesStore.toggleError">
       <notes>
-        <note category="location">src/app/core/services/favorites/favorites-store.ts:89</note>
+        <note category="location">src/app/core/services/favorites/favorites-store.ts:75</note>
       </notes>
       <segment>
         <source>Couldn&apos;t update your favorites. Please try again.</source>
@@ -155,10 +155,210 @@
     </unit>
     <unit id="favoritesPage.emptyMessage">
       <notes>
-        <note category="location">src/app/features/favorites/favorites-page/favorites-page.ts:48</note>
+        <note category="location">src/app/features/favorites/favorites-page/favorites-page.ts:58</note>
       </notes>
       <segment>
         <source>You haven&apos;t added any favorites yet.</source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.title">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:3,4</note>
+      </notes>
+      <segment>
+        <source>My restaurants</source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.addRestaurant">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:5,9</note>
+      </notes>
+      <segment>
+        <source> Add restaurant </source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.edit">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:25,27</note>
+      </notes>
+      <segment>
+        <source> Edit </source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.delete">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:33,35</note>
+      </notes>
+      <segment>
+        <source> Delete </source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.emptyMessage">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:97</note>
+      </notes>
+      <segment>
+        <source>You haven&apos;t added any restaurants yet.</source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.deleteTitle">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:102</note>
+      </notes>
+      <segment>
+        <source>Delete <ph id="0" equiv="name" disp="name"/>?</source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.deleteMessage">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:103</note>
+      </notes>
+      <segment>
+        <source>This can&apos;t be undone.</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFormPage.editTitle">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form-page/restaurant-form-page.html:3,5</note>
+      </notes>
+      <segment>
+        <source>Edit restaurant</source>
+      </segment>
+    </unit>
+    <unit id="restaurantFormPage.createTitle">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form-page/restaurant-form-page.html:5,8</note>
+      </notes>
+      <segment>
+        <source>Add restaurant</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.name">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.description">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:8,9</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.categories">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:13,14</note>
+      </notes>
+      <segment>
+        <source>Categories</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.address">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:22,23</note>
+      </notes>
+      <segment>
+        <source>Address</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.city">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:27,28</note>
+      </notes>
+      <segment>
+        <source>City</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.state">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:32,33</note>
+      </notes>
+      <segment>
+        <source>State</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.country">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:37,38</note>
+      </notes>
+      <segment>
+        <source>Country</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.postalCode">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:42,43</note>
+      </notes>
+      <segment>
+        <source>Postal code</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.phone">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:47,48</note>
+      </notes>
+      <segment>
+        <source>Phone</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.email">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:52,53</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.website">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:57,58</note>
+      </notes>
+      <segment>
+        <source>Website</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.priceRange">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:62,63</note>
+      </notes>
+      <segment>
+        <source>Price</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.isActive">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:70,72</note>
+      </notes>
+      <segment>
+        <source>Active</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.saveEdit">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:81,83</note>
+      </notes>
+      <segment>
+        <source>Save changes</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.submit">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:83,86</note>
+      </notes>
+      <segment>
+        <source>Create restaurant</source>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.cancel">
+      <notes>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:87,90</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
       </segment>
     </unit>
     <unit id="menuSection.title">
@@ -243,7 +443,7 @@
     </unit>
     <unit id="restaurantDetailPage.deleteReviewTitle">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:147</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:158</note>
       </notes>
       <segment>
         <source>Delete your review?</source>
@@ -251,7 +451,7 @@
     </unit>
     <unit id="restaurantDetailPage.deleteReviewMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:148</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:159</note>
       </notes>
       <segment>
         <source>This can&apos;t be undone.</source>

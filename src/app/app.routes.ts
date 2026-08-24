@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '@core/guards/auth.guard';
 import { guestGuard } from '@core/guards/guest.guard';
+import { ownerGuard } from '@core/guards/owner.guard';
 
 export const routes: Routes = [
   {
@@ -33,5 +34,29 @@ export const routes: Routes = [
     canActivate: [authGuard],
     loadComponent: () =>
       import('./features/favorites/favorites-page/favorites-page').then((m) => m.FavoritesPage),
+  },
+  {
+    path: 'my/restaurants',
+    canActivate: [ownerGuard],
+    loadComponent: () =>
+      import('./features/owner/my-restaurants-page/my-restaurants-page').then(
+        (m) => m.MyRestaurantsPage,
+      ),
+  },
+  {
+    path: 'my/restaurants/new',
+    canActivate: [ownerGuard],
+    loadComponent: () =>
+      import('./features/owner/restaurant-form-page/restaurant-form-page').then(
+        (m) => m.RestaurantFormPage,
+      ),
+  },
+  {
+    path: 'my/restaurants/:id/edit',
+    canActivate: [ownerGuard],
+    loadComponent: () =>
+      import('./features/owner/restaurant-form-page/restaurant-form-page').then(
+        (m) => m.RestaurantFormPage,
+      ),
   },
 ];

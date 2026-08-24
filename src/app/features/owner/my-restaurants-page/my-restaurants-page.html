@@ -1,0 +1,51 @@
+<div class="my-restaurants-page">
+  <div class="header">
+    <h1 i18n="@@myRestaurantsPage.title">My restaurants</h1>
+    <a mat-flat-button routerLink="/my/restaurants/new" i18n="@@myRestaurantsPage.addRestaurant">
+      Add restaurant
+    </a>
+  </div>
+
+  @if (restaurants.error(); as apiError) {
+    <app-error-state [message]="apiErrorMessage(apiError)" (retry)="restaurants.reload()" />
+  } @else if (restaurants.isLoading()) {
+    @for (i of skeletons; track i) {
+      <app-skeleton-card />
+    }
+  } @else if ((restaurantsPage()?.results ?? []).length === 0) {
+    <app-empty-state [message]="emptyMessage" />
+  } @else {
+    @for (restaurant of restaurantsPage()?.results ?? []; track restaurant.id) {
+      <article class="row">
+        <span class="name">{{ restaurant.name }}</span>
+        <span class="city">{{ restaurant.city }}</span>
+        <app-price-range-badge [priceRange]="restaurant.priceRange" />
+        <app-rating-stars [rating]="restaurant.averageRating" />
+        <a
+          mat-button
+          [routerLink]="['/my/restaurants', restaurant.id, 'edit']"
+          i18n="@@myRestaurantsPage.edit"
+        >
+          Edit
+        </a>
+        <button
+          mat-button
+          type="button"
+          (click)="deleteRestaurant(restaurant.id, restaurant.name)"
+          i18n="@@myRestaurantsPage.delete"
+        >
+          Delete
+        </button>
+      </article>
+    }
+
+    @if ((restaurantsPage()?.count ?? 0) > pageSize) {
+      <app-paginator-bar
+        [count]="restaurantsPage()?.count ?? 0"
+        [pageSize]="pageSize"
+        [page]="page()"
+        (pageChange)="page.set($event)"
+      />
+    }
+  }
+</div>

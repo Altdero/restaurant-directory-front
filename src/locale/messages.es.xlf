@@ -553,5 +553,155 @@
         <target>Quitar de favoritos</target>
       </segment>
     </unit>
+    <unit id="myRestaurantsPage.title">
+      <segment>
+        <source>My restaurants</source>
+        <target>Mis restaurantes</target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.addRestaurant">
+      <segment>
+        <source> Add restaurant </source>
+        <target> Agregar restaurante </target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.edit">
+      <segment>
+        <source> Edit </source>
+        <target> Editar </target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.delete">
+      <segment>
+        <source> Delete </source>
+        <target> Eliminar </target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.emptyMessage">
+      <segment>
+        <source>You haven&apos;t added any restaurants yet.</source>
+        <target>Aún no has agregado restaurantes.</target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.deleteTitle">
+      <segment>
+        <source>Delete <ph id="0" equiv="name" disp="name"/>?</source>
+        <target>¿Eliminar <ph id="0" equiv="name" disp="name"/>?</target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.deleteMessage">
+      <segment>
+        <source>This can&apos;t be undone.</source>
+        <target>Esto no se puede deshacer.</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFormPage.editTitle">
+      <segment>
+        <source>Edit restaurant</source>
+        <target>Editar restaurante</target>
+      </segment>
+    </unit>
+    <unit id="restaurantFormPage.createTitle">
+      <segment>
+        <source>Add restaurant</source>
+        <target>Agregar restaurante</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.name">
+      <segment>
+        <source>Name</source>
+        <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.description">
+      <segment>
+        <source>Description</source>
+        <target>Descripción</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.categories">
+      <segment>
+        <source>Categories</source>
+        <target>Categorías</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.address">
+      <segment>
+        <source>Address</source>
+        <target>Dirección</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.city">
+      <segment>
+        <source>City</source>
+        <target>Ciudad</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.state">
+      <segment>
+        <source>State</source>
+        <target>Estado</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.country">
+      <segment>
+        <source>Country</source>
+        <target>País</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.postalCode">
+      <segment>
+        <source>Postal code</source>
+        <target>Código postal</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.phone">
+      <segment>
+        <source>Phone</source>
+        <target>Teléfono</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.email">
+      <segment>
+        <source>Email</source>
+        <target>Correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.website">
+      <segment>
+        <source>Website</source>
+        <target>Sitio web</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.priceRange">
+      <segment>
+        <source>Price</source>
+        <target>Precio</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.isActive">
+      <segment>
+        <source>Active</source>
+        <target>Activo</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.saveEdit">
+      <segment>
+        <source>Save changes</source>
+        <target>Guardar cambios</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.submit">
+      <segment>
+        <source>Create restaurant</source>
+        <target>Crear restaurante</target>
+      </segment>
+    </unit>
+    <unit id="restaurantForm.cancel">
+      <segment>
+        <source> Cancel </source>
+        <target> Cancelar </target>
+      </segment>
+    </unit>
   </file>
 </xliff>
