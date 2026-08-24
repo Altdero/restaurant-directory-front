@@ -15,6 +15,14 @@ export interface FavoriteQuery {
  * id, which the toggle-by-restaurant-id flow never has to look up.
  */
 export interface FavoriteDataService {
-  list(query: Signal<FavoriteQuery>): AsyncResource<CountedPage<Favorite>>;
+  /**
+   * `undefined` skips the fetch entirely — the same convention as
+   * `RestaurantDataService.byId`'s `Signal<string | undefined>`. Needed by
+   * `FavoritesStore`, which must never fire `GET favorites/` for an
+   * anonymous visitor: that endpoint requires auth, and firing it anyway
+   * would trip `error.interceptor.ts`'s 401-retry-then-forced-logout path
+   * for someone who was just browsing a public page.
+   */
+  list(query: Signal<FavoriteQuery | undefined>): AsyncResource<CountedPage<Favorite>>;
   toggle(): AsyncMutation<string, { readonly favorited: boolean }>;
 }

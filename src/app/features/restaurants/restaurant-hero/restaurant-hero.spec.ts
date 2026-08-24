@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { Restaurant } from '@core/models/restaurant.model';
 
 import { RestaurantHero } from './restaurant-hero';
@@ -32,6 +33,7 @@ const BASE: Restaurant = {
 
 describe('RestaurantHero', () => {
   function mapsUrl(restaurant: Restaurant): string {
+    TestBed.configureTestingModule({ providers: [provideRouter([])] });
     const fixture = TestBed.createComponent(RestaurantHero);
     fixture.componentRef.setInput('restaurant', restaurant);
     fixture.detectChanges();

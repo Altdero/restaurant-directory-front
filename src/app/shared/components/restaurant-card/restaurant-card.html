@@ -1,11 +1,22 @@
 <article class="restaurant-card">
-  <a class="card-link" [routerLink]="['/restaurants', restaurant().id]">
-    @if (restaurant().coverImage) {
-      <img class="cover" [ngSrc]="restaurant().coverImage" width="400" height="240" alt="" />
-    } @else {
-      <div class="cover placeholder" aria-hidden="true"></div>
-    }
+  <div class="cover-wrap">
+    <a class="card-link" [routerLink]="['/restaurants', restaurant().id]" tabindex="-1">
+      @if (restaurant().coverImage) {
+        <img class="cover" [ngSrc]="restaurant().coverImage" width="400" height="240" alt="" />
+      } @else {
+        <div class="cover placeholder" aria-hidden="true"></div>
+      }
+    </a>
+    <app-favorite-button
+      class="heart-overlay"
+      [isFavorited]="isFavorited()"
+      [isAuthenticated]="isAuthenticated()"
+      [loginReturnUrl]="loginReturnUrl()"
+      (toggled)="toggleFavorite.emit()"
+    />
+  </div>
 
+  <a class="card-link" [routerLink]="['/restaurants', restaurant().id]">
     <div class="body">
       <h3>{{ restaurant().name }}</h3>
       <p class="location">{{ restaurant().city }}</p>

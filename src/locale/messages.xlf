@@ -9,6 +9,14 @@
         <source>Too many requests. Please try again in a moment.</source>
       </segment>
     </unit>
+    <unit id="favoritesStore.toggleError">
+      <notes>
+        <note category="location">src/app/core/services/favorites/favorites-store.ts:89</note>
+      </notes>
+      <segment>
+        <source>Couldn&apos;t update your favorites. Please try again.</source>
+      </segment>
+    </unit>
     <unit id="error.generic">
       <notes>
         <note category="location">src/app/core/utils/api-error-message.ts:17</note>
@@ -137,6 +145,22 @@
         <source> Already have an account? <pc id="0" equivStart="START_LINK" equivEnd="CLOSE_LINK" type="link" dispStart="&lt;a routerLink=&quot;/login&quot;&gt;" dispEnd="&lt;/a&gt;">Log in</pc></source>
       </segment>
     </unit>
+    <unit id="favoritesPage.title">
+      <notes>
+        <note category="location">src/app/features/favorites/favorites-page/favorites-page.html:2,5</note>
+      </notes>
+      <segment>
+        <source>Your favorites</source>
+      </segment>
+    </unit>
+    <unit id="favoritesPage.emptyMessage">
+      <notes>
+        <note category="location">src/app/features/favorites/favorites-page/favorites-page.ts:48</note>
+      </notes>
+      <segment>
+        <source>You haven&apos;t added any favorites yet.</source>
+      </segment>
+    </unit>
     <unit id="menuSection.title">
       <notes>
         <note category="location">src/app/features/restaurants/menu-section/menu-section.html:1,3</note>
@@ -219,7 +243,7 @@
     </unit>
     <unit id="restaurantDetailPage.deleteReviewTitle">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:134</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:147</note>
       </notes>
       <segment>
         <source>Delete your review?</source>
@@ -227,7 +251,7 @@
     </unit>
     <unit id="restaurantDetailPage.deleteReviewMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:135</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:148</note>
       </notes>
       <segment>
         <source>This can&apos;t be undone.</source>
@@ -315,7 +339,7 @@
     </unit>
     <unit id="restaurantGrid.emptyMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-grid/restaurant-grid.ts:51</note>
+        <note category="location">src/app/features/restaurants/restaurant-grid/restaurant-grid.ts:66</note>
       </notes>
       <segment>
         <source>No restaurants match your filters.</source>
@@ -323,7 +347,7 @@
     </unit>
     <unit id="restaurantGrid.errorMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-grid/restaurant-grid.ts:57</note>
+        <note category="location">src/app/features/restaurants/restaurant-grid/restaurant-grid.ts:73</note>
       </notes>
       <segment>
         <source>Couldn&apos;t load restaurants. Please try again.</source>
@@ -339,7 +363,7 @@
     </unit>
     <unit id="restaurantHero.openInMaps">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:27,30</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:33,36</note>
       </notes>
       <segment>
         <source> Open in Maps </source>
@@ -497,9 +521,17 @@
         <source>Discover restaurants near you.</source>
       </segment>
     </unit>
+    <unit id="userMenu.favorites">
+      <notes>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:14,15</note>
+      </notes>
+      <segment>
+        <source>Favorites</source>
+      </segment>
+    </unit>
     <unit id="userMenu.profile">
       <notes>
-        <note category="location">src/app/layout/user-menu/user-menu.ts:14,16</note>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:15,17</note>
       </notes>
       <segment>
         <source>Profile</source>
@@ -507,7 +539,7 @@
     </unit>
     <unit id="userMenu.myRestaurants">
       <notes>
-        <note category="location">src/app/layout/user-menu/user-menu.ts:17,20</note>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:18,21</note>
       </notes>
       <segment>
         <source> My restaurants </source>
@@ -515,7 +547,7 @@
     </unit>
     <unit id="userMenu.logout">
       <notes>
-        <note category="location">src/app/layout/user-menu/user-menu.ts:20,22</note>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:21,23</note>
       </notes>
       <segment>
         <source>Log out</source>
@@ -559,6 +591,22 @@
       </notes>
       <segment>
         <source> Try again </source>
+      </segment>
+    </unit>
+    <unit id="favoriteButton.add">
+      <notes>
+        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:75</note>
+      </notes>
+      <segment>
+        <source>Add to favorites</source>
+      </segment>
+    </unit>
+    <unit id="favoriteButton.remove">
+      <notes>
+        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:76</note>
+      </notes>
+      <segment>
+        <source>Remove from favorites</source>
       </segment>
     </unit>
     <unit id="nav.switchLanguage">
@@ -667,7 +715,7 @@
     </unit>
     <unit id="restaurantCard.reviewCount">
       <notes>
-        <note category="location">src/app/shared/components/restaurant-card/restaurant-card.html:16,18</note>
+        <note category="location">src/app/shared/components/restaurant-card/restaurant-card.html:27,29</note>
       </notes>
       <segment>
         <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/>) </source>

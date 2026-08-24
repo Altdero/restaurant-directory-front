@@ -4,7 +4,13 @@
   } @else if (restaurant.isLoading()) {
     <p i18n="@@restaurantDetailPage.loading">Loading restaurant…</p>
   } @else if (restaurant.value(); as loadedRestaurant) {
-    <app-restaurant-hero [restaurant]="loadedRestaurant" />
+    <app-restaurant-hero
+      [restaurant]="loadedRestaurant"
+      [isFavorited]="isFavorited()"
+      [isAuthenticated]="isAuthenticated()"
+      [loginReturnUrl]="loginReturnUrl()"
+      (toggleFavorite)="toggleFavorite()"
+    />
 
     <app-menu-section
       [menuItems]="menuItems.value()?.results ?? []"

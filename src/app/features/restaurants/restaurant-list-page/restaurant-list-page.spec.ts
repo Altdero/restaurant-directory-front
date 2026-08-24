@@ -4,6 +4,8 @@ import { Router, provideRouter } from '@angular/router';
 import { CATEGORY_DATA, RESTAURANT_DATA } from '@core/interfaces/tokens';
 import { RestaurantQuery } from '@core/interfaces/restaurant-data.service';
 import { CountedPage } from '@core/models/pagination.model';
+import { AuthStore } from '@core/services/auth/auth.store';
+import { FavoritesStore } from '@core/services/favorites/favorites-store';
 
 import { RestaurantListPage } from './restaurant-list-page';
 
@@ -21,9 +23,11 @@ function fakeResource() {
 describe('RestaurantListPage', () => {
   let capturedQuery: Signal<RestaurantQuery> | undefined;
   let navigate: ReturnType<typeof vi.fn>;
+  let toggleFavorite: ReturnType<typeof vi.fn>;
 
   function createFixture() {
     capturedQuery = undefined;
+    toggleFavorite = vi.fn();
 
     TestBed.configureTestingModule({
       providers: [
@@ -38,6 +42,11 @@ describe('RestaurantListPage', () => {
           },
         },
         { provide: CATEGORY_DATA, useValue: { list: () => fakeResource() } },
+        { provide: AuthStore, useValue: { isAuthenticated: signal(false) } },
+        {
+          provide: FavoritesStore,
+          useValue: { favoritedIds: signal(new Set<string>()), toggle: toggleFavorite },
+        },
       ],
     });
 
@@ -98,5 +107,14 @@ describe('RestaurantListPage', () => {
         queryParamsHandling: 'merge',
       }),
     );
+  });
+
+  it('delegates favorite toggling to FavoritesStore', () => {
+    const fixture = createFixture();
+    fixture.detectChanges();
+
+    fixture.componentInstance['toggleFavorite']('r-1');
+
+    expect(toggleFavorite).toHaveBeenCalledWith('r-1');
   });
 });

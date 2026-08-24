@@ -11,6 +11,7 @@ import { UserProfile } from '@core/models/user-profile.model';
   template: `
     <button mat-button [matMenuTriggerFor]="menu">{{ user().username }}</button>
     <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="/favorites" i18n="@@userMenu.favorites">Favorites</a>
       <a mat-menu-item routerLink="/profile" i18n="@@userMenu.profile">Profile</a>
       @if (isOwner()) {
         <a mat-menu-item routerLink="/my/restaurants" i18n="@@userMenu.myRestaurants">

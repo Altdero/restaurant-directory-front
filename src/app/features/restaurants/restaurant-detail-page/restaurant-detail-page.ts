@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MENU_ITEM_DATA, RESTAURANT_DATA, REVIEW_DATA } from '@core/interfaces/tokens';
 import { Review } from '@core/models/review.model';
 import { AuthStore } from '@core/services/auth/auth.store';
+import { FavoritesStore } from '@core/services/favorites/favorites-store';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { MenuSection } from '@features/restaurants/menu-section/menu-section';
 import { ReviewFormValue } from '@features/restaurants/review-form/review-form';
@@ -37,6 +38,7 @@ export class RestaurantDetailPage {
   private readonly menuItemData = inject(MENU_ITEM_DATA);
   private readonly reviewData = inject(REVIEW_DATA);
   private readonly authStore = inject(AuthStore);
+  private readonly favoritesStore = inject(FavoritesStore);
   private readonly dialog = inject(MatDialog);
 
   readonly id = input<string>();
@@ -67,6 +69,10 @@ export class RestaurantDetailPage {
   private readonly removeReviewMutation = this.reviewData.remove();
 
   protected readonly isAuthenticated = this.authStore.isAuthenticated;
+  protected readonly isFavorited = computed(() => {
+    const restaurant = this.restaurant.value();
+    return restaurant ? this.favoritesStore.favoritedIds().has(restaurant.id) : false;
+  });
   protected readonly myReview = computed(() => {
     const userId = this.authStore.user()?.id;
     return userId ? this.reviews().find((review) => review.userId === userId) : undefined;
@@ -88,6 +94,13 @@ export class RestaurantDetailPage {
         this.nextReviewsUrl.set(page.next);
       }
     });
+  }
+
+  protected toggleFavorite(): void {
+    const restaurant = this.restaurant.value();
+    if (restaurant) {
+      void this.favoritesStore.toggle(restaurant.id);
+    }
   }
 
   protected async loadMoreReviews(): Promise<void> {

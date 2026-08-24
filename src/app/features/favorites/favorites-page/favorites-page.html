@@ -1,0 +1,23 @@
+<div class="favorites-page">
+  <h1 i18n="@@favoritesPage.title">Your favorites</h1>
+
+  <app-restaurant-grid
+    [restaurants]="restaurants()"
+    [isLoading]="favorites.isLoading()"
+    [error]="favorites.error()"
+    [favoritedIds]="favoritedIds()"
+    [isAuthenticated]="true"
+    [emptyMessage]="emptyMessage"
+    (retry)="favorites.reload()"
+    (toggleFavorite)="onToggleFavorite($event)"
+  />
+
+  @if ((favorites.value()?.count ?? 0) > pageSize) {
+    <app-paginator-bar
+      [count]="favorites.value()?.count ?? 0"
+      [pageSize]="pageSize"
+      [page]="page()"
+      (pageChange)="page.set($event)"
+    />
+  }
+</div>

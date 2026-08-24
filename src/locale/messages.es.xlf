@@ -517,5 +517,41 @@
         <target>Confirmar</target>
       </segment>
     </unit>
+    <unit id="favoritesStore.toggleError">
+      <segment>
+        <source>Couldn&apos;t update your favorites. Please try again.</source>
+        <target>No se pudieron actualizar tus favoritos. Inténtalo de nuevo.</target>
+      </segment>
+    </unit>
+    <unit id="favoritesPage.title">
+      <segment>
+        <source>Your favorites</source>
+        <target>Tus favoritos</target>
+      </segment>
+    </unit>
+    <unit id="favoritesPage.emptyMessage">
+      <segment>
+        <source>You haven&apos;t added any favorites yet.</source>
+        <target>Aún no has agregado favoritos.</target>
+      </segment>
+    </unit>
+    <unit id="userMenu.favorites">
+      <segment>
+        <source>Favorites</source>
+        <target>Favoritos</target>
+      </segment>
+    </unit>
+    <unit id="favoriteButton.add">
+      <segment>
+        <source>Add to favorites</source>
+        <target>Agregar a favoritos</target>
+      </segment>
+    </unit>
+    <unit id="favoriteButton.remove">
+      <segment>
+        <source>Remove from favorites</source>
+        <target>Quitar de favoritos</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

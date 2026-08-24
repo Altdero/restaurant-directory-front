@@ -18,9 +18,14 @@ const EMPTY_PAGE: CountedPage<Favorite> = { count: 0, next: null, previous: null
 export class FavoriteHttpResourceService implements FavoriteDataService {
   private readonly http = inject(HttpClient);
 
-  list(query: Signal<FavoriteQuery>): AsyncResource<CountedPage<Favorite>> {
+  list(query: Signal<FavoriteQuery | undefined>): AsyncResource<CountedPage<Favorite>> {
     const resource = httpResource(
-      () => buildUrl(environment.apiBaseUrl, '/favorites/', toFavoriteParams(query())),
+      () => {
+        const value = query();
+        return value
+          ? buildUrl(environment.apiBaseUrl, '/favorites/', toFavoriteParams(value))
+          : undefined;
+      },
       { defaultValue: EMPTY_PAGE, parse: mapCountedPage(toFavorite) },
     );
     return toAsyncResource(resource);

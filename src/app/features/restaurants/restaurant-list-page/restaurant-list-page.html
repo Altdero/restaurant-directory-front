@@ -15,7 +15,11 @@
     [restaurants]="restaurants.value()?.results ?? []"
     [isLoading]="restaurants.isLoading()"
     [error]="restaurants.error()"
+    [favoritedIds]="favoritedIds()"
+    [isAuthenticated]="isAuthenticated()"
+    [loginReturnUrl]="loginReturnUrl"
     (retry)="restaurants.reload()"
+    (toggleFavorite)="toggleFavorite($event)"
   />
 
   @if ((restaurants.value()?.count ?? 0) > pageSize) {

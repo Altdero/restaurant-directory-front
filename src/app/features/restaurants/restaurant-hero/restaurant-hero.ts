@@ -1,7 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { Restaurant } from '@core/models/restaurant.model';
 import { CategoryChips } from '@shared/components/category-chips/category-chips';
+import { FavoriteButton } from '@shared/components/favorite-button/favorite-button';
 import { OpeningHoursTable } from '@shared/components/opening-hours-table/opening-hours-table';
 import { PriceRangeBadge } from '@shared/components/price-range-badge/price-range-badge';
 import { RatingStars } from '@shared/components/rating-stars/rating-stars';
@@ -17,7 +18,14 @@ const MAPS_SEARCH_URL = 'https://www.google.com/maps/search/?api=1&query=';
  */
 @Component({
   selector: 'app-restaurant-hero',
-  imports: [NgOptimizedImage, CategoryChips, RatingStars, PriceRangeBadge, OpeningHoursTable],
+  imports: [
+    NgOptimizedImage,
+    CategoryChips,
+    RatingStars,
+    PriceRangeBadge,
+    OpeningHoursTable,
+    FavoriteButton,
+  ],
   templateUrl: './restaurant-hero.html',
   styles: `
     .cover {
@@ -57,6 +65,11 @@ const MAPS_SEARCH_URL = 'https://www.google.com/maps/search/?api=1&query=';
 })
 export class RestaurantHero {
   readonly restaurant = input.required<Restaurant>();
+  readonly isFavorited = input<boolean>(false);
+  readonly isAuthenticated = input<boolean>(false);
+  readonly loginReturnUrl = input<string>('/');
+
+  readonly toggleFavorite = output<void>();
 
   protected readonly mapsUrl = computed(() => {
     const restaurant = this.restaurant();

@@ -2,6 +2,8 @@ import { Component, computed, inject, input, numberAttribute, signal } from '@an
 import { ActivatedRoute, Router } from '@angular/router';
 import { CATEGORY_DATA, RESTAURANT_DATA } from '@core/interfaces/tokens';
 import { PriceRange } from '@core/models/restaurant.model';
+import { AuthStore } from '@core/services/auth/auth.store';
+import { FavoritesStore } from '@core/services/favorites/favorites-store';
 import {
   RestaurantFilters,
   RestaurantFiltersValue,
@@ -45,6 +47,8 @@ function toPage(value: unknown): number {
 export class RestaurantListPage {
   private readonly restaurantData = inject(RESTAURANT_DATA);
   private readonly categoryData = inject(CATEGORY_DATA);
+  private readonly authStore = inject(AuthStore);
+  private readonly favoritesStore = inject(FavoritesStore);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
@@ -68,6 +72,14 @@ export class RestaurantListPage {
 
   protected readonly restaurants = this.restaurantData.list(this.query);
   protected readonly categories = this.categoryData.list(signal({ pageSize: 100 }));
+
+  protected readonly isAuthenticated = this.authStore.isAuthenticated;
+  protected readonly favoritedIds = this.favoritesStore.favoritedIds;
+  protected readonly loginReturnUrl = '/restaurants';
+
+  protected toggleFavorite(restaurantId: string): void {
+    void this.favoritesStore.toggle(restaurantId);
+  }
 
   protected onFiltersChange(filters: RestaurantFiltersValue): void {
     void this.router.navigate([], {

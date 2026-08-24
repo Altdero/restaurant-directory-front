@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from '@core/guards/auth.guard';
 import { guestGuard } from '@core/guards/guest.guard';
 
 export const routes: Routes = [
@@ -26,5 +27,11 @@ export const routes: Routes = [
     canActivate: [guestGuard],
     loadComponent: () =>
       import('./features/auth/register-page/register-page').then((m) => m.RegisterPage),
+  },
+  {
+    path: 'favorites',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/favorites/favorites-page/favorites-page').then((m) => m.FavoritesPage),
   },
 ];

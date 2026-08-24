@@ -1,14 +1,22 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Restaurant } from '@core/models/restaurant.model';
 import { CategoryChips } from '@shared/components/category-chips/category-chips';
+import { FavoriteButton } from '@shared/components/favorite-button/favorite-button';
 import { PriceRangeBadge } from '@shared/components/price-range-badge/price-range-badge';
 import { RatingStars } from '@shared/components/rating-stars/rating-stars';
 
 @Component({
   selector: 'app-restaurant-card',
-  imports: [NgOptimizedImage, RouterLink, RatingStars, PriceRangeBadge, CategoryChips],
+  imports: [
+    NgOptimizedImage,
+    RouterLink,
+    RatingStars,
+    PriceRangeBadge,
+    CategoryChips,
+    FavoriteButton,
+  ],
   templateUrl: './restaurant-card.html',
   styles: `
     .restaurant-card {
@@ -21,6 +29,16 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
       display: block;
       color: inherit;
       text-decoration: none;
+    }
+
+    .cover-wrap {
+      position: relative;
+    }
+
+    .heart-overlay {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
     }
 
     .cover {
@@ -66,4 +84,9 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
 })
 export class RestaurantCard {
   readonly restaurant = input.required<Restaurant>();
+  readonly isFavorited = input<boolean>(false);
+  readonly isAuthenticated = input<boolean>(false);
+  readonly loginReturnUrl = input<string>('/');
+
+  readonly toggleFavorite = output<void>();
 }

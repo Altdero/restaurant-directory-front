@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { Restaurant } from '@core/models/restaurant.model';
 
@@ -62,5 +63,34 @@ describe('RestaurantGrid', () => {
     fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelectorAll('app-restaurant-card').length).toBe(1);
+  });
+
+  it('falls back to the default empty message when no override is given', () => {
+    const fixture = createFixture();
+    expect(fixture.componentInstance['resolvedEmptyMessage']()).toBe(
+      'No restaurants match your filters.',
+    );
+  });
+
+  it('uses the caller-supplied empty message when given', () => {
+    const fixture = createFixture();
+    fixture.componentRef.setInput('emptyMessage', "You haven't added any favorites yet.");
+    expect(fixture.componentInstance['resolvedEmptyMessage']()).toBe(
+      "You haven't added any favorites yet.",
+    );
+  });
+
+  it('emits toggleFavorite with the restaurant id from a card', () => {
+    const fixture = createFixture();
+    fixture.componentRef.setInput('restaurants', [RESTAURANT]);
+    fixture.componentRef.setInput('isLoading', false);
+    const emitted = vi.fn();
+    fixture.componentInstance.toggleFavorite.subscribe(emitted);
+    fixture.detectChanges();
+
+    const card = fixture.debugElement.query(By.css('app-restaurant-card'));
+    card.triggerEventHandler('toggleFavorite');
+
+    expect(emitted).toHaveBeenCalledWith(RESTAURANT.id);
   });
 });

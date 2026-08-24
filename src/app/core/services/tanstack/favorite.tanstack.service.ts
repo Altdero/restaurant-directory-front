@@ -19,15 +19,18 @@ import { toAsyncMutation, toAsyncResource } from './tanstack.adapter';
 export class FavoriteTanStackService implements FavoriteDataService {
   private readonly http = inject(HttpClient);
 
-  list(query: Signal<FavoriteQuery>): AsyncResource<CountedPage<Favorite>> {
+  list(query: Signal<FavoriteQuery | undefined>): AsyncResource<CountedPage<Favorite>> {
     const result = injectQuery<CountedPage<Favorite>, ApiError>(() => {
       const q = query();
       return {
         queryKey: ['favorites', 'list', q],
+        enabled: q !== undefined,
         queryFn: () =>
           firstValueFrom(
             this.http
-              .get<unknown>(buildUrl(environment.apiBaseUrl, '/favorites/', toFavoriteParams(q)))
+              .get<unknown>(
+                buildUrl(environment.apiBaseUrl, '/favorites/', toFavoriteParams(q ?? {})),
+              )
               .pipe(map(mapCountedPage(toFavorite))),
           ),
       };

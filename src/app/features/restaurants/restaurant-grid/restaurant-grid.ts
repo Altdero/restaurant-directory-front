@@ -22,11 +22,17 @@ const SKELETON_COUNT = [0, 1, 2, 3, 4, 5];
         }
       </div>
     } @else if (restaurants().length === 0) {
-      <app-empty-state [message]="emptyMessage()" />
+      <app-empty-state [message]="resolvedEmptyMessage()" />
     } @else {
       <div class="grid">
         @for (restaurant of restaurants(); track restaurant.id) {
-          <app-restaurant-card [restaurant]="restaurant" />
+          <app-restaurant-card
+            [restaurant]="restaurant"
+            [isFavorited]="favoritedIds().has(restaurant.id)"
+            [isAuthenticated]="isAuthenticated()"
+            [loginReturnUrl]="loginReturnUrl()"
+            (toggleFavorite)="toggleFavorite.emit(restaurant.id)"
+          />
         }
       </div>
     }
@@ -43,12 +49,22 @@ export class RestaurantGrid {
   readonly restaurants = input.required<readonly Restaurant[]>();
   readonly isLoading = input.required<boolean>();
   readonly error = input<ApiError | undefined>(undefined);
+  readonly favoritedIds = input<ReadonlySet<string>>(new Set());
+  readonly isAuthenticated = input<boolean>(false);
+  readonly loginReturnUrl = input<string>('/');
+  /** Overrides the default empty-state message — e.g. `FavoritesPage`'s "no favorites yet" copy. */
+  readonly emptyMessage = input<string>();
+
   readonly retry = output<void>();
+  readonly toggleFavorite = output<string>();
 
   protected readonly skeletons = SKELETON_COUNT;
 
-  protected emptyMessage(): string {
-    return $localize`:@@restaurantGrid.emptyMessage:No restaurants match your filters.`;
+  protected resolvedEmptyMessage(): string {
+    return (
+      this.emptyMessage() ??
+      $localize`:@@restaurantGrid.emptyMessage:No restaurants match your filters.`
+    );
   }
 
   protected errorMessage(error: ApiError): string {

@@ -10,6 +10,12 @@
   <app-rating-stars [rating]="restaurant().averageRating" />
   <span i18n="@@restaurantHero.reviewCount"> ({{ restaurant().totalReviews }} reviews) </span>
   <app-price-range-badge [priceRange]="restaurant().priceRange" />
+  <app-favorite-button
+    [isFavorited]="isFavorited()"
+    [isAuthenticated]="isAuthenticated()"
+    [loginReturnUrl]="loginReturnUrl()"
+    (toggled)="toggleFavorite.emit()"
+  />
 </div>
 
 <app-category-chips [categories]="restaurant().categories" />

@@ -1,13 +1,43 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { provideRouter } from '@angular/router';
 import { MENU_ITEM_DATA, RESTAURANT_DATA, REVIEW_DATA } from '@core/interfaces/tokens';
+import { Restaurant } from '@core/models/restaurant.model';
 import { Review } from '@core/models/review.model';
 import { AuthStore } from '@core/services/auth/auth.store';
+import { FavoritesStore } from '@core/services/favorites/favorites-store';
 import { UserProfile } from '@core/models/user-profile.model';
 import { of } from 'rxjs';
 
 import { RestaurantDetailPage } from './restaurant-detail-page';
+
+const RESTAURANT_A: Restaurant = {
+  id: 'r-1',
+  owner: 'owner1',
+  name: 'La Trattoria',
+  slug: 'la-trattoria',
+  description: '',
+  categories: [],
+  address: '123 Main St',
+  city: 'Mexico City',
+  state: '',
+  country: 'Mexico',
+  postalCode: '',
+  latitude: null,
+  longitude: null,
+  phone: '',
+  email: '',
+  website: '',
+  priceRange: '$$',
+  coverImage: '',
+  averageRating: 4,
+  totalReviews: 2,
+  openingHours: {},
+  isActive: true,
+  createdAt: new Date('2026-01-01'),
+  updatedAt: new Date('2026-01-01'),
+};
 
 const REVIEW_A: Review = {
   id: 'rv-1',
@@ -52,17 +82,24 @@ describe('RestaurantDetailPage', () => {
   let updateReview: ReturnType<typeof fakeMutation>;
   let removeReview: ReturnType<typeof fakeMutation>;
   let dialogOpen: ReturnType<typeof vi.fn>;
+  let toggleFavorite: ReturnType<typeof vi.fn>;
+  let favoritedIds: ReturnType<typeof signal<ReadonlySet<string>>>;
 
-  function createFixture(options: { authenticatedAs?: UserProfile | null } = {}) {
+  function createFixture(
+    options: { authenticatedAs?: UserProfile | null; restaurant?: Restaurant } = {},
+  ) {
     loadMore = vi.fn();
     createReview = fakeMutation();
     updateReview = fakeMutation();
     removeReview = fakeMutation();
     dialogOpen = vi.fn();
+    toggleFavorite = vi.fn();
+    favoritedIds = signal(new Set<string>());
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: RESTAURANT_DATA, useValue: { byId: () => fakeResource(undefined) } },
+        provideRouter([]),
+        { provide: RESTAURANT_DATA, useValue: { byId: () => fakeResource(options.restaurant) } },
         { provide: MENU_ITEM_DATA, useValue: { list: () => fakeResource(undefined) } },
         {
           provide: REVIEW_DATA,
@@ -89,6 +126,7 @@ describe('RestaurantDetailPage', () => {
           },
         },
         { provide: MatDialog, useValue: { open: dialogOpen } },
+        { provide: FavoritesStore, useValue: { favoritedIds, toggle: toggleFavorite } },
       ],
     });
 
@@ -204,5 +242,22 @@ describe('RestaurantDetailPage', () => {
     await fixture.componentInstance['confirmDeleteReview']();
 
     expect(removeReview.mutate).not.toHaveBeenCalled();
+  });
+
+  it('reflects FavoritesStore for the loaded restaurant', () => {
+    const fixture = createFixture({ restaurant: RESTAURANT_A });
+    favoritedIds.set(new Set([RESTAURANT_A.id]));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance['isFavorited']()).toBe(true);
+  });
+
+  it('delegates favorite toggling to FavoritesStore for the loaded restaurant', () => {
+    const fixture = createFixture({ restaurant: RESTAURANT_A });
+    fixture.detectChanges();
+
+    fixture.componentInstance['toggleFavorite']();
+
+    expect(toggleFavorite).toHaveBeenCalledWith(RESTAURANT_A.id);
   });
 });
