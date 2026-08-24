@@ -4,6 +4,8 @@ import {
   isMainModule,
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
+import { buildSitemapXml } from '@core/utils/sitemap-builder';
+import { environment } from '@environments/environment';
 import express from 'express';
 import { join } from 'node:path';
 
@@ -48,6 +50,72 @@ app.use(
     redirect: false,
   }),
 );
+
+/**
+ * Fetches every restaurant id, page by page (`page_size=100`, following
+ * `next` until it's `null` — no silent cap, real or seeded backends alike),
+ * for `sitemap.xml` below.
+ */
+async function fetchAllRestaurantIds(): Promise<string[]> {
+  const ids: string[] = [];
+  let page = 1;
+  for (;;) {
+    const response = await fetch(
+      `${environment.apiBaseUrl}/restaurants/?page=${page}&page_size=100`,
+    );
+    if (!response.ok) {
+      throw new Error(`Unexpected ${response.status} fetching restaurants (page ${page})`);
+    }
+    const data = (await response.json()) as { results: { id: string }[]; next: string | null };
+    ids.push(...data.results.map((restaurant) => restaurant.id));
+    if (!data.next) {
+      return ids;
+    }
+    page += 1;
+  }
+}
+
+/**
+ * Registered before the locale-redirect middleware below — neither path is
+ * locale-prefixed, and that redirect would otherwise send this request to
+ * `/es/sitemap.xml`, which doesn't exist.
+ */
+app.get('/sitemap.xml', async (req, res) => {
+  let restaurantIds: string[] = [];
+  try {
+    restaurantIds = await fetchAllRestaurantIds();
+  } catch (error) {
+    // A crawler should never see a broken response just because the API had
+    // one bad moment — degrade to the listing page only, for both locales.
+    console.error(
+      'sitemap.xml: failed to fetch restaurants, degrading to the listing page only',
+      error,
+    );
+  }
+  res
+    .type('application/xml')
+    .send(
+      buildSitemapXml({ siteUrl: environment.siteUrl, restaurantIds, locales: SUPPORTED_LOCALES }),
+    );
+});
+
+app.get('/robots.txt', (req, res) => {
+  res
+    .type('text/plain')
+    .send(
+      [
+        'User-agent: *',
+        'Disallow: /*/login',
+        'Disallow: /*/register',
+        'Disallow: /*/favorites',
+        'Disallow: /*/profile',
+        'Disallow: /*/my/',
+        '',
+        `Sitemap: ${environment.siteUrl}/sitemap.xml`,
+        '',
+      ].join('\n'),
+    );
+});
 
 /**
  * Redirect any request whose path does not start with a supported locale

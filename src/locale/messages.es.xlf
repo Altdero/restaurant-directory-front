@@ -859,5 +859,23 @@
         <target>Tu perfil</target>
       </segment>
     </unit>
+    <unit id="restaurantListPage.metaTitle">
+      <segment>
+        <source>Restaurants | Restaurant Directory</source>
+        <target>Restaurantes | Restaurant Directory</target>
+      </segment>
+    </unit>
+    <unit id="restaurantListPage.metaDescription">
+      <segment>
+        <source>Browse restaurants by category, city, price and rating.</source>
+        <target>Explora restaurantes por categoría, ciudad, precio y calificación.</target>
+      </segment>
+    </unit>
+    <unit id="restaurantDetailPage.metaTitle">
+      <segment>
+        <source><ph id="0" equiv="name" disp="restaurant.name"/> | Restaurant Directory</source>
+        <target><ph id="0" equiv="name" disp="restaurant.name"/> | Restaurant Directory</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

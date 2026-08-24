@@ -1,9 +1,10 @@
-import { Component, computed, inject, input, numberAttribute, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, numberAttribute, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CATEGORY_DATA, RESTAURANT_DATA } from '@core/interfaces/tokens';
 import { PriceRange } from '@core/models/restaurant.model';
 import { AuthStore } from '@core/services/auth/auth.store';
 import { FavoritesStore } from '@core/services/favorites/favorites-store';
+import { SeoService } from '@core/services/seo/seo.service';
 import {
   RestaurantFilters,
   RestaurantFiltersValue,
@@ -51,6 +52,7 @@ export class RestaurantListPage {
   private readonly favoritesStore = inject(FavoritesStore);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly seoService = inject(SeoService);
 
   readonly category = input<string>();
   readonly city = input<string>();
@@ -92,6 +94,23 @@ export class RestaurantListPage {
   protected readonly isAuthenticated = this.authStore.isAuthenticated;
   protected readonly favoritedIds = this.favoritesStore.favoritedIds;
   protected readonly loginReturnUrl = '/restaurants';
+
+  constructor() {
+    effect(() => {
+      this.seoService.updatePage({
+        title: $localize`:@@restaurantListPage.metaTitle:Restaurants | Restaurant Directory`,
+        description: $localize`:@@restaurantListPage.metaDescription:Browse restaurants by category, city, price and rating.`,
+        canonicalQueryParams: {
+          category: this.category(),
+          city: this.city(),
+          priceRange: this.priceRange(),
+          minRating: this.minRating(),
+          search: this.search(),
+          page: this.page() > 1 ? this.page() : undefined,
+        },
+      });
+    });
+  }
 
   protected toggleFavorite(restaurantId: string): void {
     void this.favoritesStore.toggle(restaurantId);

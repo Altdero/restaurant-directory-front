@@ -633,9 +633,17 @@
         <source>Loading restaurant…</source>
       </segment>
     </unit>
+    <unit id="restaurantDetailPage.metaTitle">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:124</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="name" disp="restaurant.name"/> | Restaurant Directory</source>
+      </segment>
+    </unit>
     <unit id="restaurantDetailPage.deleteReviewTitle">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:158</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:179</note>
       </notes>
       <segment>
         <source>Delete your review?</source>
@@ -643,7 +651,7 @@
     </unit>
     <unit id="restaurantDetailPage.deleteReviewMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:159</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:180</note>
       </notes>
       <segment>
         <source>This can&apos;t be undone.</source>
@@ -767,6 +775,22 @@
       </notes>
       <segment>
         <source>Restaurants</source>
+      </segment>
+    </unit>
+    <unit id="restaurantListPage.metaTitle">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.ts:101</note>
+      </notes>
+      <segment>
+        <source>Restaurants | Restaurant Directory</source>
+      </segment>
+    </unit>
+    <unit id="restaurantListPage.metaDescription">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.ts:102</note>
+      </notes>
+      <segment>
+        <source>Browse restaurants by category, city, price and rating.</source>
       </segment>
     </unit>
     <unit id="reviewForm.rating">
@@ -1019,7 +1043,7 @@
     </unit>
     <unit id="nav.switchLanguage">
       <notes>
-        <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:35</note>
+        <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:36</note>
       </notes>
       <segment>
         <source>Switch language to <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></source>

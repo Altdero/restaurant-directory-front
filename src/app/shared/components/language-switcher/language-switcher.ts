@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/core';
 import { Component, LOCALE_ID, inject } from '@angular/core';
+import { stripLocalePrefix } from '@core/utils/locale-path';
 
 type Locale = 'es' | 'en';
 
@@ -36,7 +37,7 @@ export class LanguageSwitcher {
 
   private buildAlternateHref(): string {
     const { pathname, search } = this.document.location;
-    const pathWithoutLocale = pathname.replace(/^\/(?:es|en)(\/|$)/, '/');
+    const pathWithoutLocale = stripLocalePrefix(pathname);
     const path = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
     return `/${this.alternateLocale}${path}${search}`;
   }

@@ -7,3 +7,6 @@
  * string is always substituted before this identifier reaches the bundle.
  */
 declare const NG_APP_API_BASE_URL: string;
+
+/** Same `define` substitution as `NG_APP_API_BASE_URL` above, for the app's own absolute origin. */
+declare const NG_APP_SITE_URL: string;

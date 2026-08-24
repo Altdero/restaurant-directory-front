@@ -1,10 +1,14 @@
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { Component, LOCALE_ID, computed, effect, inject, input, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MENU_ITEM_DATA, RESTAURANT_DATA, REVIEW_DATA } from '@core/interfaces/tokens';
 import { Review } from '@core/models/review.model';
 import { AuthStore } from '@core/services/auth/auth.store';
 import { FavoritesStore } from '@core/services/favorites/favorites-store';
+import { JsonLdService } from '@core/services/seo/json-ld.service';
+import { SeoService } from '@core/services/seo/seo.service';
 import { apiErrorMessage } from '@core/utils/api-error-message';
+import { buildRestaurantJsonLd } from '@core/utils/restaurant-json-ld';
+import { environment } from '@environments/environment';
 import { MenuSection } from '@features/restaurants/menu-section/menu-section';
 import { ReviewFormValue } from '@features/restaurants/review-form/review-form';
 import { RestaurantHero } from '@features/restaurants/restaurant-hero/restaurant-hero';
@@ -40,6 +44,9 @@ export class RestaurantDetailPage {
   private readonly authStore = inject(AuthStore);
   private readonly favoritesStore = inject(FavoritesStore);
   private readonly dialog = inject(MatDialog);
+  private readonly seoService = inject(SeoService);
+  private readonly jsonLdService = inject(JsonLdService);
+  private readonly localeId = inject(LOCALE_ID);
 
   readonly id = input<string>();
 
@@ -104,6 +111,20 @@ export class RestaurantDetailPage {
         this.loadedReviews.set(page.results);
         this.nextReviewsUrl.set(page.next);
       }
+    });
+
+    effect(() => {
+      const restaurant = this.restaurant.error() ? undefined : this.restaurant.value();
+      if (!restaurant) {
+        return;
+      }
+      const locale = this.localeId === 'en' ? 'en' : 'es';
+      const pageUrl = `${environment.siteUrl}/${locale}/restaurants/${restaurant.id}`;
+      this.seoService.updatePage({
+        title: $localize`:@@restaurantDetailPage.metaTitle:${restaurant.name}:name: | Restaurant Directory`,
+        description: restaurant.description,
+      });
+      this.jsonLdService.set(buildRestaurantJsonLd(restaurant, pageUrl));
     });
   }
 
