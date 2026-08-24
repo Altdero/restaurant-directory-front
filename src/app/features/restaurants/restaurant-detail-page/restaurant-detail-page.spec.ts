@@ -21,7 +21,6 @@ const REVIEW_A: Review = {
   createdAt: new Date('2026-01-01'),
   updatedAt: new Date('2026-01-01'),
 };
-const REVIEW_B: Review = { ...REVIEW_A, id: 'rv-2', username: 'bea' };
 const MY_USER: UserProfile = {
   id: 'u-1',
   username: 'ana',
@@ -105,83 +104,11 @@ describe('RestaurantDetailPage', () => {
     return TestBed.createComponent(RestaurantDetailPage);
   }
 
-  it('syncs the accumulated reviews and next-page cursor from the first page', () => {
-    const fixture = createFixture();
-    fixture.detectChanges();
-
-    expect(fixture.componentInstance['reviews']()).toEqual([REVIEW_A]);
-    expect(fixture.componentInstance['hasMoreReviews']()).toBe(true);
-  });
-
-  it('appends the next page and updates the cursor on load more', async () => {
-    const fixture = createFixture();
-    loadMore.mockResolvedValue({ next: null, previous: null, results: [REVIEW_B] });
-    fixture.detectChanges();
-
-    await fixture.componentInstance['loadMoreReviews']();
-
-    expect(fixture.componentInstance['reviews']()).toEqual([REVIEW_A, REVIEW_B]);
-    expect(fixture.componentInstance['hasMoreReviews']()).toBe(false);
-    expect(loadMore).toHaveBeenCalledWith('https://api/reviews/?cursor=abc');
-  });
-
-  it('is a no-op when there is no next page', async () => {
-    const fixture = createFixture();
-    loadMore.mockResolvedValue({ next: null, previous: null, results: [] });
-    fixture.detectChanges();
-    await fixture.componentInstance['loadMoreReviews']();
-    loadMore.mockClear();
-
-    await fixture.componentInstance['loadMoreReviews']();
-
-    expect(loadMore).not.toHaveBeenCalled();
-  });
-
-  it('identifies myReview by matching the authenticated user id', () => {
-    const fixture = createFixture({ authenticatedAs: MY_USER });
-    fixture.detectChanges();
-
-    expect(fixture.componentInstance['myReview']()).toEqual(REVIEW_A);
-  });
-
-  it('has no myReview when logged out', () => {
-    const fixture = createFixture();
-    fixture.detectChanges();
-
-    expect(fixture.componentInstance['myReview']()).toBeUndefined();
-  });
-
-  it('creates a review when the user has none yet, then reloads and closes the form', async () => {
-    const fixture = createFixture({ authenticatedAs: { ...MY_USER, id: 'someone-else' } });
-    createReview.mutate.mockResolvedValue(REVIEW_A);
-    fixture.componentRef.setInput('id', 'r-1');
-    fixture.detectChanges();
-    fixture.componentInstance['isReviewFormOpen'].set(true);
-
-    await fixture.componentInstance['submitReview']({ rating: 5, comment: 'Loved it' });
-
-    expect(createReview.mutate).toHaveBeenCalledWith({
-      restaurant: 'r-1',
-      rating: 5,
-      comment: 'Loved it',
-    });
-    expect(fixture.componentInstance['isReviewFormOpen']()).toBe(false);
-  });
-
-  it('updates the existing review when the user already has one', async () => {
-    const fixture = createFixture({ authenticatedAs: MY_USER });
-    updateReview.mutate.mockResolvedValue(REVIEW_A);
-    fixture.componentRef.setInput('id', 'r-1');
-    fixture.detectChanges();
-
-    await fixture.componentInstance['submitReview']({ rating: 2, comment: 'Changed my mind' });
-
-    expect(updateReview.mutate).toHaveBeenCalledWith({
-      id: REVIEW_A.id,
-      body: { rating: 2, comment: 'Changed my mind' },
-    });
-  });
-
+  // The happy paths here (cursor pagination, create-vs-update branching,
+  // myReview matching, review-delete confirm/cancel, favorite toggling) are
+  // now proven end-to-end by e2e/specs/restaurant-detail.spec.ts and
+  // e2e/specs/reviews.spec.ts with equal precision — kept only the one
+  // scenario no E2E test exercises (all E2E review tests mock success).
   it('keeps the form open and does not reload when the mutation fails', async () => {
     const fixture = createFixture({ authenticatedAs: MY_USER });
     updateReview.mutate.mockRejectedValue({ type: 'unknown', status: 500 });

@@ -32,19 +32,13 @@ describe('RegisterPage', () => {
     return TestBed.createComponent(RegisterPage);
   }
 
-  it('flags a password/confirm mismatch and does not submit', async () => {
-    const fixture = createFixture();
-    fixture.componentInstance.form.setValue({ ...VALID_VALUE, password_confirm: 'different' });
-
-    expect(fixture.componentInstance.form.errors).toEqual({ passwordMismatch: true });
-
-    await fixture.componentInstance.submit();
-    expect(register).not.toHaveBeenCalled();
-  });
-
+  // The password-mismatch case is now proven end-to-end (equal precision)
+  // by e2e/specs/auth.spec.ts's identical test. These two survive because
+  // no E2E test exercises a successful registration or a server-side field
+  // error — auth.spec.ts's other cases are all login/mismatch/logout.
   it('registers and navigates home on success', async () => {
-    register.mockResolvedValue(undefined);
     const fixture = createFixture();
+    register.mockResolvedValue(undefined);
     fixture.componentInstance.form.setValue(VALID_VALUE);
 
     await fixture.componentInstance.submit();

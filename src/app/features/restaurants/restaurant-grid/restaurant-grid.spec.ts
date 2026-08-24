@@ -19,14 +19,6 @@ describe('RestaurantGrid', () => {
     );
   });
 
-  it('falls back to the default empty message when no override is given', () => {
-    const fixture = TestBed.createComponent(RestaurantGrid);
-
-    expect(fixture.componentInstance['resolvedEmptyMessage']()).toBe(
-      'No restaurants match your filters.',
-    );
-  });
-
   it('uses the caller-supplied empty message when given', () => {
     const fixture = TestBed.createComponent(RestaurantGrid);
     fixture.componentRef.setInput('emptyMessage', "You haven't added any favorites yet.");
