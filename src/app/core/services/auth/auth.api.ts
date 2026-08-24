@@ -8,7 +8,12 @@ import {
   RegisterResult,
   toRegisterResult,
 } from '@core/models/auth.model';
-import { UserProfile, UserProfileDto, toUserProfile } from '@core/models/user-profile.model';
+import {
+  UserProfile,
+  UserProfileDto,
+  UserProfileUpdate,
+  toUserProfile,
+} from '@core/models/user-profile.model';
 import { buildUrl } from '@core/utils/api-url.builder';
 import { environment } from '@environments/environment';
 import { Observable, map } from 'rxjs';
@@ -43,6 +48,12 @@ export class AuthApi {
   me(): Observable<UserProfile> {
     return this.http
       .get<UserProfileDto>(buildUrl(environment.apiBaseUrl, '/users/me/'))
+      .pipe(map(toUserProfile));
+  }
+
+  updateMe(body: UserProfileUpdate): Observable<UserProfile> {
+    return this.http
+      .patch<UserProfileDto>(buildUrl(environment.apiBaseUrl, '/users/me/'), body)
       .pipe(map(toUserProfile));
   }
 }

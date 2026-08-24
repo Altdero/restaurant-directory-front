@@ -1,0 +1,15 @@
+<div class="profile-page">
+  <h1 i18n="@@profilePage.title">Your profile</h1>
+
+  @if (user(); as user) {
+    <app-profile-form
+      [user]="user"
+      [isPending]="isPending()"
+      [error]="formError()"
+      [avatarUrl]="avatarUrl()"
+      [isUploadingImage]="isUploadingImage()"
+      (save)="submit($event)"
+      (imageSelected)="onImageSelected($event)"
+    />
+  }
+</div>

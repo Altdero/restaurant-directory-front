@@ -811,5 +811,53 @@
         <target> Menú </target>
       </segment>
     </unit>
+    <unit id="profileForm.username">
+      <segment>
+        <source>Username</source>
+        <target>Nombre de usuario</target>
+      </segment>
+    </unit>
+    <unit id="profileForm.role">
+      <segment>
+        <source>Role</source>
+        <target>Rol</target>
+      </segment>
+    </unit>
+    <unit id="profileForm.email">
+      <segment>
+        <source>Email</source>
+        <target>Correo electrónico</target>
+      </segment>
+    </unit>
+    <unit id="profileForm.firstName">
+      <segment>
+        <source>First name</source>
+        <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="profileForm.lastName">
+      <segment>
+        <source>Last name</source>
+        <target>Apellido</target>
+      </segment>
+    </unit>
+    <unit id="profileForm.phone">
+      <segment>
+        <source>Phone</source>
+        <target>Teléfono</target>
+      </segment>
+    </unit>
+    <unit id="profileForm.submit">
+      <segment>
+        <source>Save changes</source>
+        <target>Guardar cambios</target>
+      </segment>
+    </unit>
+    <unit id="profilePage.title">
+      <segment>
+        <source>Your profile</source>
+        <target>Tu perfil</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

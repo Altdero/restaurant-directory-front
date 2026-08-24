@@ -124,6 +124,19 @@ describe('AuthStore', () => {
     expect(store.user()).toEqual(expect.objectContaining({ username: 'ana' }));
   });
 
+  it('updateProfile patches the API and replaces the user with the response', async () => {
+    const store = flushRehydration('valid-session');
+    TestBed.tick();
+
+    const updatePromise = store.updateProfile({ first_name: 'Nueva' });
+    httpMock
+      .expectOne(`${environment.apiBaseUrl}/users/me/`)
+      .flush({ ...USER_DTO, first_name: 'Nueva' });
+    await updatePromise;
+
+    expect(store.user()).toEqual(expect.objectContaining({ firstName: 'Nueva' }));
+  });
+
   it('logout clears local state even if the API call fails', async () => {
     const store = flushRehydration('valid-session');
     TestBed.tick();

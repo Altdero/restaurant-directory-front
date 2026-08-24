@@ -235,7 +235,7 @@
     </unit>
     <unit id="menuItemForm.isAvailable">
       <notes>
-        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:32,34</note>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:33,36</note>
       </notes>
       <segment>
         <source>Available</source>
@@ -243,7 +243,7 @@
     </unit>
     <unit id="menuItemForm.saveEdit">
       <notes>
-        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:47,49</note>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:49,51</note>
       </notes>
       <segment>
         <source>Save changes</source>
@@ -251,7 +251,7 @@
     </unit>
     <unit id="menuItemForm.submit">
       <notes>
-        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:49,52</note>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:51,54</note>
       </notes>
       <segment>
         <source>Add menu item</source>
@@ -259,7 +259,7 @@
     </unit>
     <unit id="menuItemForm.cancel">
       <notes>
-        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:53,56</note>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:55,58</note>
       </notes>
       <segment>
         <source> Cancel </source>
@@ -307,7 +307,7 @@
     </unit>
     <unit id="menuManagerPage.deleteTitle">
       <notes>
-        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:142</note>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:139</note>
       </notes>
       <segment>
         <source>Delete <ph id="0" equiv="name" disp="item.name"/>?</source>
@@ -315,7 +315,7 @@
     </unit>
     <unit id="menuManagerPage.deleteMessage">
       <notes>
-        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:143</note>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:140</note>
       </notes>
       <segment>
         <source>This can&apos;t be undone.</source>
@@ -527,6 +527,70 @@
       </notes>
       <segment>
         <source> Cancel </source>
+      </segment>
+    </unit>
+    <unit id="profileForm.username">
+      <notes>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:10,11</note>
+      </notes>
+      <segment>
+        <source>Username</source>
+      </segment>
+    </unit>
+    <unit id="profileForm.role">
+      <notes>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:12,13</note>
+      </notes>
+      <segment>
+        <source>Role</source>
+      </segment>
+    </unit>
+    <unit id="profileForm.email">
+      <notes>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:16,17</note>
+      </notes>
+      <segment>
+        <source>Email</source>
+      </segment>
+    </unit>
+    <unit id="profileForm.firstName">
+      <notes>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:21,22</note>
+      </notes>
+      <segment>
+        <source>First name</source>
+      </segment>
+    </unit>
+    <unit id="profileForm.lastName">
+      <notes>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:26,27</note>
+      </notes>
+      <segment>
+        <source>Last name</source>
+      </segment>
+    </unit>
+    <unit id="profileForm.phone">
+      <notes>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:31,32</note>
+      </notes>
+      <segment>
+        <source>Phone</source>
+      </segment>
+    </unit>
+    <unit id="profileForm.submit">
+      <notes>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:48,51</note>
+      </notes>
+      <segment>
+        <source>Save changes</source>
+      </segment>
+    </unit>
+    <unit id="profilePage.title">
+      <notes>
+        <note category="location">src/app/features/profile/profile-page/profile-page.html:2,4</note>
+      </notes>
+      <segment>
+        <source>Your profile</source>
       </segment>
     </unit>
     <unit id="menuSection.title">
@@ -939,7 +1003,7 @@
     </unit>
     <unit id="imageUploader.uploading">
       <notes>
-        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:12,14</note>
+        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:17,19</note>
       </notes>
       <segment>
         <source>Uploading…</source>
@@ -947,7 +1011,7 @@
     </unit>
     <unit id="imageUploader.choose">
       <notes>
-        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:14,18</note>
+        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:19,23</note>
       </notes>
       <segment>
         <source>Choose image</source>

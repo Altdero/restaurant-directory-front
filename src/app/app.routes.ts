@@ -36,6 +36,12 @@ export const routes: Routes = [
       import('./features/favorites/favorites-page/favorites-page').then((m) => m.FavoritesPage),
   },
   {
+    path: 'profile',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/profile/profile-page/profile-page').then((m) => m.ProfilePage),
+  },
+  {
     path: 'my/restaurants',
     canActivate: [ownerGuard],
     loadComponent: () =>

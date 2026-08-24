@@ -1,0 +1,11 @@
+{
+  "id": "055d8a18-ced9-4313-9948-25598f5becb5",
+  "username": "admin",
+  "email": "admin@example.com",
+  "first_name": "Ana",
+  "last_name": "Ruiz",
+  "role": "customer",
+  "phone": "555-0100",
+  "avatar": "https://res.cloudinary.com/demo/image/upload/avatar.jpg",
+  "date_joined": "2026-08-07T21:24:16.549589-06:00"
+}

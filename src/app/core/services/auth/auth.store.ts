@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Service, computed, effect, inject, signal } from '@angular/core';
 import { LoginRequest, RegisterRequest } from '@core/models/auth.model';
-import { UserProfile } from '@core/models/user-profile.model';
+import { UserProfile, UserProfileUpdate } from '@core/models/user-profile.model';
 import { catchError, finalize, firstValueFrom, of, switchMap, tap } from 'rxjs';
 
 import { AuthApi } from './auth.api';
@@ -77,6 +77,11 @@ export class AuthStore {
     const result = await firstValueFrom(this.authApi.register(payload));
     this.accessTokenStore.set(result.access);
     this.userSignal.set(result.user);
+  }
+
+  async updateProfile(body: UserProfileUpdate): Promise<void> {
+    const user = await firstValueFrom(this.authApi.updateMe(body));
+    this.userSignal.set(user);
   }
 
   async logout(): Promise<void> {

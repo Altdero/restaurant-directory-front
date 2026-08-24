@@ -70,6 +70,18 @@ describe('AuthApi', () => {
     expect(result).toEqual(expect.objectContaining({ role: 'customer' }));
   });
 
+  it('patches users/me/ and maps the response to a UserProfile', () => {
+    let result: { email: string } | undefined;
+    api.updateMe({ email: 'new@example.com' }).subscribe((user) => (result = user));
+
+    const req = httpMock.expectOne(`${environment.apiBaseUrl}/users/me/`);
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({ email: 'new@example.com' });
+    req.flush({ ...USER_DTO, email: 'new@example.com' });
+
+    expect(result).toEqual(expect.objectContaining({ email: 'new@example.com' }));
+  });
+
   it('posts to auth/logout/', () => {
     api.logout().subscribe();
 
