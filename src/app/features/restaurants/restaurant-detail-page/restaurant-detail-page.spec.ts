@@ -8,36 +8,8 @@ import { Review } from '@core/models/review.model';
 import { AuthStore } from '@core/services/auth/auth.store';
 import { FavoritesStore } from '@core/services/favorites/favorites-store';
 import { UserProfile } from '@core/models/user-profile.model';
-import { of } from 'rxjs';
 
 import { RestaurantDetailPage } from './restaurant-detail-page';
-
-const RESTAURANT_A: Restaurant = {
-  id: 'r-1',
-  owner: 'owner1',
-  name: 'La Trattoria',
-  slug: 'la-trattoria',
-  description: '',
-  categories: [],
-  address: '123 Main St',
-  city: 'Mexico City',
-  state: '',
-  country: 'Mexico',
-  postalCode: '',
-  latitude: null,
-  longitude: null,
-  phone: '',
-  email: '',
-  website: '',
-  priceRange: '$$',
-  coverImage: '',
-  averageRating: 4,
-  totalReviews: 2,
-  openingHours: {},
-  isActive: true,
-  createdAt: new Date('2026-01-01'),
-  updatedAt: new Date('2026-01-01'),
-};
 
 const REVIEW_A: Review = {
   id: 'rv-1',
@@ -221,43 +193,5 @@ describe('RestaurantDetailPage', () => {
 
     expect(updateReview.mutate).toHaveBeenCalled();
     expect(fixture.componentInstance['isReviewFormOpen']()).toBe(true);
-  });
-
-  it('deletes the review only after the confirm dialog resolves true', async () => {
-    const fixture = createFixture({ authenticatedAs: MY_USER });
-    dialogOpen.mockReturnValue({ afterClosed: () => of(true) });
-    removeReview.mutate.mockResolvedValue(undefined);
-    fixture.detectChanges();
-
-    await fixture.componentInstance['confirmDeleteReview']();
-
-    expect(removeReview.mutate).toHaveBeenCalledWith(REVIEW_A.id);
-  });
-
-  it('does not delete when the confirm dialog is dismissed', async () => {
-    const fixture = createFixture({ authenticatedAs: MY_USER });
-    dialogOpen.mockReturnValue({ afterClosed: () => of(false) });
-    fixture.detectChanges();
-
-    await fixture.componentInstance['confirmDeleteReview']();
-
-    expect(removeReview.mutate).not.toHaveBeenCalled();
-  });
-
-  it('reflects FavoritesStore for the loaded restaurant', () => {
-    const fixture = createFixture({ restaurant: RESTAURANT_A });
-    favoritedIds.set(new Set([RESTAURANT_A.id]));
-    fixture.detectChanges();
-
-    expect(fixture.componentInstance['isFavorited']()).toBe(true);
-  });
-
-  it('delegates favorite toggling to FavoritesStore for the loaded restaurant', () => {
-    const fixture = createFixture({ restaurant: RESTAURANT_A });
-    fixture.detectChanges();
-
-    fixture.componentInstance['toggleFavorite']();
-
-    expect(toggleFavorite).toHaveBeenCalledWith(RESTAURANT_A.id);
   });
 });

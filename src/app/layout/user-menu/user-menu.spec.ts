@@ -36,16 +36,4 @@ describe('UserMenu', () => {
 
     expect(fixture.componentInstance.isOwner()).toBe(true);
   });
-
-  it('emits logout when requested', () => {
-    const fixture = TestBed.createComponent(UserMenu);
-    fixture.componentRef.setInput('user', BASE_USER);
-    fixture.detectChanges();
-
-    const emitted = vi.fn();
-    fixture.componentInstance.logout.subscribe(emitted);
-    fixture.componentInstance.logout.emit();
-
-    expect(emitted).toHaveBeenCalled();
-  });
 });

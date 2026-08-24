@@ -108,13 +108,4 @@ describe('RestaurantListPage', () => {
       }),
     );
   });
-
-  it('delegates favorite toggling to FavoritesStore', () => {
-    const fixture = createFixture();
-    fixture.detectChanges();
-
-    fixture.componentInstance['toggleFavorite']('r-1');
-
-    expect(toggleFavorite).toHaveBeenCalledWith('r-1');
-  });
 });

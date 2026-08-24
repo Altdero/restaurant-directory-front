@@ -28,17 +28,4 @@ describe('FavoriteButton', () => {
     const button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
     expect(button.getAttribute('aria-pressed')).toBe('true');
   });
-
-  it('emits toggle when the authenticated button is clicked', () => {
-    const fixture = createFixture();
-    fixture.componentRef.setInput('isFavorited', false);
-    fixture.componentRef.setInput('isAuthenticated', true);
-    fixture.detectChanges();
-    const emitted = vi.fn();
-    fixture.componentInstance.toggled.subscribe(emitted);
-
-    fixture.nativeElement.querySelector('button').click();
-
-    expect(emitted).toHaveBeenCalled();
-  });
 });

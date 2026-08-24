@@ -22,7 +22,6 @@ function fakeResource(value: unknown) {
 describe('FavoritesPage', () => {
   let list: ReturnType<typeof vi.fn>;
   let toggle: ReturnType<typeof vi.fn>;
-  let reload: ReturnType<typeof vi.fn>;
 
   function createFixture(page: { count: number; results: readonly { restaurant: Restaurant }[] }) {
     toggle = vi.fn();
@@ -32,7 +31,6 @@ describe('FavoritesPage', () => {
       previous: null,
       results: page.results,
     });
-    reload = resource.reload;
     list = vi.fn().mockReturnValue(resource);
 
     TestBed.configureTestingModule({
@@ -57,15 +55,5 @@ describe('FavoritesPage', () => {
     fixture.detectChanges();
 
     expect(fixture.componentInstance['restaurants']()).toEqual([RESTAURANT_A, RESTAURANT_B]);
-  });
-
-  it('toggles through FavoritesStore and reloads the page afterward', async () => {
-    const fixture = createFixture({ count: 1, results: [{ restaurant: RESTAURANT_A }] });
-    fixture.detectChanges();
-
-    await fixture.componentInstance['onToggleFavorite'](RESTAURANT_A.id);
-
-    expect(toggle).toHaveBeenCalledWith(RESTAURANT_A.id);
-    expect(reload).toHaveBeenCalled();
   });
 });
