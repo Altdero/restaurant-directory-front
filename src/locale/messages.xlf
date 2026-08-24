@@ -25,6 +25,46 @@
         <source>Something went wrong. Please try again.</source>
       </segment>
     </unit>
+    <unit id="menuSection.appetizer">
+      <notes>
+        <note category="location">src/app/core/utils/menu-item-category-label.ts:14</note>
+      </notes>
+      <segment>
+        <source>Appetizers</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.mainCourse">
+      <notes>
+        <note category="location">src/app/core/utils/menu-item-category-label.ts:16</note>
+      </notes>
+      <segment>
+        <source>Main Courses</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.beverage">
+      <notes>
+        <note category="location">src/app/core/utils/menu-item-category-label.ts:18</note>
+      </notes>
+      <segment>
+        <source>Beverages</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.dessert">
+      <notes>
+        <note category="location">src/app/core/utils/menu-item-category-label.ts:20</note>
+      </notes>
+      <segment>
+        <source>Desserts</source>
+      </segment>
+    </unit>
+    <unit id="menuSection.other">
+      <notes>
+        <note category="location">src/app/core/utils/menu-item-category-label.ts:22</note>
+      </notes>
+      <segment>
+        <source>Other</source>
+      </segment>
+    </unit>
     <unit id="auth.login.title">
       <notes>
         <note category="location">src/app/features/auth/login-page/login-page.ts:26</note>
@@ -161,6 +201,126 @@
         <source>You haven&apos;t added any favorites yet.</source>
       </segment>
     </unit>
+    <unit id="menuItemForm.name">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:9,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.description">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:14,15</note>
+      </notes>
+      <segment>
+        <source>Description</source>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.price">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:19,20</note>
+      </notes>
+      <segment>
+        <source>Price</source>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.category">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:24,25</note>
+      </notes>
+      <segment>
+        <source>Category</source>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.isAvailable">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:32,34</note>
+      </notes>
+      <segment>
+        <source>Available</source>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.saveEdit">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:47,49</note>
+      </notes>
+      <segment>
+        <source>Save changes</source>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.submit">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:49,52</note>
+      </notes>
+      <segment>
+        <source>Add menu item</source>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.cancel">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:53,56</note>
+      </notes>
+      <segment>
+        <source> Cancel </source>
+      </segment>
+    </unit>
+    <unit id="menuItemTable.edit">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.html:11,13</note>
+      </notes>
+      <segment>
+        <source> Edit </source>
+      </segment>
+    </unit>
+    <unit id="menuItemTable.delete">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.html:14,16</note>
+      </notes>
+      <segment>
+        <source> Delete </source>
+      </segment>
+    </unit>
+    <unit id="menuItemTable.emptyMessage">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.ts:51</note>
+      </notes>
+      <segment>
+        <source>No menu items yet.</source>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.title">
+      <notes>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.html:7,8</note>
+      </notes>
+      <segment>
+        <source>Menu for</source>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.addItem">
+      <notes>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.html:17,20</note>
+      </notes>
+      <segment>
+        <source> Add menu item </source>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.deleteTitle">
+      <notes>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:142</note>
+      </notes>
+      <segment>
+        <source>Delete <ph id="0" equiv="name" disp="item.name"/>?</source>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.deleteMessage">
+      <notes>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:143</note>
+      </notes>
+      <segment>
+        <source>This can&apos;t be undone.</source>
+      </segment>
+    </unit>
     <unit id="myRestaurantsPage.title">
       <notes>
         <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:3,4</note>
@@ -179,15 +339,23 @@
     </unit>
     <unit id="myRestaurantsPage.edit">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:25,27</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:29,32</note>
       </notes>
       <segment>
         <source> Edit </source>
       </segment>
     </unit>
+    <unit id="myRestaurantsPage.menu">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:36,38</note>
+      </notes>
+      <segment>
+        <source> Menu </source>
+      </segment>
+    </unit>
     <unit id="myRestaurantsPage.delete">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:33,35</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:44,46</note>
       </notes>
       <segment>
         <source> Delete </source>
@@ -235,7 +403,7 @@
     </unit>
     <unit id="restaurantForm.name">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:3,4</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:9,10</note>
       </notes>
       <segment>
         <source>Name</source>
@@ -243,7 +411,7 @@
     </unit>
     <unit id="restaurantForm.description">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:8,9</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:14,15</note>
       </notes>
       <segment>
         <source>Description</source>
@@ -251,7 +419,7 @@
     </unit>
     <unit id="restaurantForm.categories">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:13,14</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:19,20</note>
       </notes>
       <segment>
         <source>Categories</source>
@@ -259,7 +427,7 @@
     </unit>
     <unit id="restaurantForm.address">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:22,23</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:28,29</note>
       </notes>
       <segment>
         <source>Address</source>
@@ -267,7 +435,7 @@
     </unit>
     <unit id="restaurantForm.city">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:27,28</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:33,34</note>
       </notes>
       <segment>
         <source>City</source>
@@ -275,7 +443,7 @@
     </unit>
     <unit id="restaurantForm.state">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:32,33</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:38,39</note>
       </notes>
       <segment>
         <source>State</source>
@@ -283,7 +451,7 @@
     </unit>
     <unit id="restaurantForm.country">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:37,38</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:43,44</note>
       </notes>
       <segment>
         <source>Country</source>
@@ -291,7 +459,7 @@
     </unit>
     <unit id="restaurantForm.postalCode">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:42,43</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:48,49</note>
       </notes>
       <segment>
         <source>Postal code</source>
@@ -299,7 +467,7 @@
     </unit>
     <unit id="restaurantForm.phone">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:47,48</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:53,54</note>
       </notes>
       <segment>
         <source>Phone</source>
@@ -307,7 +475,7 @@
     </unit>
     <unit id="restaurantForm.email">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:52,53</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:58,59</note>
       </notes>
       <segment>
         <source>Email</source>
@@ -315,7 +483,7 @@
     </unit>
     <unit id="restaurantForm.website">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:57,58</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:63,64</note>
       </notes>
       <segment>
         <source>Website</source>
@@ -323,7 +491,7 @@
     </unit>
     <unit id="restaurantForm.priceRange">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:62,63</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:68,69</note>
       </notes>
       <segment>
         <source>Price</source>
@@ -331,7 +499,7 @@
     </unit>
     <unit id="restaurantForm.isActive">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:70,72</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:76,78</note>
       </notes>
       <segment>
         <source>Active</source>
@@ -339,7 +507,7 @@
     </unit>
     <unit id="restaurantForm.saveEdit">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:81,83</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:91,93</note>
       </notes>
       <segment>
         <source>Save changes</source>
@@ -347,7 +515,7 @@
     </unit>
     <unit id="restaurantForm.submit">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:83,86</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:93,96</note>
       </notes>
       <segment>
         <source>Create restaurant</source>
@@ -355,7 +523,7 @@
     </unit>
     <unit id="restaurantForm.cancel">
       <notes>
-        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:87,90</note>
+        <note category="location">src/app/features/owner/restaurant-form/restaurant-form.html:97,100</note>
       </notes>
       <segment>
         <source> Cancel </source>
@@ -385,49 +553,9 @@
         <source>(Unavailable)</source>
       </segment>
     </unit>
-    <unit id="menuSection.appetizer">
-      <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:24</note>
-      </notes>
-      <segment>
-        <source>Appetizers</source>
-      </segment>
-    </unit>
-    <unit id="menuSection.mainCourse">
-      <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:26</note>
-      </notes>
-      <segment>
-        <source>Main Courses</source>
-      </segment>
-    </unit>
-    <unit id="menuSection.beverage">
-      <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:28</note>
-      </notes>
-      <segment>
-        <source>Beverages</source>
-      </segment>
-    </unit>
-    <unit id="menuSection.dessert">
-      <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:30</note>
-      </notes>
-      <segment>
-        <source>Desserts</source>
-      </segment>
-    </unit>
-    <unit id="menuSection.other">
-      <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:32</note>
-      </notes>
-      <segment>
-        <source>Other</source>
-      </segment>
-    </unit>
     <unit id="menuSection.emptyMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:97</note>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:83</note>
       </notes>
       <segment>
         <source>This restaurant hasn&apos;t added a menu yet.</source>
@@ -807,6 +935,22 @@
       </notes>
       <segment>
         <source>Remove from favorites</source>
+      </segment>
+    </unit>
+    <unit id="imageUploader.uploading">
+      <notes>
+        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:12,14</note>
+      </notes>
+      <segment>
+        <source>Uploading…</source>
+      </segment>
+    </unit>
+    <unit id="imageUploader.choose">
+      <notes>
+        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:14,18</note>
+      </notes>
+      <segment>
+        <source>Choose image</source>
       </segment>
     </unit>
     <unit id="nav.switchLanguage">

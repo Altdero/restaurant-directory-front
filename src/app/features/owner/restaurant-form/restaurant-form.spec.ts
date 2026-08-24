@@ -86,8 +86,12 @@ describe('RestaurantForm', () => {
     expect(emitted).not.toHaveBeenCalled();
   });
 
-  it('emits the snake_case payload on a valid submit', () => {
+  it('emits the snake_case payload, including the tracked cover image url, on a valid submit', () => {
     const fixture = createFixture();
+    fixture.componentRef.setInput(
+      'coverImageUrl',
+      'https://res.cloudinary.com/demo/image/upload/new.jpg',
+    );
     fixture.detectChanges();
     fixture.componentInstance['form'].patchValue({ name: 'New Spot', category_ids: ['c-1'] });
     const emitted = vi.fn();
@@ -96,7 +100,11 @@ describe('RestaurantForm', () => {
     fixture.componentInstance.submit();
 
     expect(emitted).toHaveBeenCalledWith(
-      expect.objectContaining({ name: 'New Spot', category_ids: ['c-1'] }),
+      expect.objectContaining({
+        name: 'New Spot',
+        category_ids: ['c-1'],
+        cover_image: 'https://res.cloudinary.com/demo/image/upload/new.jpg',
+      }),
     );
   });
 

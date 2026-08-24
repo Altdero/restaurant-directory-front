@@ -1,4 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
+  <app-image-uploader
+    [imageUrl]="coverImageUrl()"
+    [isUploading]="isUploadingImage()"
+    (fileSelected)="imageSelected.emit($event)"
+  />
+
   <mat-form-field appearance="outline">
     <mat-label i18n="@@restaurantForm.name">Name</mat-label>
     <input matInput formControlName="name" />
@@ -74,7 +80,11 @@
   }
 
   <div class="actions">
-    <button mat-flat-button type="submit" [disabled]="form.invalid || isPending()">
+    <button
+      mat-flat-button
+      type="submit"
+      [disabled]="form.invalid || isPending() || isUploadingImage()"
+    >
       @if (isPending()) {
         <mat-progress-spinner diameter="20" mode="indeterminate" />
       } @else if (restaurant()) {

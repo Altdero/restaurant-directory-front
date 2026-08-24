@@ -1,0 +1,7 @@
+{
+  "signature": "e2e-test-signature",
+  "timestamp": 1798000000,
+  "api_key": "e2e-test-key",
+  "cloud_name": "demo",
+  "folder": "restaurant-directory/restaurants"
+}

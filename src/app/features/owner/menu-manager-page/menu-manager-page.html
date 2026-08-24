@@ -1,0 +1,43 @@
+<div class="menu-manager-page">
+  @if (restaurant.error(); as apiError) {
+    <app-error-state [message]="apiErrorMessage(apiError)" (retry)="restaurant.reload()" />
+  } @else {
+    <div class="header">
+      <h1>
+        <span i18n="@@menuManagerPage.title">Menu for</span>
+        {{ restaurantValue()?.name }}
+      </h1>
+      @if (!isFormOpen()) {
+        <button
+          mat-flat-button
+          type="button"
+          (click)="openCreateForm()"
+          i18n="@@menuManagerPage.addItem"
+        >
+          Add menu item
+        </button>
+      }
+    </div>
+
+    @if (isFormOpen()) {
+      <app-menu-item-form
+        [menuItem]="editingItem()"
+        [isPending]="formPending()"
+        [error]="formError()"
+        [imageUrl]="imageUrl()"
+        [isUploadingImage]="isUploadingImage()"
+        (save)="submit($event)"
+        (cancelled)="closeForm()"
+        (imageSelected)="onImageSelected($event)"
+      />
+    } @else if (menuItems.error(); as apiError) {
+      <app-error-state [message]="apiErrorMessage(apiError)" (retry)="menuItems.reload()" />
+    } @else {
+      <app-menu-item-table
+        [items]="menuItemsPage()?.results ?? []"
+        (edit)="openEditForm($event)"
+        (delete)="deleteItem($event)"
+      />
+    }
+  }
+</div>

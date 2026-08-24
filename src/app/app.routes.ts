@@ -59,4 +59,10 @@ export const routes: Routes = [
         (m) => m.RestaurantFormPage,
       ),
   },
+  {
+    path: 'my/restaurants/:id/menu',
+    canActivate: [ownerGuard],
+    loadComponent: () =>
+      import('./features/owner/menu-manager-page/menu-manager-page').then((m) => m.MenuManagerPage),
+  },
 ];

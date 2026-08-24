@@ -1,0 +1,22 @@
+<div class="image-uploader">
+  @if (imageUrl()) {
+    <img class="preview" [ngSrc]="imageUrl()" width="200" height="120" alt="" />
+  } @else {
+    <div class="preview placeholder" aria-hidden="true"></div>
+  }
+
+  <label class="upload-button" [class.disabled]="isUploading()">
+    <input
+      type="file"
+      accept="image/*"
+      [disabled]="isUploading()"
+      (change)="onFileChange($event)"
+    />
+    @if (isUploading()) {
+      <mat-progress-spinner diameter="16" mode="indeterminate" />
+      <span i18n="@@imageUploader.uploading">Uploading…</span>
+    } @else {
+      <span i18n="@@imageUploader.choose">Choose image</span>
+    }
+  </label>
+</div>

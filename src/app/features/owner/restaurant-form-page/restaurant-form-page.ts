@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CATEGORY_DATA, RESTAURANT_DATA } from '@core/interfaces/tokens';
 import { ApiError } from '@core/models/api-error.model';
 import { RestaurantWrite } from '@core/models/restaurant.model';
+import { CloudinaryUploadService } from '@core/services/upload/cloudinary-upload.service';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import {
   RestaurantForm,
@@ -15,17 +16,24 @@ import { ErrorState } from '@shared/components/error-state/error-state';
  * present means edit, absent means create, same split `RestaurantForm`
  * itself uses for its `restaurant` input.
  *
- * **Create vs. edit request-body asymmetry — the one subtlety in this
- * component.** `create()` takes a full `RestaurantWrite`, so a new
- * restaurant gets `cover_image: ''`/`opening_hours: {}`/`latitude`/
- * `longitude: null` — valid empty defaults for fields this commit doesn't
- * expose a form control for (Cloudinary upload is commit 16; an
- * opening-hours editor has no established pattern yet — see PLAN.md commit
- * 15's scope decisions). `update()` takes a `Partial<RestaurantWrite>`, so
- * the edit path sends the form value *alone*, with none of those four keys
- * — omitting them means the backend leaves the restaurant's existing
- * values untouched on PATCH, rather than a blank form silently wiping a
- * cover image or schedule the owner already set through some other path.
+ * **Owns the actual Cloudinary upload** — `RestaurantForm` only re-emits
+ * the selected `File` (never performs HTTP itself). `uploadedCoverImage`
+ * holds the result once `CloudinaryUploadService.upload()` resolves;
+ * `coverImageUrl` falls back to the loaded restaurant's existing image
+ * when nothing new has been uploaded yet, so the form always has a
+ * correct current value to round-trip.
+ *
+ * **Create vs. edit request-body asymmetry — simpler than commit 15 left
+ * it.** `cover_image` used to be omitted from the `update()` `Partial`
+ * body because the form had no way to *preserve* the existing value —
+ * sending it risked wiping it with an empty default. Now that the form
+ * faithfully round-trips the current value via `coverImageUrl` above,
+ * `cover_image` is safe to include in both create and update bodies
+ * unconditionally, same as every other field. `opening_hours`/`latitude`/
+ * `longitude` still have no form control (no established schedule-editor
+ * pattern yet, no map — see PLAN.md commit 15's scope decisions) and stay
+ * omitted from the update body for the same reason `cover_image` used to
+ * be.
  */
 @Component({
   selector: 'app-restaurant-form-page',
@@ -42,6 +50,7 @@ import { ErrorState } from '@shared/components/error-state/error-state';
 export class RestaurantFormPage {
   private readonly restaurantData = inject(RESTAURANT_DATA);
   private readonly categoryData = inject(CATEGORY_DATA);
+  private readonly uploadService = inject(CloudinaryUploadService);
   private readonly router = inject(Router);
 
   readonly id = input<string>();
@@ -70,6 +79,21 @@ export class RestaurantFormPage {
   protected readonly formError = signal<ApiError | undefined>(undefined);
   protected readonly apiErrorMessage = apiErrorMessage;
 
+  private readonly uploadedCoverImage = signal<string | undefined>(undefined);
+  protected readonly coverImageUrl = computed(
+    () => this.uploadedCoverImage() ?? this.restaurantValue()?.coverImage ?? '',
+  );
+  protected readonly isUploadingImage = signal(false);
+
+  protected async onImageSelected(file: File): Promise<void> {
+    this.isUploadingImage.set(true);
+    try {
+      this.uploadedCoverImage.set(await this.uploadService.upload(file, 'restaurants'));
+    } finally {
+      this.isUploadingImage.set(false);
+    }
+  }
+
   protected async submit(value: RestaurantFormValue): Promise<void> {
     this.formError.set(undefined);
     try {
@@ -78,7 +102,6 @@ export class RestaurantFormPage {
       } else {
         const body: RestaurantWrite = {
           ...value,
-          cover_image: '',
           opening_hours: {},
           latitude: null,
           longitude: null,

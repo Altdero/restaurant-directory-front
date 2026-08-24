@@ -11,6 +11,7 @@ import { Category } from '@core/models/category.model';
 import { PriceRange, Restaurant } from '@core/models/restaurant.model';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { applyFieldErrors } from '@core/utils/apply-field-errors';
+import { ImageUploader } from '@shared/components/image-uploader/image-uploader';
 
 export interface RestaurantFormValue {
   readonly name: string;
@@ -26,6 +27,7 @@ export interface RestaurantFormValue {
   readonly website: string;
   readonly price_range: PriceRange;
   readonly is_active: boolean;
+  readonly cover_image: string;
 }
 
 const PRICE_RANGES: readonly PriceRange[] = ['$', '$$', '$$$', '$$$$'];
@@ -36,11 +38,21 @@ const PRICE_RANGES: readonly PriceRange[] = ['$', '$$', '$$$', '$$$$'];
  * decides which mutation to call and what extra keys the request body needs
  * (see that component's doc comment for the create-vs-edit body asymmetry).
  *
- * `cover_image`/`opening_hours`/`latitude`/`longitude` are deliberately not
- * fields here — see PLAN.md commit 15's scope decisions. Control names stay
- * snake_case to match `RestaurantWrite`'s DTO keys exactly, the same reason
- * `login-page.ts`/`register-page.ts` do this: `applyFieldErrors` looks up a
- * form control by the API's own field name, with no mapping table.
+ * `opening_hours`/`latitude`/`longitude` are deliberately not fields here —
+ * see PLAN.md commit 15's scope decisions (still no established editor for
+ * a weekday schedule, still no map). Control names stay snake_case to match
+ * `RestaurantWrite`'s DTO keys exactly, the same reason `login-page.ts`/
+ * `register-page.ts` do this: `applyFieldErrors` looks up a form control by
+ * the API's own field name, with no mapping table.
+ *
+ * `cover_image` is **not** a Reactive Form control — nothing to type into,
+ * it's driven entirely by `ImageUploader`. `coverImageUrl` (the current
+ * value, from whichever source — the loaded restaurant or a fresh upload)
+ * is a plain input the parent (`RestaurantFormPage`) keeps live; `submit()`
+ * merges it into the emitted value directly. This component never performs
+ * HTTP itself (same rule as `ReviewForm`/`RestaurantFilters`) — a selected
+ * file is re-emitted up via `imageSelected` for the parent to actually
+ * upload.
  */
 @Component({
   selector: 'app-restaurant-form',
@@ -52,6 +64,7 @@ const PRICE_RANGES: readonly PriceRange[] = ['$', '$$', '$$$', '$$$$'];
     MatCheckboxModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    ImageUploader,
   ],
   templateUrl: './restaurant-form.html',
   styles: `
@@ -80,9 +93,12 @@ export class RestaurantForm {
   readonly categories = input.required<readonly Category[]>();
   readonly isPending = input<boolean>(false);
   readonly error = input<ApiError | undefined>(undefined);
+  readonly coverImageUrl = input<string>('');
+  readonly isUploadingImage = input<boolean>(false);
 
   readonly save = output<RestaurantFormValue>();
   readonly cancelled = output<void>();
+  readonly imageSelected = output<File>();
 
   protected readonly priceRanges = PRICE_RANGES;
   protected readonly apiErrorMessage = apiErrorMessage;
@@ -135,6 +151,6 @@ export class RestaurantForm {
     if (this.form.invalid) {
       return;
     }
-    this.save.emit(this.form.getRawValue());
+    this.save.emit({ ...this.form.getRawValue(), cover_image: this.coverImageUrl() });
   }
 }

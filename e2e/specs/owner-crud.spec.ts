@@ -8,6 +8,7 @@ import usersMeOwner from '../fixtures/users-me-owner.json';
 import usersMe from '../fixtures/users-me.json';
 import restaurantCreateResponse from '../fixtures/restaurant-create-response.json';
 import restaurantUpdateResponse from '../fixtures/restaurant-update-response.json';
+import uploadSignatureResponse from '../fixtures/upload-signature-response.json';
 
 const GUADALAJARA_ID = restaurantsList.results[1].id;
 
@@ -25,7 +26,7 @@ test.describe('owner restaurant CRUD', () => {
     await expect(page.getByRole('article')).toHaveCount(restaurantsList.results.length);
   });
 
-  test('creates a restaurant, sending the create-mode defaults for undeferred fields', async ({
+  test('creates a restaurant, uploading a cover image and sending create-mode defaults for undeferred fields', async ({
     page,
   }) => {
     await page.goto('/en/my/restaurants');
@@ -33,6 +34,21 @@ test.describe('owner restaurant CRUD', () => {
     await expect(page).toHaveURL('/en/my/restaurants/new');
 
     await page.locator('input[formcontrolname="name"]').fill('New Spot');
+
+    await mockMethod(page, '/uploads/signature/', 'POST', uploadSignatureResponse);
+    await page.route('https://api.cloudinary.com/v1_1/demo/image/upload', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          secure_url: 'https://res.cloudinary.com/demo/image/upload/cover.jpg',
+        }),
+      }),
+    );
+    await page
+      .locator('input[type="file"]')
+      .setInputFiles({ name: 'cover.jpg', mimeType: 'image/jpeg', buffer: Buffer.from('fake') });
+    await expect(page.getByRole('button', { name: 'Create restaurant' })).toBeEnabled();
 
     let capturedBody: unknown;
     await page.route(`${API_BASE}/restaurants/`, async (route) => {
@@ -52,7 +68,7 @@ test.describe('owner restaurant CRUD', () => {
     await expect(page).toHaveURL('/en/my/restaurants');
     expect(capturedBody).toMatchObject({
       name: 'New Spot',
-      cover_image: '',
+      cover_image: 'https://res.cloudinary.com/demo/image/upload/cover.jpg',
       opening_hours: {},
       latitude: null,
       longitude: null,
@@ -89,8 +105,14 @@ test.describe('owner restaurant CRUD', () => {
     await page.getByRole('button', { name: 'Save changes' }).click();
 
     await expect(page).toHaveURL('/en/my/restaurants');
-    expect(capturedBody).toMatchObject({ name: 'La Trattoria Renamed' });
-    expect(capturedBody).not.toHaveProperty('cover_image');
+    // cover_image is included, round-tripping the existing (untouched) value
+    // — safe now that the form always carries the correct current value.
+    // opening_hours/latitude/longitude still have no form control and stay
+    // omitted, so a PATCH can't wipe them.
+    expect(capturedBody).toMatchObject({
+      name: 'La Trattoria Renamed',
+      cover_image: restaurantsList.results[1].cover_image,
+    });
     expect(capturedBody).not.toHaveProperty('opening_hours');
     expect(capturedBody).not.toHaveProperty('latitude');
     expect(capturedBody).not.toHaveProperty('longitude');

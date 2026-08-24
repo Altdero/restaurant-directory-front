@@ -2,6 +2,7 @@ import { Component, computed, input } from '@angular/core';
 import { ApiError } from '@core/models/api-error.model';
 import { MenuItem, MenuItemCategory } from '@core/models/menu-item.model';
 import { apiErrorMessage } from '@core/utils/api-error-message';
+import { menuItemCategoryLabel } from '@core/utils/menu-item-category-label';
 import { EmptyState } from '@shared/components/empty-state/empty-state';
 import { ErrorState } from '@shared/components/error-state/error-state';
 
@@ -17,21 +18,6 @@ const CATEGORY_ORDER: readonly MenuItemCategory[] = [
   'dessert',
   'other',
 ];
-
-function categoryLabel(category: MenuItemCategory): string {
-  switch (category) {
-    case 'appetizer':
-      return $localize`:@@menuSection.appetizer:Appetizers`;
-    case 'main_course':
-      return $localize`:@@menuSection.mainCourse:Main Courses`;
-    case 'beverage':
-      return $localize`:@@menuSection.beverage:Beverages`;
-    case 'dessert':
-      return $localize`:@@menuSection.dessert:Desserts`;
-    case 'other':
-      return $localize`:@@menuSection.other:Other`;
-  }
-}
 
 /** Groups a flat menu-item list by category, in a fixed display order, dropping empty categories. */
 export function groupMenuItems(items: readonly MenuItem[]): readonly MenuItemGroup[] {
@@ -90,7 +76,7 @@ export class MenuSection {
   readonly error = input<ApiError | undefined>(undefined);
 
   protected readonly groups = computed(() => groupMenuItems(this.menuItems()));
-  protected readonly categoryLabel = categoryLabel;
+  protected readonly categoryLabel = menuItemCategoryLabel;
   protected readonly apiErrorMessage = apiErrorMessage;
 
   protected emptyMessage(): string {

@@ -28,6 +28,13 @@
         >
           Edit
         </a>
+        <a
+          mat-button
+          [routerLink]="['/my/restaurants', restaurant.id, 'menu']"
+          i18n="@@myRestaurantsPage.menu"
+        >
+          Menu
+        </a>
         <button
           mat-button
           type="button"

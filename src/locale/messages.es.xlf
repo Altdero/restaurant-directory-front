@@ -703,5 +703,113 @@
         <target> Cancelar </target>
       </segment>
     </unit>
+    <unit id="imageUploader.choose">
+      <segment>
+        <source>Choose image</source>
+        <target>Elegir imagen</target>
+      </segment>
+    </unit>
+    <unit id="imageUploader.uploading">
+      <segment>
+        <source>Uploading…</source>
+        <target>Subiendo…</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.name">
+      <segment>
+        <source>Name</source>
+        <target>Nombre</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.description">
+      <segment>
+        <source>Description</source>
+        <target>Descripción</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.price">
+      <segment>
+        <source>Price</source>
+        <target>Precio</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.category">
+      <segment>
+        <source>Category</source>
+        <target>Categoría</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.isAvailable">
+      <segment>
+        <source>Available</source>
+        <target>Disponible</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.saveEdit">
+      <segment>
+        <source>Save changes</source>
+        <target>Guardar cambios</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.submit">
+      <segment>
+        <source>Add menu item</source>
+        <target>Agregar platillo</target>
+      </segment>
+    </unit>
+    <unit id="menuItemForm.cancel">
+      <segment>
+        <source> Cancel </source>
+        <target> Cancelar </target>
+      </segment>
+    </unit>
+    <unit id="menuItemTable.emptyMessage">
+      <segment>
+        <source>No menu items yet.</source>
+        <target>Aún no hay platillos en el menú.</target>
+      </segment>
+    </unit>
+    <unit id="menuItemTable.edit">
+      <segment>
+        <source> Edit </source>
+        <target> Editar </target>
+      </segment>
+    </unit>
+    <unit id="menuItemTable.delete">
+      <segment>
+        <source> Delete </source>
+        <target> Eliminar </target>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.title">
+      <segment>
+        <source>Menu for</source>
+        <target>Menú de</target>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.addItem">
+      <segment>
+        <source> Add menu item </source>
+        <target> Agregar platillo </target>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.deleteTitle">
+      <segment>
+        <source>Delete <ph id="0" equiv="name" disp="item.name"/>?</source>
+        <target>¿Eliminar <ph id="0" equiv="name" disp="item.name"/>?</target>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.deleteMessage">
+      <segment>
+        <source>This can&apos;t be undone.</source>
+        <target>Esto no se puede deshacer.</target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.menu">
+      <segment>
+        <source> Menu </source>
+        <target> Menú </target>
+      </segment>
+    </unit>
   </file>
 </xliff>

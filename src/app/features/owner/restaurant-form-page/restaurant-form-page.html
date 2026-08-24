@@ -13,8 +13,11 @@
       [categories]="categoriesPage()?.results ?? []"
       [isPending]="isPending()"
       [error]="formError()"
+      [coverImageUrl]="coverImageUrl()"
+      [isUploadingImage]="isUploadingImage()"
       (save)="submit($event)"
       (cancelled)="cancel()"
+      (imageSelected)="onImageSelected($event)"
     />
   }
 </div>

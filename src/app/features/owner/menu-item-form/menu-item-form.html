@@ -1,0 +1,58 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <app-image-uploader
+    [imageUrl]="imageUrl()"
+    [isUploading]="isUploadingImage()"
+    (fileSelected)="imageSelected.emit($event)"
+  />
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@menuItemForm.name">Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@menuItemForm.description">Description</mat-label>
+    <textarea matInput formControlName="description" rows="3"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@menuItemForm.price">Price</mat-label>
+    <input matInput type="number" step="0.01" formControlName="price" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label i18n="@@menuItemForm.category">Category</mat-label>
+    <mat-select formControlName="category">
+      @for (category of categories; track category) {
+        <mat-option [value]="category">{{ categoryLabel(category) }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="is_available" i18n="@@menuItemForm.isAvailable"
+    >Available</mat-checkbox
+  >
+
+  @if (error(); as apiError) {
+    <p class="error" role="alert">{{ apiErrorMessage(apiError) }}</p>
+  }
+
+  <div class="actions">
+    <button
+      mat-flat-button
+      type="submit"
+      [disabled]="form.invalid || isPending() || isUploadingImage()"
+    >
+      @if (isPending()) {
+        <mat-progress-spinner diameter="20" mode="indeterminate" />
+      } @else if (menuItem()) {
+        <span i18n="@@menuItemForm.saveEdit">Save changes</span>
+      } @else {
+        <span i18n="@@menuItemForm.submit">Add menu item</span>
+      }
+    </button>
+    <button mat-button type="button" (click)="cancelled.emit()" i18n="@@menuItemForm.cancel">
+      Cancel
+    </button>
+  </div>
+</form>
