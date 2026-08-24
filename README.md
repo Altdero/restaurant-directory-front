@@ -70,11 +70,14 @@ Translations live in `src/locale/messages.es.xlf` and are committed alongside th
 
 ## Environment variables
 
-| Variable        | Description                                                                                                      | Example                     |
-| --------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `API_BASE_URL`  | Base URL of the Django REST API, no trailing slash                                                               | `http://localhost:8000/api` |
-| `PORT`          | Port the Node SSR server binds to. Render sets this automatically in production                                  | `4200`                      |
-| `ALLOWED_HOSTS` | Comma-separated hostnames the SSR server accepts. Requests for any other `Host`/`X-Forwarded-Host` receive `400` | `localhost`                 |
+| Variable            | Description                                                                                                          | Example                     |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `API_BASE_URL`      | Base URL of the Django REST API, no trailing slash                                                                   | `http://localhost:8000/api` |
+| `SITE_URL`          | Absolute origin of this app itself, no trailing slash — used for canonical URLs, hreflang, JSON-LD and `sitemap.xml` | `http://localhost:4200`     |
+| `PORT`              | Port the Node SSR server binds to. Render sets this automatically in production                                      | `4200`                      |
+| `ALLOWED_HOSTS`     | Comma-separated hostnames the SSR server accepts. Requests for any other `Host`/`X-Forwarded-Host` receive `400`     | `localhost`                 |
+| `E2E_TEST_USERNAME` | A real, already-registered account on `API_BASE_URL` — only used by `npm run e2e:live`                               | —                           |
+| `E2E_TEST_PASSWORD` | Password for the account above — only used by `npm run e2e:live`                                                     | —                           |
 
 See [`.env.example`](./.env.example) for the template. No Cloudinary credentials are needed on the frontend — the upload signature (including `cloud_name`) is issued by the backend at request time.
 

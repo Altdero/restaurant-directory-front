@@ -2,7 +2,11 @@
 
 Mocked default suite (`npm run e2e`) — Playwright drives a real Chromium against `ng serve` (`npm start`), with every backend call intercepted via `page.route()`. No backend required to run this suite.
 
-The `@live` smoke suite (`npm run e2e:live`, run against a real backend at `localhost:8000`) is a later addition — see `PLAN.md`'s commit 19.
+The `@live` smoke suite (`npm run e2e:live`, run against a real backend at `localhost:8000`) — `e2e/specs/live-smoke.spec.ts` — is a small, deliberately non-comprehensive counterpart: no `page.route()` mocking anywhere, every request hits the real API. Its job is catching contract drift between this app and the real API (a field renamed, a status code changed, an endpoint moved), not coverage — the mocked suite above already covers behavior/branching in detail, and re-proving the same branches against a live backend would just be slower and flakier for no new signal. One test: log in, browse to a restaurant, round-trip a favorite toggle (leaves the toggled restaurant in the same state it found it in). Kept intentionally small — this API throttles anonymous clients at 30 req/min, and every request in this suite, after login, is a real request against a shared local dev backend.
+
+`playwright.config.ts` runs both suites from one config, one `webServer`: `chromium` (project, default) excludes anything tagged `@live` via `grepInvert`; `live` (project) selects only `@live`-tagged tests via `grep`, with `retries: 0` — retrying a failure against an already-throttled backend would make things worse, not better. The same production build serves both: `apiBaseUrl` is baked in from `.env`'s `API_BASE_URL`, which already points at `http://localhost:8000/api` locally, so no separate build or webServer config is needed for the live project.
+
+**Needs `E2E_TEST_USERNAME`/`E2E_TEST_PASSWORD` in `.env`** — a real, already-registered account on the backend at `API_BASE_URL` (see `.env.example`). `live-smoke.spec.ts` skips itself with a clear reason when these are unset, rather than failing — this suite depends on external state (a running backend, a seeded account) the repo itself can't provide or fabricate, the same reasoning `docs/API.md`'s and this file's own fixture-recording notes already apply to real credentials elsewhere: used transiently, never committed.
 
 ## Layout
 
