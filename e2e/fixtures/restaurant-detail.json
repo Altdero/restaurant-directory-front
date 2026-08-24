@@ -1,0 +1,42 @@
+{
+  "id": "fa20287b-25e7-4c19-beba-c02b8f400217",
+  "owner": "owner1",
+  "name": "La Trattoria",
+  "slug": "la-trattoria",
+  "description": "",
+  "categories": [
+    {
+      "id": "061215c4-69f6-4770-9923-e5e2befa2460",
+      "name": "Italian",
+      "slug": "italian",
+      "description": "Updated desc",
+      "icon": "\ud83c\udf5d",
+      "is_active": true,
+      "created_at": "2026-08-07T21:30:32.680664-06:00",
+      "updated_at": "2026-08-07T21:31:16.510439-06:00"
+    }
+  ],
+  "address": "123 Main St",
+  "city": "Mexico City",
+  "state": "",
+  "country": "Mexico",
+  "postal_code": "",
+  "latitude": null,
+  "longitude": null,
+  "phone": "555-1234",
+  "email": "",
+  "website": "",
+  "price_range": "$$",
+  "cover_image": "",
+  "average_rating": "2.00",
+  "total_reviews": 1,
+  "opening_hours": {
+    "mon": {
+      "open": "09:00",
+      "close": "22:00"
+    }
+  },
+  "is_active": true,
+  "created_at": "2026-08-07T21:47:14.886171-06:00",
+  "updated_at": "2026-08-18T22:08:21.185573-06:00"
+}

@@ -13,7 +13,7 @@
     />
 
     <app-menu-section
-      [menuItems]="menuItems.value()?.results ?? []"
+      [menuItems]="menuItemsPage()?.results ?? []"
       [isLoading]="menuItems.isLoading()"
       [error]="menuItems.error()"
     />

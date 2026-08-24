@@ -1,0 +1,14 @@
+{
+  "user": {
+    "id": "9c3f6e2a-2b1a-4b7e-9c1a-1a2b3c4d5e6f",
+    "username": "newuser",
+    "email": "newuser@example.com",
+    "first_name": "New",
+    "last_name": "User",
+    "role": "customer",
+    "phone": "",
+    "avatar": "",
+    "date_joined": "2026-08-23T00:00:00.000000-06:00"
+  },
+  "access": "mock-access-token"
+}

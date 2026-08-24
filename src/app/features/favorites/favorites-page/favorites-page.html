@@ -12,9 +12,9 @@
     (toggleFavorite)="onToggleFavorite($event)"
   />
 
-  @if ((favorites.value()?.count ?? 0) > pageSize) {
+  @if (favoritesCount() > pageSize) {
     <app-paginator-bar
-      [count]="favorites.value()?.count ?? 0"
+      [count]="favoritesCount()"
       [pageSize]="pageSize"
       [page]="page()"
       (pageChange)="page.set($event)"

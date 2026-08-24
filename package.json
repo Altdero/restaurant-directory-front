@@ -7,6 +7,7 @@
     "build": "node scripts/build.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "e2e": "playwright test",
     "serve:ssr:restaurant-directory": "node --env-file-if-exists=.env dist/restaurant-directory/server/server.mjs",
     "lint": "ng lint",
     "prepare": "husky"

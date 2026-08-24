@@ -40,9 +40,19 @@ export class FavoritesPage {
   private readonly query = computed(() => ({ page: this.page(), pageSize: PAGE_SIZE }));
   protected readonly favorites = this.favoriteData.list(this.query);
 
-  protected readonly restaurants = computed(
-    () => this.favorites.value()?.results.map((favorite) => favorite.restaurant) ?? [],
+  /**
+   * `resource.value()` re-throws the underlying error once a resource has
+   * failed (Angular's own documented `WritableResource` behavior) — this
+   * guards on `.error()` first, same fix as `RestaurantListPage`, so a
+   * failed fetch never throws mid-render and silently blanks the page.
+   */
+  private readonly favoritesPage = computed(() =>
+    this.favorites.error() ? undefined : this.favorites.value(),
   );
+  protected readonly restaurants = computed(
+    () => this.favoritesPage()?.results.map((favorite) => favorite.restaurant) ?? [],
+  );
+  protected readonly favoritesCount = computed(() => this.favoritesPage()?.count ?? 0);
   protected readonly favoritedIds = this.favoritesStore.favoritedIds;
 
   protected readonly emptyMessage = $localize`:@@favoritesPage.emptyMessage:You haven't added any favorites yet.`;

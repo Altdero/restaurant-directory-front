@@ -1,0 +1,16 @@
+{
+  "next": null,
+  "previous": "http://localhost:8000/api/reviews/?cursor=cD0yMDI2LTA4LTA3KzIyJTNBMjklM0E0MiZyPTE%3D",
+  "results": [
+    {
+      "id": "a1b2c3d4-e5f6-4789-a0b1-c2d3e4f5a6b7",
+      "restaurant": "fa20287b-25e7-4c19-beba-c02b8f400217",
+      "user": "b7c8d9e0-f1a2-4b3c-8d4e-5f6a7b8c9d0e",
+      "username": "diner2",
+      "rating": 5,
+      "comment": "Loved this place, coming back for sure.",
+      "created_at": "2026-08-06T18:12:03.000000-06:00",
+      "updated_at": "2026-08-06T18:12:03.000000-06:00"
+    }
+  ]
+}

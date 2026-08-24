@@ -1,0 +1,27 @@
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": "061215c4-69f6-4770-9923-e5e2befa2460",
+      "name": "Italian",
+      "slug": "italian",
+      "description": "Updated desc",
+      "icon": "\ud83c\udf5d",
+      "is_active": true,
+      "created_at": "2026-08-07T21:30:32.680664-06:00",
+      "updated_at": "2026-08-07T21:31:16.510439-06:00"
+    },
+    {
+      "id": "f5bb02b6-106c-4037-b72e-3457fae1fc3c",
+      "name": "Mexican",
+      "slug": "mexican",
+      "description": "",
+      "icon": "\ud83c\udf2e",
+      "is_active": true,
+      "created_at": "2026-08-07T21:30:32.774460-06:00",
+      "updated_at": "2026-08-07T21:30:32.774464-06:00"
+    }
+  ]
+}

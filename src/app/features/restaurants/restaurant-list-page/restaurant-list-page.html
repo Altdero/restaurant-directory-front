@@ -2,7 +2,7 @@
   <h1 i18n="@@restaurantListPage.title">Restaurants</h1>
 
   <app-restaurant-filters
-    [categories]="categories.value()?.results ?? []"
+    [categories]="categoriesPage()?.results ?? []"
     [category]="category()"
     [city]="city()"
     [priceRange]="priceRange()"
@@ -12,7 +12,7 @@
   />
 
   <app-restaurant-grid
-    [restaurants]="restaurants.value()?.results ?? []"
+    [restaurants]="restaurantsPage()?.results ?? []"
     [isLoading]="restaurants.isLoading()"
     [error]="restaurants.error()"
     [favoritedIds]="favoritedIds()"
@@ -22,9 +22,9 @@
     (toggleFavorite)="toggleFavorite($event)"
   />
 
-  @if ((restaurants.value()?.count ?? 0) > pageSize) {
+  @if ((restaurantsPage()?.count ?? 0) > pageSize) {
     <app-paginator-bar
-      [count]="restaurants.value()?.count ?? 0"
+      [count]="restaurantsPage()?.count ?? 0"
       [pageSize]="pageSize"
       [page]="page()"
       (pageChange)="onPageChange($event)"

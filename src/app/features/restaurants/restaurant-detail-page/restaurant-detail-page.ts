@@ -47,6 +47,17 @@ export class RestaurantDetailPage {
   protected readonly menuItems = this.menuItemData.list(
     computed(() => ({ restaurantId: this.id(), limit: MENU_ITEM_LIMIT })),
   );
+  /**
+   * `resource.value()` re-throws the underlying error once a resource has
+   * failed (Angular's own documented `WritableResource` behavior) — reading
+   * it directly in the template alongside a separate `.error()` binding (as
+   * `menuItems.value()?.results` did) throws mid-render before `MenuSection`
+   * ever gets a chance to show its own error state. Same fix as
+   * `RestaurantListPage`/`FavoritesPage`.
+   */
+  protected readonly menuItemsPage = computed(() =>
+    this.menuItems.error() ? undefined : this.menuItems.value(),
+  );
   private readonly reviewsQuery = computed(() => ({ restaurantId: this.id() }));
   private readonly reviewsResource = this.reviewData.list(this.reviewsQuery);
 

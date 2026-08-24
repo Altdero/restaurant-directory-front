@@ -73,6 +73,22 @@ export class RestaurantListPage {
   protected readonly restaurants = this.restaurantData.list(this.query);
   protected readonly categories = this.categoryData.list(signal({ pageSize: 100 }));
 
+  /**
+   * `resource.value()` re-throws the underlying error once a resource has
+   * failed (Angular's own documented `WritableResource` behavior) — reading
+   * it directly in the template (as `restaurants.value()?.results` did)
+   * throws mid-render and silently kills the whole component's output,
+   * with no visible error UI, the moment the request fails. Guarding on
+   * `.error()` first, same as `RestaurantDetailPage`'s `@if`/`@else if`
+   * chain, avoids ever touching `.value()` in that state.
+   */
+  protected readonly restaurantsPage = computed(() =>
+    this.restaurants.error() ? undefined : this.restaurants.value(),
+  );
+  protected readonly categoriesPage = computed(() =>
+    this.categories.error() ? undefined : this.categories.value(),
+  );
+
   protected readonly isAuthenticated = this.authStore.isAuthenticated;
   protected readonly favoritedIds = this.favoritesStore.favoritedIds;
   protected readonly loginReturnUrl = '/restaurants';
