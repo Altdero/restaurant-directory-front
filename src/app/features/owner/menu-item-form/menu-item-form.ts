@@ -10,6 +10,7 @@ import { ApiError } from '@core/models/api-error.model';
 import { MenuItem, MenuItemCategory } from '@core/models/menu-item.model';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { applyFieldErrors } from '@core/utils/apply-field-errors';
+import { fieldErrorMessage } from '@core/utils/field-error-message';
 import { menuItemCategoryLabel } from '@core/utils/menu-item-category-label';
 import { ImageUploader } from '@shared/components/image-uploader/image-uploader';
 
@@ -86,6 +87,7 @@ export class MenuItemForm {
   protected readonly categories = CATEGORIES;
   protected readonly categoryLabel = menuItemCategoryLabel;
   protected readonly apiErrorMessage = apiErrorMessage;
+  protected readonly fieldErrorMessage = fieldErrorMessage;
 
   protected readonly form = this.fb.nonNullable.group({
     name: this.fb.nonNullable.control('', Validators.required),
@@ -117,6 +119,7 @@ export class MenuItemForm {
 
   submit(): void {
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
     this.save.emit({ ...this.form.getRawValue(), image: this.imageUrl() });

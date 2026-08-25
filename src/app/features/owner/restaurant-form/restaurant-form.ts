@@ -11,6 +11,7 @@ import { Category } from '@core/models/category.model';
 import { PriceRange, Restaurant } from '@core/models/restaurant.model';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { applyFieldErrors } from '@core/utils/apply-field-errors';
+import { fieldErrorMessage } from '@core/utils/field-error-message';
 import { ImageUploader } from '@shared/components/image-uploader/image-uploader';
 
 export interface RestaurantFormValue {
@@ -102,15 +103,16 @@ export class RestaurantForm {
 
   protected readonly priceRanges = PRICE_RANGES;
   protected readonly apiErrorMessage = apiErrorMessage;
+  protected readonly fieldErrorMessage = fieldErrorMessage;
 
   protected readonly form = this.fb.nonNullable.group({
     name: this.fb.nonNullable.control('', Validators.required),
     description: this.fb.nonNullable.control(''),
     category_ids: this.fb.nonNullable.control<readonly string[]>([]),
-    address: this.fb.nonNullable.control(''),
-    city: this.fb.nonNullable.control(''),
+    address: this.fb.nonNullable.control('', Validators.required),
+    city: this.fb.nonNullable.control('', Validators.required),
     state: this.fb.nonNullable.control(''),
-    country: this.fb.nonNullable.control(''),
+    country: this.fb.nonNullable.control('', Validators.required),
     postal_code: this.fb.nonNullable.control(''),
     phone: this.fb.nonNullable.control(''),
     email: this.fb.nonNullable.control('', Validators.email),
@@ -149,6 +151,7 @@ export class RestaurantForm {
 
   submit(): void {
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
     this.save.emit({ ...this.form.getRawValue(), cover_image: this.coverImageUrl() });

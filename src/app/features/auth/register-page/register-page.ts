@@ -15,6 +15,7 @@ import { ApiError } from '@core/models/api-error.model';
 import { AuthStore } from '@core/services/auth/auth.store';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { applyFieldErrors } from '@core/utils/apply-field-errors';
+import { fieldErrorMessage } from '@core/utils/field-error-message';
 import { AuthCard } from '@shared/components/auth-card/auth-card';
 
 function passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -68,8 +69,11 @@ export class RegisterPage {
   readonly isSubmitting = signal(false);
   readonly topLevelError = signal<string | undefined>(undefined);
 
+  protected readonly fieldErrorMessage = fieldErrorMessage;
+
   async submit(): Promise<void> {
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
     this.isSubmitting.set(true);

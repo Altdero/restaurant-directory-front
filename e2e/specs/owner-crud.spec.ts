@@ -34,6 +34,9 @@ test.describe('owner restaurant CRUD', () => {
     await expect(page).toHaveURL('/en/my/restaurants/new');
 
     await page.locator('input[formcontrolname="name"]').fill('New Spot');
+    await page.locator('input[formcontrolname="address"]').fill('789 New St');
+    await page.locator('input[formcontrolname="city"]').fill('Monterrey');
+    await page.locator('input[formcontrolname="country"]').fill('Mexico');
 
     await mockMethod(page, '/uploads/signature/', 'POST', uploadSignatureResponse);
     await page.route('https://api.cloudinary.com/v1_1/demo/image/upload', (route) =>

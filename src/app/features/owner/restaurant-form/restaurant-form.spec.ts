@@ -86,6 +86,29 @@ describe('RestaurantForm', () => {
     expect(emitted).not.toHaveBeenCalled();
   });
 
+  it('requires name, address, city and country', () => {
+    const fixture = createFixture();
+    fixture.detectChanges();
+    const form = fixture.componentInstance['form'];
+
+    expect(form.get('name')?.hasError('required')).toBe(true);
+    expect(form.get('address')?.hasError('required')).toBe(true);
+    expect(form.get('city')?.hasError('required')).toBe(true);
+    expect(form.get('country')?.hasError('required')).toBe(true);
+    expect(form.get('state')?.hasError('required')).toBe(false);
+  });
+
+  it('marks every control as touched on an invalid submit, so errors are revealed', () => {
+    const fixture = createFixture();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance['form'].get('name')?.touched).toBe(false);
+    fixture.componentInstance.submit();
+
+    expect(fixture.componentInstance['form'].get('name')?.touched).toBe(true);
+    expect(fixture.componentInstance['form'].get('address')?.touched).toBe(true);
+  });
+
   it('emits the snake_case payload, including the tracked cover image url, on a valid submit', () => {
     const fixture = createFixture();
     fixture.componentRef.setInput(
@@ -93,7 +116,13 @@ describe('RestaurantForm', () => {
       'https://res.cloudinary.com/demo/image/upload/new.jpg',
     );
     fixture.detectChanges();
-    fixture.componentInstance['form'].patchValue({ name: 'New Spot', category_ids: ['c-1'] });
+    fixture.componentInstance['form'].patchValue({
+      name: 'New Spot',
+      category_ids: ['c-1'],
+      address: '456 Side St',
+      city: 'Guadalajara',
+      country: 'Mexico',
+    });
     const emitted = vi.fn();
     fixture.componentInstance.save.subscribe(emitted);
 

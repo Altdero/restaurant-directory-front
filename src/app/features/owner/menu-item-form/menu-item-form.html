@@ -8,6 +8,9 @@
   <mat-form-field appearance="outline">
     <mat-label i18n="@@menuItemForm.name">Name</mat-label>
     <input matInput formControlName="name" />
+    @if (fieldErrorMessage(form.get('name')); as message) {
+      <mat-error>{{ message }}</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -18,6 +21,9 @@
   <mat-form-field appearance="outline">
     <mat-label i18n="@@menuItemForm.price">Price</mat-label>
     <input matInput type="number" step="0.01" formControlName="price" />
+    @if (fieldErrorMessage(form.get('price')); as message) {
+      <mat-error>{{ message }}</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -38,11 +44,7 @@
   }
 
   <div class="actions">
-    <button
-      mat-flat-button
-      type="submit"
-      [disabled]="form.invalid || isPending() || isUploadingImage()"
-    >
+    <button mat-flat-button type="submit" [disabled]="isPending() || isUploadingImage()">
       @if (isPending()) {
         <mat-progress-spinner diameter="20" mode="indeterminate" />
       } @else if (menuItem()) {

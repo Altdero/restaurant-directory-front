@@ -877,5 +877,23 @@
         <target><ph id="0" equiv="name" disp="restaurant.name"/> | Restaurant Directory</target>
       </segment>
     </unit>
+    <unit id="validation.required">
+      <segment>
+        <source>This field is required.</source>
+        <target>Este campo es obligatorio.</target>
+      </segment>
+    </unit>
+    <unit id="validation.email">
+      <segment>
+        <source>Enter a valid email address.</source>
+        <target>Ingresa un correo electrónico válido.</target>
+      </segment>
+    </unit>
+    <unit id="validation.min">
+      <segment>
+        <source>Must be at least <ph id="0" equiv="min" disp="control.getError(&apos;min&apos;).min"/>.</source>
+        <target>Debe ser al menos <ph id="0" equiv="min" disp="control.getError(&apos;min&apos;).min"/>.</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

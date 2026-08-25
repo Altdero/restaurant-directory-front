@@ -18,6 +18,14 @@ describe('applyFieldErrors', () => {
     expect(form.get('email')?.errors).toEqual({ server: 'Enter a valid email.' });
   });
 
+  it('marks each affected control as touched, so its error is actually displayed', () => {
+    const form = new FormGroup({ username: new FormControl('') });
+
+    applyFieldErrors(form, { type: 'field', errors: { username: ['Already taken.'] } });
+
+    expect(form.get('username')?.touched).toBe(true);
+  });
+
   it('ignores a field name with no matching control', () => {
     const form = new FormGroup({ username: new FormControl('') });
 

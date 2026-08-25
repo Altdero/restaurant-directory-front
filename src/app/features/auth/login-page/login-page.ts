@@ -9,6 +9,7 @@ import { ApiError } from '@core/models/api-error.model';
 import { AuthStore } from '@core/services/auth/auth.store';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { applyFieldErrors } from '@core/utils/apply-field-errors';
+import { fieldErrorMessage } from '@core/utils/field-error-message';
 import { AuthCard } from '@shared/components/auth-card/auth-card';
 
 @Component({
@@ -28,6 +29,9 @@ import { AuthCard } from '@shared/components/auth-card/auth-card';
         <mat-form-field appearance="outline">
           <mat-label i18n="@@auth.login.username">Username</mat-label>
           <input matInput formControlName="username" autocomplete="username" />
+          @if (fieldErrorMessage(form.get('username')); as message) {
+            <mat-error>{{ message }}</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -38,13 +42,16 @@ import { AuthCard } from '@shared/components/auth-card/auth-card';
             formControlName="password"
             autocomplete="current-password"
           />
+          @if (fieldErrorMessage(form.get('password')); as message) {
+            <mat-error>{{ message }}</mat-error>
+          }
         </mat-form-field>
 
         @if (topLevelError(); as message) {
           <p class="error" role="alert">{{ message }}</p>
         }
 
-        <button mat-flat-button type="submit" [disabled]="form.invalid || isSubmitting()">
+        <button mat-flat-button type="submit" [disabled]="isSubmitting()">
           @if (isSubmitting()) {
             <mat-progress-spinner diameter="20" mode="indeterminate" />
           } @else {
@@ -85,8 +92,11 @@ export class LoginPage {
   readonly isSubmitting = signal(false);
   readonly topLevelError = signal<string | undefined>(undefined);
 
+  protected readonly fieldErrorMessage = fieldErrorMessage;
+
   async submit(): Promise<void> {
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
     this.isSubmitting.set(true);

@@ -6,11 +6,17 @@
         <mat-option [value]="rating">{{ rating }}</mat-option>
       }
     </mat-select>
+    @if (fieldErrorMessage(form.get('rating')); as message) {
+      <mat-error>{{ message }}</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label i18n="@@reviewForm.comment">Comment</mat-label>
     <textarea matInput formControlName="comment" rows="4"></textarea>
+    @if (fieldErrorMessage(form.get('comment')); as message) {
+      <mat-error>{{ message }}</mat-error>
+    }
   </mat-form-field>
 
   @if (error(); as apiError) {
@@ -18,7 +24,7 @@
   }
 
   <div class="actions">
-    <button mat-flat-button type="submit" [disabled]="form.invalid || isPending()">
+    <button mat-flat-button type="submit" [disabled]="isPending()">
       @if (isPending()) {
         <mat-progress-spinner diameter="20" mode="indeterminate" />
       } @else if (review()) {

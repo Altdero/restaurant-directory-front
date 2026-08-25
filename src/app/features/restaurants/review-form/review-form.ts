@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ApiError } from '@core/models/api-error.model';
 import { Review } from '@core/models/review.model';
 import { apiErrorMessage } from '@core/utils/api-error-message';
+import { fieldErrorMessage } from '@core/utils/field-error-message';
 
 export interface ReviewFormValue {
   readonly rating: number;
@@ -64,6 +65,7 @@ export class ReviewForm {
 
   protected readonly ratings = RATINGS;
   protected readonly apiErrorMessage = apiErrorMessage;
+  protected readonly fieldErrorMessage = fieldErrorMessage;
 
   protected readonly form = this.fb.nonNullable.group({
     rating: this.fb.nonNullable.control<number | null>(null, Validators.required),
@@ -82,6 +84,7 @@ export class ReviewForm {
 
   submit(): void {
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
     const raw = this.form.getRawValue();

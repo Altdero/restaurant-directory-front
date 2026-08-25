@@ -8,6 +8,7 @@ import { ApiError } from '@core/models/api-error.model';
 import { UserProfile } from '@core/models/user-profile.model';
 import { apiErrorMessage } from '@core/utils/api-error-message';
 import { applyFieldErrors } from '@core/utils/apply-field-errors';
+import { fieldErrorMessage } from '@core/utils/field-error-message';
 import { ImageUploader } from '@shared/components/image-uploader/image-uploader';
 
 export interface ProfileFormValue {
@@ -77,6 +78,7 @@ export class ProfileForm {
   readonly imageSelected = output<File>();
 
   protected readonly apiErrorMessage = apiErrorMessage;
+  protected readonly fieldErrorMessage = fieldErrorMessage;
 
   protected readonly form = this.fb.nonNullable.group({
     email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
@@ -106,6 +108,7 @@ export class ProfileForm {
 
   submit(): void {
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
     this.save.emit({ ...this.form.getRawValue(), avatar: this.avatarUrl() });

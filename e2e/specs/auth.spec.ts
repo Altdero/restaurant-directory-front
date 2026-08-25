@@ -55,7 +55,13 @@ test.describe('auth', () => {
     await page.locator('input[formcontrolname="password_confirm"]').fill('Password2');
 
     await expect(page.getByRole('alert')).toContainText('Passwords do not match');
-    await expect(page.getByRole('button', { name: 'Create account' })).toBeDisabled();
+
+    // The button stays enabled (inline validation errors are revealed on
+    // click, not by disabling the button — see fieldErrorMessage()); the
+    // mismatch is still what actually blocks the request.
+    await page.getByRole('button', { name: 'Create account' }).click();
+
+    await expect(page.getByRole('alert')).toContainText('Passwords do not match');
     expect(registerCalled).toBe(false);
   });
 

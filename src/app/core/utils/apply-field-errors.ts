@@ -15,6 +15,12 @@ export function applyFieldErrors(form: FormGroup, error: ApiError): void {
     return;
   }
   for (const [field, messages] of Object.entries(error.errors)) {
-    form.get(field)?.setErrors({ server: messages[0] });
+    const control = form.get(field);
+    control?.setErrors({ server: messages[0] });
+    // The form was client-valid when submitted, so nothing would otherwise
+    // have touched this control yet — without this, `fieldErrorMessage()`
+    // (gated on `touched`, matching Material's own default behavior) would
+    // never actually display the error this just attached.
+    control?.markAsTouched();
   }
 }
