@@ -5,6 +5,10 @@ import { ownerGuard } from '@core/guards/owner.guard';
 
 export const routes: Routes = [
   {
+    path: '',
+    loadComponent: () => import('./features/home/home-page/home-page').then((m) => m.HomePage),
+  },
+  {
     path: 'restaurants',
     loadComponent: () =>
       import('./features/restaurants/restaurant-list-page/restaurant-list-page').then(

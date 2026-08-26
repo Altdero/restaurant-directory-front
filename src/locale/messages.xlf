@@ -225,6 +225,62 @@
         <source>You haven&apos;t added any favorites yet.</source>
       </segment>
     </unit>
+    <unit id="homePage.heroTitle">
+      <notes>
+        <note category="location">src/app/features/home/home-page/home-page.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Find your next favorite restaurant</source>
+      </segment>
+    </unit>
+    <unit id="homePage.heroTagline">
+      <notes>
+        <note category="location">src/app/features/home/home-page/home-page.html:5,8</note>
+      </notes>
+      <segment>
+        <source> Browse restaurants by category, city, price and rating — read reviews, check menus, and save your favorites. </source>
+      </segment>
+    </unit>
+    <unit id="homePage.heroCta">
+      <notes>
+        <note category="location">src/app/features/home/home-page/home-page.html:8,11</note>
+      </notes>
+      <segment>
+        <source>Browse restaurants</source>
+      </segment>
+    </unit>
+    <unit id="homePage.previewTitle">
+      <notes>
+        <note category="location">src/app/features/home/home-page/home-page.html:12,15</note>
+      </notes>
+      <segment>
+        <source>Discover restaurants</source>
+      </segment>
+    </unit>
+    <unit id="homePage.seeAllLink">
+      <notes>
+        <note category="location">src/app/features/home/home-page/home-page.html:26,29</note>
+      </notes>
+      <segment>
+        <source> See all restaurants </source>
+      </segment>
+    </unit>
+    <unit id="homePage.metaTitle">
+      <notes>
+        <note category="location">src/app/features/home/home-page/home-page.ts:90</note>
+      </notes>
+      <segment>
+        <source>Restaurant Directory — Find your next favorite restaurant</source>
+      </segment>
+    </unit>
+    <unit id="homePage.metaDescription">
+      <notes>
+        <note category="location">src/app/features/home/home-page/home-page.ts:91</note>
+      </notes>
+      <segment>
+        <source>Browse restaurants by category, city, price and rating. Read reviews, check menus and save your favorites.</source>
+      </segment>
+    </unit>
     <unit id="menuItemForm.name">
       <notes>
         <note category="location">src/app/features/owner/menu-item-form/menu-item-form.html:9,10</note>

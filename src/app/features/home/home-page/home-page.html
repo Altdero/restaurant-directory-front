@@ -1,0 +1,29 @@
+<div class="home-page">
+  <section class="hero">
+    <h1 i18n="@@homePage.heroTitle">Find your next favorite restaurant</h1>
+    <p i18n="@@homePage.heroTagline">
+      Browse restaurants by category, city, price and rating — read reviews, check menus, and save
+      your favorites.
+    </p>
+    <a mat-flat-button routerLink="/restaurants" i18n="@@homePage.heroCta">Browse restaurants</a>
+  </section>
+
+  <section class="preview">
+    <h2 i18n="@@homePage.previewTitle">Discover restaurants</h2>
+
+    <app-restaurant-grid
+      [restaurants]="restaurants()"
+      [isLoading]="preview.isLoading()"
+      [error]="preview.error()"
+      [favoritedIds]="favoritedIds()"
+      [isAuthenticated]="isAuthenticated()"
+      [loginReturnUrl]="loginReturnUrl"
+      (retry)="preview.reload()"
+      (toggleFavorite)="toggleFavorite($event)"
+    />
+
+    <a class="see-all" routerLink="/restaurants" i18n="@@homePage.seeAllLink">
+      See all restaurants
+    </a>
+  </section>
+</div>

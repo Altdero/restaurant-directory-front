@@ -895,5 +895,47 @@
         <target>Debe ser al menos <ph id="0" equiv="min" disp="control.getError(&apos;min&apos;).min"/>.</target>
       </segment>
     </unit>
+    <unit id="homePage.metaTitle">
+      <segment>
+        <source>Restaurant Directory — Find your next favorite restaurant</source>
+        <target>Restaurant Directory — Encuentra tu próximo restaurante favorito</target>
+      </segment>
+    </unit>
+    <unit id="homePage.metaDescription">
+      <segment>
+        <source>Browse restaurants by category, city, price and rating. Read reviews, check menus and save your favorites.</source>
+        <target>Explora restaurantes por categoría, ciudad, precio y calificación. Lee reseñas, consulta menús y guarda tus favoritos.</target>
+      </segment>
+    </unit>
+    <unit id="homePage.heroTitle">
+      <segment>
+        <source>Find your next favorite restaurant</source>
+        <target>Encuentra tu próximo restaurante favorito</target>
+      </segment>
+    </unit>
+    <unit id="homePage.heroTagline">
+      <segment>
+        <source> Browse restaurants by category, city, price and rating — read reviews, check menus, and save your favorites. </source>
+        <target> Explora restaurantes por categoría, ciudad, precio y calificación — lee reseñas, consulta menús y guarda tus favoritos. </target>
+      </segment>
+    </unit>
+    <unit id="homePage.heroCta">
+      <segment>
+        <source>Browse restaurants</source>
+        <target>Explorar restaurantes</target>
+      </segment>
+    </unit>
+    <unit id="homePage.previewTitle">
+      <segment>
+        <source>Discover restaurants</source>
+        <target>Descubre restaurantes</target>
+      </segment>
+    </unit>
+    <unit id="homePage.seeAllLink">
+      <segment>
+        <source> See all restaurants </source>
+        <target> Ver todos los restaurantes </target>
+      </segment>
+    </unit>
   </file>
 </xliff>

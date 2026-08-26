@@ -1,7 +1,8 @@
 /**
- * Builds a `sitemap.xml` document covering both locale trees for the two
- * real public/server-rendered pages this app has: the restaurant listing
- * and each restaurant's detail page. Deliberately a flat `<url>` list, no
+ * Builds a `sitemap.xml` document covering both locale trees for the three
+ * real public/server-rendered pages this app has: the home page, the
+ * restaurant listing, and each restaurant's detail page. Deliberately a
+ * flat `<url>` list, no
  * `xhtml:link` hreflang annotations — valid either way per the sitemap
  * protocol, and each page already emits its own `<link rel="alternate">`
  * hreflang tags (`SeoService`), so the annotated form would only duplicate
@@ -17,6 +18,7 @@ export function buildSitemapXml(options: {
   const { siteUrl, restaurantIds, locales } = options;
 
   const urls = locales.flatMap((locale) => [
+    `${siteUrl}/${locale}`,
     `${siteUrl}/${locale}/restaurants`,
     ...restaurantIds.map((id) => `${siteUrl}/${locale}/restaurants/${id}`),
   ]);
