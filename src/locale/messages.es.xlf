@@ -823,6 +823,12 @@
         <target>Menú de</target>
       </segment>
     </unit>
+    <unit id="menuManagerPage.breadcrumbMyRestaurants">
+      <segment>
+        <source> My restaurants </source>
+        <target> Mis restaurantes </target>
+      </segment>
+    </unit>
     <unit id="menuManagerPage.addItem">
       <segment>
         <source> Add menu item </source>

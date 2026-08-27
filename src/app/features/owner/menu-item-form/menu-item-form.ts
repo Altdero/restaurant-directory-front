@@ -56,12 +56,19 @@ const CATEGORIES: readonly MenuItemCategory[] = [
     form {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      max-width: 32rem;
+      gap: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 2rem;
+      background-color: var(--mat-sys-surface-container-low);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--mat-sys-corner-large);
+      box-shadow: var(--app-card-shadow);
     }
 
     .actions {
       display: flex;
+      justify-content: flex-end;
       gap: 0.5rem;
     }
 

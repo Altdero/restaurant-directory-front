@@ -2,6 +2,14 @@
   @if (restaurant.error(); as apiError) {
     <app-error-state [message]="apiErrorMessage(apiError)" (retry)="restaurant.reload()" />
   } @else {
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/my/restaurants" i18n="@@menuManagerPage.breadcrumbMyRestaurants">
+        My restaurants
+      </a>
+      <span aria-hidden="true">/</span>
+      <span>{{ restaurantValue()?.name }}</span>
+    </nav>
+
     <div class="header">
       <h1>
         <span i18n="@@menuManagerPage.title">Menu for</span>

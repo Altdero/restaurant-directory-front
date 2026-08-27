@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { RouterLink } from '@angular/router';
 import { MENU_ITEM_DATA, RESTAURANT_DATA } from '@core/interfaces/tokens';
 import { ApiError } from '@core/models/api-error.model';
 import { MenuItem } from '@core/models/menu-item.model';
@@ -27,18 +28,43 @@ const MENU_ITEM_LIMIT = 100;
  */
 @Component({
   selector: 'app-menu-manager-page',
-  imports: [MatButtonModule, MenuItemForm, MenuItemTable, ErrorState],
+  imports: [RouterLink, MatButtonModule, MenuItemForm, MenuItemTable, ErrorState],
   templateUrl: './menu-manager-page.html',
   styles: `
     .menu-manager-page {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
       max-width: 40rem;
       margin: 0 auto;
       padding: 1.5rem;
     }
 
-    .header {
+    .breadcrumb {
       display: flex;
       align-items: center;
+      gap: 0.5rem;
+      font: var(--mat-sys-body-small);
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    .breadcrumb a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--mat-sys-primary);
+    }
+
+    h1 {
+      font-size: 2.375rem;
+      margin: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: flex-end;
       justify-content: space-between;
     }
   `,

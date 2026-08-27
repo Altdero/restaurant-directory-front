@@ -2,18 +2,76 @@
   <app-empty-state [message]="emptyMessage" />
 } @else {
   @for (group of groups(); track group.category) {
-    <h3>{{ categoryLabel(group.category) }}</h3>
-    @for (item of group.items; track item.id) {
-      <article class="row" [class.unavailable]="!item.isAvailable">
-        <span class="name">{{ item.name }}</span>
-        <span class="price">${{ item.price.toFixed(2) }}</span>
-        <button mat-button type="button" (click)="edit.emit(item)" i18n="@@menuItemTable.edit">
-          Edit
-        </button>
-        <button mat-button type="button" (click)="delete.emit(item)" i18n="@@menuItemTable.delete">
-          Delete
-        </button>
-      </article>
-    }
+    <div class="group">
+      <h3 class="category-label">{{ categoryLabel(group.category) }}</h3>
+      <div class="list">
+        @for (item of group.items; track item.id) {
+          <article class="row" [class.unavailable]="!item.isAvailable">
+            @if (item.image) {
+              <img class="thumb" [ngSrc]="item.image" width="60" height="60" alt="" />
+            } @else {
+              <div class="thumb placeholder" aria-hidden="true"></div>
+            }
+
+            <div class="info">
+              <span class="name">{{ item.name }}</span>
+              @if (item.description) {
+                <p class="description">{{ item.description }}</p>
+              }
+            </div>
+
+            <span class="price">${{ item.price.toFixed(2) }}</span>
+
+            <div class="actions">
+              <button
+                mat-icon-button
+                type="button"
+                (click)="edit.emit(item)"
+                [attr.aria-label]="editLabel"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                mat-icon-button
+                type="button"
+                class="danger"
+                (click)="delete.emit(item)"
+                [attr.aria-label]="deleteLabel"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M4 7h16M9 7V4h6v3m-8 0 1 13a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2l1-13"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
   }
 }

@@ -314,6 +314,16 @@ No unit specs for `MenuManagerPage`/`MenuItemTable`/`ImageUploader` — same rea
 
 Bundle budget checked via `stats.json`, not assumed: real eager weight ~718kB (`main.js` + the one shared eagerly-imported chunk, confirmed by import **kind** rather than the summary table's headline number — see the finding above), under the `745kB` warning threshold. `angular.json` untouched.
 
+### Menu manager restyle (commit 33) — the last commit of the Option A visual restyle
+
+`MenuItemTable` gets the exact same treatment `MenuSection` (commit 30) already established for the public detail page — bordered cards with a 60px thumbnail (`MenuItem.image`, same field, same placeholder pattern), a small uppercase teal category label, and price in bold primary — since both components display the same underlying data, just to different audiences.
+
+**Edit/Delete became icon-only circular buttons (pencil / trash, the trash glyph reused verbatim from `MyRestaurantsPage`'s delete button) using the same accessible-name-preserving technique as commit 31**: `e2e/specs/menu-management.spec.ts` clicks `getByRole('button', { name: 'Edit' })`/`{ name: 'Delete' }`, driven by accessible name — moving the existing `menuItemTable.edit`/`.delete` `$localize` strings from visible button text to `[attr.aria-label]` kept all four tests (including the edit and delete-confirmation flows) passing with zero test changes.
+
+`MenuManagerPage` gained a breadcrumb ("My restaurants / {restaurant name}") linking back to the dashboard — new translatable text, but plain static copy with no interpolation, same low-risk category as `ProfilePage`'s subtitle (commit 29), not the count-with-a-number category that's been skipped three times this restyle (`/favorites`, `/my/restaurants`, and implicitly here too — no "N items" subtitle was added for the same reason). `h1` got the `2.375rem` convention. The inline `MenuItemForm` — deliberately still inline, not converted to the reference's modal dialog, since this app's create/edit flow was an intentional architectural choice made in an earlier commit, not a style default — got the same card treatment as every other form this restyle touched (`ProfileForm`, `RestaurantForm`).
+
+This closes out PLAN.md's Phase 3 (commits 22–33): every screen in the app now reads from the same design-system tokens established in commit 22, with five documented, deliberate exceptions where a reference detail was a genuinely different widget or behavior, not a restyle of the same one (the restaurant-list search pill/price-toggle, the auth pages' password-visibility toggle, `ProfilePage`'s Cancel button and faked-disabled email, `MyRestaurantsPage`'s kebab-menu Delete, and this commit's inline-vs-modal menu-item form) — each traded off in favor of not touching tested behavior or expanding scope beyond a pure visual pass, and each recorded here and in PLAN.md at the point it came up rather than silently.
+
 ## Profile
 
 `/profile` (`ProfilePage` → `ProfileForm`), `authGuard` (any authenticated user, not `ownerGuard` — every account has a profile) and `RenderMode.Client`, matching `/favorites`'s reasoning exactly. `UserMenu` already linked here since the favorites commit, with nothing behind it until now.

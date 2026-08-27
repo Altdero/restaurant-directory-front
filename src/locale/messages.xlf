@@ -345,33 +345,41 @@
         <source> Cancel </source>
       </segment>
     </unit>
-    <unit id="menuItemTable.edit">
-      <notes>
-        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.html:11,13</note>
-      </notes>
-      <segment>
-        <source> Edit </source>
-      </segment>
-    </unit>
-    <unit id="menuItemTable.delete">
-      <notes>
-        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.html:14,16</note>
-      </notes>
-      <segment>
-        <source> Delete </source>
-      </segment>
-    </unit>
     <unit id="menuItemTable.emptyMessage">
       <notes>
-        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.ts:51</note>
+        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.ts:113</note>
       </notes>
       <segment>
         <source>No menu items yet.</source>
       </segment>
     </unit>
+    <unit id="menuItemTable.edit">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.ts:114</note>
+      </notes>
+      <segment>
+        <source>Edit</source>
+      </segment>
+    </unit>
+    <unit id="menuItemTable.delete">
+      <notes>
+        <note category="location">src/app/features/owner/menu-item-table/menu-item-table.ts:115</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
+    <unit id="menuManagerPage.breadcrumbMyRestaurants">
+      <notes>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.html:7,9</note>
+      </notes>
+      <segment>
+        <source> My restaurants </source>
+      </segment>
+    </unit>
     <unit id="menuManagerPage.title">
       <notes>
-        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.html:7,8</note>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.html:15,16</note>
       </notes>
       <segment>
         <source>Menu for</source>
@@ -379,7 +387,7 @@
     </unit>
     <unit id="menuManagerPage.addItem">
       <notes>
-        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.html:17,20</note>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.html:25,28</note>
       </notes>
       <segment>
         <source> Add menu item </source>
@@ -387,7 +395,7 @@
     </unit>
     <unit id="menuManagerPage.deleteTitle">
       <notes>
-        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:139</note>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:165</note>
       </notes>
       <segment>
         <source>Delete <ph id="0" equiv="name" disp="item.name"/>?</source>
@@ -395,7 +403,7 @@
     </unit>
     <unit id="menuManagerPage.deleteMessage">
       <notes>
-        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:140</note>
+        <note category="location">src/app/features/owner/menu-manager-page/menu-manager-page.ts:166</note>
       </notes>
       <segment>
         <source>This can&apos;t be undone.</source>
