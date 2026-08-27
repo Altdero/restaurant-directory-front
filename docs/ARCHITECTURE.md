@@ -336,3 +336,11 @@ Verified for real: registered a throwaway account against the live dev backend, 
 `core/utils/sitemap-builder.ts` now also emits `/{locale}` (the root) alongside `/{locale}/restaurants` and each restaurant detail URL — confirmed via `curl http://localhost:4200/sitemap.xml` after this commit.
 
 No unit spec for `HomePage` — static content plus a thin, already-tested-elsewhere data fetch, same as every other thin orchestration page in this codebase. New `e2e/specs/home.spec.ts` **finally lands the locale-redirect/language-switcher coverage this project's own testing-strategy plan flagged as blocked since commit 10** (no home route existed to test against): `/` redirects to `/es/`, the hero/CTA render, the CTA and "see all" link both navigate to `/restaurants`, the preview renders from a mocked response, and the language switcher swaps `/en/` ↔ `/es/` while staying on the home page.
+
+### Home page restyle (commit 25)
+
+Mostly automatic once `RestaurantCard` (commit 23) and the app shell (commit 24) were done — a screenshot confirmed the CTA button already renders in the corrected primary color (`mat-flat-button` with no explicit `color` input defaults to primary in this app's M3 theme, same as `RestaurantFilters`' "Apply" button; no fix needed). What actually changed: hero type scale bumped up (`2.75rem`, tighter `line-height`/`letter-spacing`, more vertical padding) to read as the single largest, most marketing-weighted text on the site, matching the reference's emphasis on this page over the rest of the app.
+
+**A second instance of the exact bug the commit-24 screenshot caught in `MainToolbar`, this time in `HomePage` itself**: the "See all restaurants" link was a bare `<a routerLink>` with no styles, rendering as a default blue underlined link against the rest of the now-themed page. Fixed the same way — explicit `color`/`text-decoration` matching the nav-link convention.
+
+**A pre-existing, unrelated E2E flake was found and root-caused (not fixed) during this commit's verification — see PLAN.md's "Known follow-up" entry for `auth.spec.ts`'s post-login redirect.** Confirmed via a controlled before/after test against the commit immediately preceding this restyle work (`4f263a1`): the same test fails at the same ~50% rate there too, ruling out any restyle commit as the cause.

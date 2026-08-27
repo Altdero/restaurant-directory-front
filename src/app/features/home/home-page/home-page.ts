@@ -39,18 +39,22 @@ const PREVIEW_PAGE_SIZE = 6;
 
     .hero {
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 5rem 1rem 4rem;
     }
 
     .hero h1 {
       font-family: 'Fraunces Variable', serif;
-      font-size: 2.25rem;
-      margin: 0 0 0.75rem;
+      font-size: 2.75rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 40rem;
+      margin: 0 auto 0.75rem;
     }
 
     .hero p {
       max-width: 36rem;
       margin: 0 auto 1.5rem;
+      font-size: 1.125rem;
       color: var(--mat-sys-on-surface-variant);
     }
 
@@ -62,6 +66,13 @@ const PREVIEW_PAGE_SIZE = 6;
 
     .see-all {
       align-self: center;
+      font: var(--mat-sys-label-large);
+      color: var(--mat-sys-on-surface-variant);
+      text-decoration: none;
+    }
+
+    .see-all:hover {
+      color: var(--mat-sys-primary);
     }
   `,
 })
