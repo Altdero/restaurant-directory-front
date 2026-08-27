@@ -35,7 +35,7 @@ describe('SeoService', () => {
     expect(linkHref('canonical')).toBe('http://localhost:4200/en/restaurants/abc-123');
     expect(linkHref('alternate-es')).toBe('http://localhost:4200/es/restaurants/abc-123');
     expect(linkHref('alternate-en')).toBe('http://localhost:4200/en/restaurants/abc-123');
-    expect(linkHref('alternate-x-default')).toBe('http://localhost:4200/es/restaurants/abc-123');
+    expect(linkHref('alternate-x-default')).toBe('http://localhost:4200/en/restaurants/abc-123');
   });
 
   it('self-references the current query string when no canonicalQueryParams override is given', () => {

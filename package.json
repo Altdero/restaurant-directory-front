@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "NODE_ENV=development ng serve",
+    "start-es": "NODE_ENV=development ng serve --configuration=development-es",
     "build": "node scripts/build.mjs",
+    "build:watch-i18n": "node scripts/build.mjs --localize --watch",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "e2e": "playwright test --project=chromium",
     "e2e:live": "playwright test --project=live",
-    "serve:ssr:restaurant-directory": "node --env-file-if-exists=.env dist/restaurant-directory/server/server.mjs",
+    "serve:ssr:restaurant-directory": "node --watch-path=dist/restaurant-directory/server --env-file-if-exists=.env dist/restaurant-directory/server/server.mjs",
     "lint": "ng lint",
     "prepare": "husky"
   },

@@ -5,8 +5,8 @@ import { environment } from '@environments/environment';
 
 type Locale = 'es' | 'en';
 
-/** `x-default` points at the `es` URL — matches `server.ts`'s `DEFAULT_LOCALE`. */
-const DEFAULT_LOCALE: Locale = 'es';
+/** `x-default` points at the `en` URL — matches `server.ts`'s `DEFAULT_LOCALE`. */
+const DEFAULT_LOCALE: Locale = 'en';
 
 export interface SeoPageData {
   readonly title: string;

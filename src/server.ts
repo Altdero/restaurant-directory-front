@@ -14,11 +14,12 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 /**
  * Must stay in sync with `i18n.locales` / `i18n.sourceLocale` in angular.json.
  * The engine's own Accept-Language redirect falls back to the first supported
- * locale, which is `en` here (the source locale) — not the Spanish default this
- * project requires, so unprefixed requests are redirected explicitly instead.
+ * locale, which happens to also be `en` (the source locale) here — but that's
+ * a coincidence of array order, not something this app can rely on, so
+ * unprefixed requests are redirected explicitly instead.
  */
-const SUPPORTED_LOCALES = ['es', 'en'];
-const DEFAULT_LOCALE = 'es';
+const SUPPORTED_LOCALES = ['en', 'es'];
+const DEFAULT_LOCALE = 'en';
 
 const allowedHosts = process.env['ALLOWED_HOSTS']
   ?.split(',')
@@ -119,11 +120,27 @@ app.get('/robots.txt', (req, res) => {
 
 /**
  * Redirect any request whose path does not start with a supported locale
- * segment to its `/es/...` equivalent, preserving the rest of the path and
+ * segment to its `/en/...` equivalent, preserving the rest of the path and
  * the query string. This covers both the bare `/` root and unprefixed deep
  * links (e.g. `/restaurants`), so no page is reachable at two URLs.
+ *
+ * Skipped when `NODE_ENV=development` — `ng serve`'s dev-server (`start`/
+ * `start-es`) hits a real routing loop otherwise: a locale-prefixed path
+ * (e.g. `/en/`) redirects to itself indefinitely, a Vite dev-server quirk
+ * unrelated to this middleware's own logic (confirmed by reproducing the
+ * loop with this whole block removed). `NODE_ENV` is set explicitly by
+ * `start`/`start-es` for exactly this — checking `req.hostname === 'localhost'`
+ * instead would also disable this redirect while testing the compiled
+ * production server locally via `serve:ssr:restaurant-directory` (also
+ * accessed via `localhost`), which defeats that command's actual purpose:
+ * verifying real production redirect behavior before deploying.
  */
 app.use((req, res, next) => {
+  if (process.env['NODE_ENV'] === 'development') {
+    next();
+    return;
+  }
+
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     next();
     return;

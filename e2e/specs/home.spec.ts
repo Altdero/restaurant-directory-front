@@ -12,7 +12,7 @@ test.describe('home page', () => {
 
   test('redirects the unprefixed root to the default locale', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveURL('/es/');
+    await expect(page).toHaveURL('/en/');
   });
 
   test('shows the hero, the CTA, and a live restaurant preview', async ({ page }) => {

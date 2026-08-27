@@ -3,7 +3,8 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "schematicCollections": ["angular-eslint"]
+    "schematicCollections": ["angular-eslint"],
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -78,13 +79,15 @@
               "outputHashing": "all"
             },
             "development": {
-              "localize": false,
+              "localize": ["en"],
+              "baseHref": "/en/",
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             },
             "development-es": {
               "localize": ["es"],
+              "baseHref": "/es/",
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
