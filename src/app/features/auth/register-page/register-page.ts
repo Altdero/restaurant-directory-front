@@ -40,12 +40,23 @@ function passwordsMatchValidator(control: AbstractControl): ValidationErrors | n
     form {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 1rem;
     }
 
     .error {
       color: var(--mat-sys-error);
       margin: 0;
+    }
+
+    [footer] {
+      font: var(--mat-sys-body-medium);
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    [footer] a {
+      color: var(--mat-sys-primary);
+      font-weight: 500;
+      text-decoration: none;
     }
   `,
 })

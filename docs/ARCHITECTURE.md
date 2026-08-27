@@ -184,7 +184,11 @@ A standing `effect()` inside `AuthStore` clears the user profile whenever `Acces
 
 `role` on `UserProfile` is treated as UX convenience only, never a security boundary, since the backend enforces the same rule independently — `owner.guard.ts` exists to avoid rendering a dashboard shell the API would reject, not as the actual security boundary.
 
-## Restaurant listing
+### Login/register restyle (commit 28)
+
+A before-screenshot showed both pages already close to the reference — `AuthCard` (commit 23), the form fields, and the primary-colored submit button all inherited correctly, and the submit button turned out to already be full-width for free: `form { display: flex; flex-direction: column }`'s default `align-items: stretch` fills flex-item width without anything explicit needed. Two real changes: field gap `0.5rem` → `1rem` for the reference's more generous field spacing, and — **the fourth occurrence of the same "unstyled `<a routerLink>` renders as a default blue link" bug** (`MainToolbar`, `HomePage`'s "See all", now here) — the "Register"/"Log in" footer links, fixed with a `[footer] a` rule identical in spirit to the earlier fixes. `[footer]`, not a class, since that's the actual attribute `AuthCard`'s `<ng-content select="[footer]">` projects against, already present in `LoginPage`/`RegisterPage`'s own templates.
+
+Not added: a password show/hide toggle the reference's mockup shows inline in the field. That's new interactive state (an input `type` toggle), not a style change, and no existing hook for it — out of scope here.
 
 `/restaurants` (`RestaurantListPage`) drives its filters and pagination entirely from the URL's query params — this is what makes `RenderMode.Server` on this route actually meaningful (each filter combination its own crawlable, server-rendered URL) rather than a client-only view of shared state. Wired via `withComponentInputBinding()`, added to `provideRouter()` in `app.config.ts` (first use in this project): verified against the real `@angular/router` source (`RoutedComponentInputBinder` in `_router-chunk.mjs`) before relying on it — it merges `queryParams`/`params`/`data` by key and calls `setInput()` on every matching declared `input()` of the routed component, including `undefined` when a param is absent (default `unmatchedInputBehavior: 'alwaysUndefined'`). Query-param values always arrive as strings; `page`/`minRating` use an `input(..., { transform })` with `numberAttribute` (coercing an absent/invalid value to a fallback, not `NaN`).
 
