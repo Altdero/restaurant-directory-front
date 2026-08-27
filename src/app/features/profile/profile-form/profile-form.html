@@ -1,9 +1,12 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
   <app-image-uploader
+    shape="circle"
     [imageUrl]="avatarUrl()"
     [isUploading]="isUploadingImage()"
     (fileSelected)="imageSelected.emit($event)"
   />
+
+  <div class="divider" aria-hidden="true"></div>
 
   @if (user(); as user) {
     <p class="read-only">

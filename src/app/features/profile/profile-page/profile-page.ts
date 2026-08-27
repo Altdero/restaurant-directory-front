@@ -17,9 +17,22 @@ import { ProfileForm, ProfileFormValue } from '@features/profile/profile-form/pr
   templateUrl: './profile-page.html',
   styles: `
     .profile-page {
-      max-width: 28rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      max-width: 34rem;
       margin: 0 auto;
       padding: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.375rem;
+      margin: 0;
+    }
+
+    .subtitle {
+      margin: 0 0 1.25rem;
+      color: var(--mat-sys-on-surface-variant);
     }
   `,
 })

@@ -45,17 +45,36 @@ export interface ProfileFormValue {
     form {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      max-width: 24rem;
+      gap: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 2rem;
+      background-color: var(--mat-sys-surface-container-low);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--mat-sys-corner-large);
+      box-shadow: var(--app-card-shadow);
+    }
+
+    .divider {
+      height: 1px;
+      background-color: var(--mat-sys-outline-variant);
+      margin: 0.25rem 0;
     }
 
     .read-only {
+      font: var(--mat-sys-body-medium);
       color: var(--mat-sys-on-surface-variant);
       margin: 0;
     }
 
+    .read-only span {
+      font-weight: 500;
+      color: var(--mat-sys-on-surface);
+    }
+
     .actions {
       display: flex;
+      justify-content: flex-end;
       gap: 0.5rem;
     }
 

@@ -219,7 +219,7 @@
     </unit>
     <unit id="favoritesPage.emptyMessage">
       <notes>
-        <note category="location">src/app/features/favorites/favorites-page/favorites-page.ts:58</note>
+        <note category="location">src/app/features/favorites/favorites-page/favorites-page.ts:63</note>
       </notes>
       <segment>
         <source>You haven&apos;t added any favorites yet.</source>
@@ -267,7 +267,7 @@
     </unit>
     <unit id="homePage.metaTitle">
       <notes>
-        <note category="location">src/app/features/home/home-page/home-page.ts:90</note>
+        <note category="location">src/app/features/home/home-page/home-page.ts:101</note>
       </notes>
       <segment>
         <source>Restaurant Directory — Find your next favorite restaurant</source>
@@ -275,7 +275,7 @@
     </unit>
     <unit id="homePage.metaDescription">
       <notes>
-        <note category="location">src/app/features/home/home-page/home-page.ts:91</note>
+        <note category="location">src/app/features/home/home-page/home-page.ts:102</note>
       </notes>
       <segment>
         <source>Browse restaurants by category, city, price and rating. Read reviews, check menus and save your favorites.</source>
@@ -611,7 +611,7 @@
     </unit>
     <unit id="profileForm.username">
       <notes>
-        <note category="location">src/app/features/profile/profile-form/profile-form.html:10,11</note>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:13,14</note>
       </notes>
       <segment>
         <source>Username</source>
@@ -619,7 +619,7 @@
     </unit>
     <unit id="profileForm.role">
       <notes>
-        <note category="location">src/app/features/profile/profile-form/profile-form.html:12,13</note>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:15,16</note>
       </notes>
       <segment>
         <source>Role</source>
@@ -627,7 +627,7 @@
     </unit>
     <unit id="profileForm.email">
       <notes>
-        <note category="location">src/app/features/profile/profile-form/profile-form.html:16,17</note>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:19,20</note>
       </notes>
       <segment>
         <source>Email</source>
@@ -635,7 +635,7 @@
     </unit>
     <unit id="profileForm.firstName">
       <notes>
-        <note category="location">src/app/features/profile/profile-form/profile-form.html:24,25</note>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:27,28</note>
       </notes>
       <segment>
         <source>First name</source>
@@ -643,7 +643,7 @@
     </unit>
     <unit id="profileForm.lastName">
       <notes>
-        <note category="location">src/app/features/profile/profile-form/profile-form.html:29,30</note>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:32,33</note>
       </notes>
       <segment>
         <source>Last name</source>
@@ -651,7 +651,7 @@
     </unit>
     <unit id="profileForm.phone">
       <notes>
-        <note category="location">src/app/features/profile/profile-form/profile-form.html:34,35</note>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:37,38</note>
       </notes>
       <segment>
         <source>Phone</source>
@@ -659,7 +659,7 @@
     </unit>
     <unit id="profileForm.submit">
       <notes>
-        <note category="location">src/app/features/profile/profile-form/profile-form.html:47,50</note>
+        <note category="location">src/app/features/profile/profile-form/profile-form.html:50,53</note>
       </notes>
       <segment>
         <source>Save changes</source>
@@ -667,10 +667,18 @@
     </unit>
     <unit id="profilePage.title">
       <notes>
-        <note category="location">src/app/features/profile/profile-page/profile-page.html:2,4</note>
+        <note category="location">src/app/features/profile/profile-page/profile-page.html:2,3</note>
       </notes>
       <segment>
         <source>Your profile</source>
+      </segment>
+    </unit>
+    <unit id="profilePage.subtitle">
+      <notes>
+        <note category="location">src/app/features/profile/profile-page/profile-page.html:3,6</note>
+      </notes>
+      <segment>
+        <source>Manage your account details.</source>
       </segment>
     </unit>
     <unit id="menuSection.title">
@@ -859,7 +867,7 @@
     </unit>
     <unit id="restaurantListPage.metaTitle">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.ts:101</note>
+        <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.ts:106</note>
       </notes>
       <segment>
         <source>Restaurants | Restaurant Directory</source>
@@ -867,7 +875,7 @@
     </unit>
     <unit id="restaurantListPage.metaDescription">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.ts:102</note>
+        <note category="location">src/app/features/restaurants/restaurant-list-page/restaurant-list-page.ts:107</note>
       </notes>
       <segment>
         <source>Browse restaurants by category, city, price and rating.</source>
@@ -979,7 +987,7 @@
     </unit>
     <unit id="nav.wordmark">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:23,24</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:30,31</note>
       </notes>
       <segment>
         <source>Restaurant Directory</source>
@@ -987,15 +995,15 @@
     </unit>
     <unit id="nav.restaurants">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:24,25</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:32,34</note>
       </notes>
       <segment>
-        <source>Restaurants</source>
+        <source> Restaurants </source>
       </segment>
     </unit>
     <unit id="nav.login">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:30,31</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:39,40</note>
       </notes>
       <segment>
         <source>Log in</source>
@@ -1003,7 +1011,7 @@
     </unit>
     <unit id="nav.register">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:31,34</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:40,43</note>
       </notes>
       <segment>
         <source>Register</source>
@@ -1011,7 +1019,7 @@
     </unit>
     <unit id="footer.tagline">
       <notes>
-        <note category="location">src/app/layout/site-footer/site-footer.ts:14,18</note>
+        <note category="location">src/app/layout/site-footer/site-footer.ts:14,17</note>
       </notes>
       <segment>
         <source>Discover restaurants near you.</source>
@@ -1019,7 +1027,7 @@
     </unit>
     <unit id="userMenu.favorites">
       <notes>
-        <note category="location">src/app/layout/user-menu/user-menu.ts:14,15</note>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:24,25</note>
       </notes>
       <segment>
         <source>Favorites</source>
@@ -1027,7 +1035,7 @@
     </unit>
     <unit id="userMenu.profile">
       <notes>
-        <note category="location">src/app/layout/user-menu/user-menu.ts:15,17</note>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:25,27</note>
       </notes>
       <segment>
         <source>Profile</source>
@@ -1035,7 +1043,7 @@
     </unit>
     <unit id="userMenu.myRestaurants">
       <notes>
-        <note category="location">src/app/layout/user-menu/user-menu.ts:18,21</note>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:28,31</note>
       </notes>
       <segment>
         <source> My restaurants </source>
@@ -1043,7 +1051,7 @@
     </unit>
     <unit id="userMenu.logout">
       <notes>
-        <note category="location">src/app/layout/user-menu/user-menu.ts:21,23</note>
+        <note category="location">src/app/layout/user-menu/user-menu.ts:31,33</note>
       </notes>
       <segment>
         <source>Log out</source>
@@ -1091,7 +1099,7 @@
     </unit>
     <unit id="favoriteButton.add">
       <notes>
-        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:75</note>
+        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:79</note>
       </notes>
       <segment>
         <source>Add to favorites</source>
@@ -1099,7 +1107,7 @@
     </unit>
     <unit id="favoriteButton.remove">
       <notes>
-        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:76</note>
+        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:80</note>
       </notes>
       <segment>
         <source>Remove from favorites</source>
@@ -1107,7 +1115,7 @@
     </unit>
     <unit id="imageUploader.uploading">
       <notes>
-        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:17,19</note>
+        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:24,26</note>
       </notes>
       <segment>
         <source>Uploading…</source>
@@ -1115,7 +1123,7 @@
     </unit>
     <unit id="imageUploader.choose">
       <notes>
-        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:19,23</note>
+        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:26,30</note>
       </notes>
       <segment>
         <source>Choose image</source>
@@ -1123,7 +1131,7 @@
     </unit>
     <unit id="nav.switchLanguage">
       <notes>
-        <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:36</note>
+        <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:47</note>
       </notes>
       <segment>
         <source>Switch language to <ph id="0" equiv="alternateLabel" disp="this.alternateLabel"/></source>
@@ -1227,7 +1235,7 @@
     </unit>
     <unit id="restaurantCard.reviewCount">
       <notes>
-        <note category="location">src/app/shared/components/restaurant-card/restaurant-card.html:27,29</note>
+        <note category="location">src/app/shared/components/restaurant-card/restaurant-card.html:34,35</note>
       </notes>
       <segment>
         <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/>) </source>
@@ -1235,7 +1243,7 @@
     </unit>
     <unit id="theme.switchToLight">
       <notes>
-        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:41</note>
+        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:55</note>
       </notes>
       <segment>
         <source>Switch to light mode</source>
@@ -1243,7 +1251,7 @@
     </unit>
     <unit id="theme.switchToDark">
       <notes>
-        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:42</note>
+        <note category="location">src/app/shared/components/theme-toggle/theme-toggle.ts:56</note>
       </notes>
       <segment>
         <source>Switch to dark mode</source>

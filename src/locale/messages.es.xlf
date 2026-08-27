@@ -859,6 +859,12 @@
         <target>Tu perfil</target>
       </segment>
     </unit>
+    <unit id="profilePage.subtitle">
+      <segment>
+        <source>Manage your account details.</source>
+        <target>Administra los datos de tu cuenta.</target>
+      </segment>
+    </unit>
     <unit id="restaurantListPage.metaTitle">
       <segment>
         <source>Restaurants | Restaurant Directory</source>
