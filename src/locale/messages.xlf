@@ -417,41 +417,57 @@
         <source> Add restaurant </source>
       </segment>
     </unit>
-    <unit id="myRestaurantsPage.edit">
+    <unit id="myRestaurantsPage.active">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:29,32</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:39,41</note>
       </notes>
       <segment>
-        <source> Edit </source>
+        <source>Active</source>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.inactive">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:41,45</note>
+      </notes>
+      <segment>
+        <source>Inactive</source>
       </segment>
     </unit>
     <unit id="myRestaurantsPage.menu">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:36,38</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:55,57</note>
       </notes>
       <segment>
         <source> Menu </source>
       </segment>
     </unit>
-    <unit id="myRestaurantsPage.delete">
+    <unit id="myRestaurantsPage.edit">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:44,46</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.html:63,65</note>
       </notes>
       <segment>
-        <source> Delete </source>
+        <source> Edit </source>
       </segment>
     </unit>
     <unit id="myRestaurantsPage.emptyMessage">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:97</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:168</note>
       </notes>
       <segment>
         <source>You haven&apos;t added any restaurants yet.</source>
       </segment>
     </unit>
+    <unit id="myRestaurantsPage.delete">
+      <notes>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:169</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
     <unit id="myRestaurantsPage.deleteTitle">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:102</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:174</note>
       </notes>
       <segment>
         <source>Delete <ph id="0" equiv="name" disp="name"/>?</source>
@@ -459,7 +475,7 @@
     </unit>
     <unit id="myRestaurantsPage.deleteMessage">
       <notes>
-        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:103</note>
+        <note category="location">src/app/features/owner/my-restaurants-page/my-restaurants-page.ts:175</note>
       </notes>
       <segment>
         <source>This can&apos;t be undone.</source>
@@ -843,7 +859,7 @@
     </unit>
     <unit id="restaurantHero.reviewCount">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:22,23</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:29,30</note>
       </notes>
       <segment>
         <source>(<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/> reviews)</source>
@@ -851,7 +867,7 @@
     </unit>
     <unit id="restaurantHero.addressLabel">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:42,44</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:49,51</note>
       </notes>
       <segment>
         <source>Address</source>
@@ -859,7 +875,7 @@
     </unit>
     <unit id="restaurantHero.openInMaps">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:49,53</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:56,60</note>
       </notes>
       <segment>
         <source> Open in Maps </source>
@@ -867,7 +883,7 @@
     </unit>
     <unit id="restaurantHero.hoursLabel">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:56,57</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:63,64</note>
       </notes>
       <segment>
         <source>Hours</source>
@@ -875,7 +891,7 @@
     </unit>
     <unit id="restaurantHero.contactLabel">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:64,66</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:71,73</note>
       </notes>
       <segment>
         <source>Contact</source>
@@ -1011,7 +1027,7 @@
     </unit>
     <unit id="reviewsSection.emptyMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.ts:176</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.ts:182</note>
       </notes>
       <segment>
         <source>No reviews yet.</source>

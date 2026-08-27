@@ -601,6 +601,18 @@
         <target> Eliminar </target>
       </segment>
     </unit>
+    <unit id="myRestaurantsPage.active">
+      <segment>
+        <source>Active</source>
+        <target>Activo</target>
+      </segment>
+    </unit>
+    <unit id="myRestaurantsPage.inactive">
+      <segment>
+        <source>Inactive</source>
+        <target>Inactivo</target>
+      </segment>
+    </unit>
     <unit id="myRestaurantsPage.emptyMessage">
       <segment>
         <source>You haven&apos;t added any restaurants yet.</source>

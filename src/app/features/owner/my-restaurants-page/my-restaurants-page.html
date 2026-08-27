@@ -15,36 +15,80 @@
   } @else if ((restaurantsPage()?.results ?? []).length === 0) {
     <app-empty-state [message]="emptyMessage" />
   } @else {
-    @for (restaurant of restaurantsPage()?.results ?? []; track restaurant.id) {
-      <article class="row">
-        <span class="name">{{ restaurant.name }}</span>
-        <span class="city">{{ restaurant.city }}</span>
-        <app-price-range-badge [priceRange]="restaurant.priceRange" />
-        <app-rating-stars [rating]="restaurant.averageRating" />
-        <a
-          mat-button
-          [routerLink]="['/my/restaurants', restaurant.id, 'edit']"
-          i18n="@@myRestaurantsPage.edit"
-        >
-          Edit
-        </a>
-        <a
-          mat-button
-          [routerLink]="['/my/restaurants', restaurant.id, 'menu']"
-          i18n="@@myRestaurantsPage.menu"
-        >
-          Menu
-        </a>
-        <button
-          mat-button
-          type="button"
-          (click)="deleteRestaurant(restaurant.id, restaurant.name)"
-          i18n="@@myRestaurantsPage.delete"
-        >
-          Delete
-        </button>
-      </article>
-    }
+    <div class="list">
+      @for (restaurant of restaurantsPage()?.results ?? []; track restaurant.id) {
+        <article class="row">
+          @if (restaurant.coverImage) {
+            <img class="thumb" [ngSrc]="restaurant.coverImage" width="72" height="56" alt="" />
+          } @else {
+            <div class="thumb placeholder" aria-hidden="true"></div>
+          }
+
+          <div class="info">
+            <span class="name">{{ restaurant.name }}</span>
+            <span class="city">
+              {{ restaurant.city }}
+              @if (restaurant.categories[0]; as category) {
+                · {{ category.name }}
+              }
+            </span>
+          </div>
+
+          <span class="status" [class.inactive]="!restaurant.isActive">
+            @if (restaurant.isActive) {
+              <span i18n="@@myRestaurantsPage.active">Active</span>
+            } @else {
+              <span i18n="@@myRestaurantsPage.inactive">Inactive</span>
+            }
+          </span>
+
+          <app-price-range-badge [priceRange]="restaurant.priceRange" />
+          <app-rating-stars [rating]="restaurant.averageRating" />
+
+          <div class="actions">
+            <a
+              mat-stroked-button
+              class="pill"
+              [routerLink]="['/my/restaurants', restaurant.id, 'menu']"
+              i18n="@@myRestaurantsPage.menu"
+            >
+              Menu
+            </a>
+            <a
+              mat-stroked-button
+              class="pill"
+              [routerLink]="['/my/restaurants', restaurant.id, 'edit']"
+              i18n="@@myRestaurantsPage.edit"
+            >
+              Edit
+            </a>
+            <button
+              mat-icon-button
+              type="button"
+              class="danger"
+              (click)="deleteRestaurant(restaurant.id, restaurant.name)"
+              [attr.aria-label]="deleteLabel"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 7h16M9 7V4h6v3m-8 0 1 13a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2l1-13"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
 
     @if ((restaurantsPage()?.count ?? 0) > pageSize) {
       <app-paginator-bar

@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -30,6 +31,7 @@ const SKELETON_COUNT = [0, 1, 2, 3, 4, 5];
 @Component({
   selector: 'app-my-restaurants-page',
   imports: [
+    NgOptimizedImage,
     RouterLink,
     MatButtonModule,
     ErrorState,
@@ -50,26 +52,95 @@ const SKELETON_COUNT = [0, 1, 2, 3, 4, 5];
       margin: 0 auto;
     }
 
+    h1 {
+      font-size: 2.375rem;
+      margin: 0;
+    }
+
     .header {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
+    }
+
+    .list {
+      background-color: var(--mat-sys-surface-container-low);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--mat-sys-corner-medium);
+      box-shadow: var(--app-card-shadow);
+      overflow: hidden;
     }
 
     .row {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 0.75rem 0;
+      gap: 1.25rem;
+      padding: 1.125rem 1.375rem;
       border-bottom: 1px solid var(--mat-sys-outline-variant);
     }
 
-    .row .name {
-      flex: 1 1 auto;
+    .row:last-child {
+      border-bottom: none;
     }
 
-    .row .city {
+    .thumb {
+      flex: none;
+      width: 4.5rem;
+      height: 3.5rem;
+      border-radius: var(--mat-sys-corner-small);
+      object-fit: cover;
+    }
+
+    .thumb.placeholder {
+      background-color: var(--mat-sys-surface-container-high);
+    }
+
+    .info {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .info .name {
+      font-weight: 600;
+    }
+
+    .info .city {
+      font: var(--mat-sys-body-small);
       color: var(--mat-sys-on-surface-variant);
+    }
+
+    .status {
+      height: 1.625rem;
+      padding: 0 0.75rem;
+      display: flex;
+      align-items: center;
+      border-radius: var(--mat-sys-corner-full);
+      background-color: var(--app-chip-teal-bg);
+      color: var(--app-chip-teal-fg);
+      font: var(--mat-sys-label-medium);
+    }
+
+    .status.inactive {
+      background-color: var(--mat-sys-error-container);
+      color: var(--mat-sys-on-error-container);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      border-radius: var(--mat-sys-corner-full);
+    }
+
+    .danger {
+      border: 1px solid var(--mat-sys-error);
+      color: var(--mat-sys-error);
     }
   `,
 })
@@ -95,6 +166,7 @@ export class MyRestaurantsPage {
 
   protected readonly apiErrorMessage = apiErrorMessage;
   protected readonly emptyMessage = $localize`:@@myRestaurantsPage.emptyMessage:You haven't added any restaurants yet.`;
+  protected readonly deleteLabel = $localize`:@@myRestaurantsPage.delete:Delete`;
 
   protected async deleteRestaurant(id: string, name: string): Promise<void> {
     const ref = this.dialog.open(ConfirmDialog, {
