@@ -43,6 +43,11 @@ function toPage(value: unknown): number {
       max-width: 75rem;
       margin: 0 auto;
     }
+
+    h1 {
+      font-size: 2.375rem;
+      margin: 0;
+    }
   `,
 })
 export class RestaurantListPage {

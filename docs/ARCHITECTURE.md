@@ -194,6 +194,12 @@ A standing `effect()` inside `AuthStore` clears the user profile whenever `Acces
 
 `PriceRangeBadge` (not `PriceRange`, PLAN.md §2's original name) — a component named `PriceRange` would collide with `core/models/restaurant.model.ts`'s existing `PriceRange` type in any file needing both, e.g. `RestaurantCard`.
 
+### Restaurant list page restyle (commit 27)
+
+The smallest of the page-level restyle commits: a screenshot of the existing page showed `RestaurantFilters`' Material `mat-form-field appearance="outline"` fields, and the "Apply"/"Clear" buttons, already reading correctly against the corrected tokens (commit 22) — outlined borders in the pale corrected `outline-variant`, muted labels, a solid-terracotta "Apply" pill, terracotta "Clear" text — with no changes at all. Only `h1` needed the `2.375rem` section-header convention established in commit 26, for consistency with `/favorites` and (later) `/my/restaurants`.
+
+**Deliberately not chased**: the reference's search field is a fully-rounded 56px pill with an inline icon, and its price filter is a segmented toggle group rather than a dropdown — both meaningfully different widgets from what's built today, not just a restyle of the same one. Changing either would mean either a sitewide `mat-form-field` shape override (touching every form in the app — login, register, profile, restaurant/menu-item forms — well beyond this page) or swapping `mat-select` for a bespoke control bound to the same `FormControl` (a structural change, not styling, and this commit's own scope note says the filter bar just needs styling, not a widget swap). Left as Material's standard outlined fields, which are already themed correctly.
+
 `RestaurantCard` doesn't yet link to `/restaurants/:id` — that route lands in commit 12; same reasoning as `MainToolbar` deferring auth links in commit 9 until `/login`/`/register` existed.
 
 ## Restaurant detail
