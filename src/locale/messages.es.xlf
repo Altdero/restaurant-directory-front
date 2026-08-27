@@ -361,6 +361,24 @@
         <target> Abrir en Maps </target>
       </segment>
     </unit>
+    <unit id="restaurantHero.addressLabel">
+      <segment>
+        <source>Address</source>
+        <target>Dirección</target>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.hoursLabel">
+      <segment>
+        <source>Hours</source>
+        <target>Horario</target>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.contactLabel">
+      <segment>
+        <source>Contact</source>
+        <target>Contacto</target>
+      </segment>
+    </unit>
     <unit id="reviewsSection.title">
       <segment>
         <source>Reviews</source>
@@ -377,6 +395,12 @@
       <segment>
         <source>No reviews yet.</source>
         <target>Aún no hay reseñas.</target>
+      </segment>
+    </unit>
+    <unit id="reviewsSection.reviewCount">
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ totalReviews() }}"/> reviews</source>
+        <target><ph id="0" equiv="INTERPOLATION" disp="{{ totalReviews() }}"/> reseñas</target>
       </segment>
     </unit>
     <unit id="cursorLoadMore.label">

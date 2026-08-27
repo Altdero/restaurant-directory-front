@@ -8,24 +8,33 @@
   <app-empty-state [message]="emptyMessage()" />
 } @else {
   @for (group of groups(); track group.category) {
-    <h3>{{ categoryLabel(group.category) }}</h3>
-    <ul>
-      @for (item of group.items; track item.id) {
-        <li class="item" [class.unavailable]="!item.isAvailable">
-          <div>
-            <div class="item-name">
-              {{ item.name }}
-              @if (!item.isAvailable) {
-                <span i18n="@@menuSection.unavailable">(Unavailable)</span>
+    <div class="group">
+      <h3 class="category-label">{{ categoryLabel(group.category) }}</h3>
+      <ul>
+        @for (item of group.items; track item.id) {
+          <li class="item" [class.unavailable]="!item.isAvailable">
+            @if (item.image) {
+              <img class="thumb" [ngSrc]="item.image" width="76" height="76" alt="" />
+            } @else {
+              <div class="thumb placeholder" aria-hidden="true"></div>
+            }
+            <div class="item-body">
+              <div class="item-row">
+                <span class="item-name">
+                  {{ item.name }}
+                  @if (!item.isAvailable) {
+                    <span i18n="@@menuSection.unavailable">(Unavailable)</span>
+                  }
+                </span>
+                <span class="price">${{ item.price.toFixed(2) }}</span>
+              </div>
+              @if (item.description) {
+                <p class="item-description">{{ item.description }}</p>
               }
             </div>
-            @if (item.description) {
-              <p class="item-description">{{ item.description }}</p>
-            }
-          </div>
-          <span class="price">${{ item.price.toFixed(2) }}</span>
-        </li>
-      }
-    </ul>
+          </li>
+        }
+      </ul>
+    </div>
   }
 }

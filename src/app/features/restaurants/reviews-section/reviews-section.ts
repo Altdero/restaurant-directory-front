@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, computed, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
@@ -24,6 +24,7 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
   imports: [
     RatingStars,
     DatePipe,
+    DecimalPipe,
     EmptyState,
     ErrorState,
     CursorLoadMore,
@@ -34,7 +35,37 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
   templateUrl: './reviews-section.html',
   styles: `
     h2 {
-      font: var(--mat-sys-title-medium);
+      font-size: 1.625rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .summary {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.125rem;
+      margin-bottom: 1.25rem;
+      background-color: var(--mat-sys-surface-container-low);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--mat-sys-corner-medium);
+    }
+
+    .summary-rating {
+      font-family: 'Fraunces Variable', serif;
+      font-weight: 600;
+      font-size: 2.375rem;
+      line-height: 1;
+    }
+
+    .summary-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .summary-meta span {
+      font: var(--mat-sys-body-small);
+      color: var(--mat-sys-on-surface-variant);
     }
 
     ul {
@@ -43,7 +74,38 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.75rem;
+    }
+
+    .review-card {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem;
+      background-color: var(--mat-sys-surface-container-low);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--mat-sys-corner-medium);
+    }
+
+    .avatar {
+      flex: none;
+      width: 2.25rem;
+      height: 2.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--mat-sys-corner-full);
+      background-color: var(--app-chip-teal-bg);
+      color: var(--app-chip-teal-fg);
+      font: var(--mat-sys-label-medium);
+      font-weight: 600;
+    }
+
+    .review-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
     }
 
     .review-header {
@@ -53,7 +115,7 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
     }
 
     .username {
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .date {
@@ -62,20 +124,29 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
     }
 
     .comment {
-      margin: 0.25rem 0 0;
+      margin: 0;
     }
 
     .my-review {
-      background-color: var(--mat-sys-surface-container);
-      border-radius: var(--mat-sys-corner-medium);
-      padding: 0.75rem 1rem;
       margin-bottom: 1.5rem;
     }
 
     .actions {
       display: flex;
       gap: 0.5rem;
-      margin-top: 0.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .pill {
+      border-radius: var(--mat-sys-corner-full);
+      height: 2.75rem;
+      padding: 0 1.5rem;
+    }
+
+    p > a {
+      color: var(--mat-sys-primary);
+      font-weight: 500;
+      text-decoration: none;
     }
   `,
 })
@@ -85,6 +156,9 @@ export class ReviewsSection {
   readonly error = input<ApiError | undefined>(undefined);
   readonly hasMore = input<boolean>(false);
   readonly isLoadingMore = input<boolean>(false);
+  /** The restaurant's own authoritative totals — not derived from `reviews()`, which is only whatever page has loaded so far. */
+  readonly averageRating = input<number>(0);
+  readonly totalReviews = input<number>(0);
 
   readonly isAuthenticated = input<boolean>(false);
   readonly myReview = input<Review>();
@@ -106,5 +180,9 @@ export class ReviewsSection {
 
   protected emptyMessage(): string {
     return $localize`:@@reviewsSection.emptyMessage:No reviews yet.`;
+  }
+
+  protected initials(username: string): string {
+    return username.slice(0, 2).toUpperCase();
   }
 }

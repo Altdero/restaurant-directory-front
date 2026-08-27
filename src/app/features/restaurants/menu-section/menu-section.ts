@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { ApiError } from '@core/models/api-error.model';
 import { MenuItem, MenuItemCategory } from '@core/models/menu-item.model';
@@ -29,16 +30,35 @@ export function groupMenuItems(items: readonly MenuItem[]): readonly MenuItemGro
 
 @Component({
   selector: 'app-menu-section',
-  imports: [EmptyState, ErrorState],
+  imports: [NgOptimizedImage, EmptyState, ErrorState],
   templateUrl: './menu-section.html',
   styles: `
     h2 {
-      font: var(--mat-sys-title-medium);
+      font-size: 1.625rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .group {
+      margin-bottom: 1.5rem;
+    }
+
+    .group:last-child {
+      margin-bottom: 0;
+    }
+
+    .category-label {
+      font-family: 'Inter Variable', sans-serif;
+      font: var(--mat-sys-label-medium);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--app-chip-teal-fg);
+      margin: 0 0 0.75rem;
     }
 
     ul {
       list-style: none;
-      margin: 0 0 1.5rem;
+      margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
@@ -47,16 +67,45 @@ export function groupMenuItems(items: readonly MenuItem[]): readonly MenuItemGro
 
     .item {
       display: flex;
-      justify-content: space-between;
       gap: 1rem;
+      padding: 0.875rem;
+      background-color: var(--mat-sys-surface-container-low);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--mat-sys-corner-medium);
     }
 
     .item.unavailable {
       opacity: 0.5;
     }
 
+    .thumb {
+      flex: none;
+      width: 4.75rem;
+      height: 4.75rem;
+      border-radius: var(--mat-sys-corner-small);
+      object-fit: cover;
+    }
+
+    .thumb.placeholder {
+      background-color: var(--mat-sys-surface-container-high);
+    }
+
+    .item-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .item-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
     .item-name {
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .item-description {
@@ -67,6 +116,8 @@ export function groupMenuItems(items: readonly MenuItem[]): readonly MenuItemGro
 
     .price {
       white-space: nowrap;
+      font-weight: 600;
+      color: var(--mat-sys-primary);
     }
   `,
 })

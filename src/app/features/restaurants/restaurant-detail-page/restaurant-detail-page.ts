@@ -31,6 +31,9 @@ const MENU_ITEM_LIMIT = 100;
   templateUrl: './restaurant-detail-page.html',
   styles: `
     .restaurant-detail-page {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
       max-width: 60rem;
       margin: 0 auto;
       padding: 1.5rem;

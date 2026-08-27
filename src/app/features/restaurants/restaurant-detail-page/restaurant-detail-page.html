@@ -19,6 +19,8 @@
     />
 
     <app-reviews-section
+      [averageRating]="loadedRestaurant.averageRating"
+      [totalReviews]="loadedRestaurant.totalReviews"
       [reviews]="reviews()"
       [isLoading]="reviewsIsLoading()"
       [error]="reviewsError()"

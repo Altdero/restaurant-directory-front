@@ -1,29 +1,52 @@
-@if (restaurant().coverImage) {
-  <img class="cover" [ngSrc]="restaurant().coverImage" priority width="1200" height="512" alt="" />
-} @else {
-  <div class="cover placeholder" aria-hidden="true"></div>
-}
+<div class="cover-wrap">
+  @if (restaurant().coverImage) {
+    <img
+      class="cover"
+      [ngSrc]="restaurant().coverImage"
+      priority
+      width="1200"
+      height="512"
+      alt=""
+    />
+  } @else {
+    <div class="cover placeholder" aria-hidden="true"></div>
+  }
+  <div class="cover-overlay" aria-hidden="true"></div>
 
-<h1>{{ restaurant().name }}</h1>
-
-<div class="meta">
-  <app-rating-stars [rating]="restaurant().averageRating" />
-  <span i18n="@@restaurantHero.reviewCount"> ({{ restaurant().totalReviews }} reviews) </span>
-  <app-price-range-badge [priceRange]="restaurant().priceRange" />
   <app-favorite-button
+    class="heart-overlay"
+    size="lg"
     [isFavorited]="isFavorited()"
     [isAuthenticated]="isAuthenticated()"
     [loginReturnUrl]="loginReturnUrl()"
     (toggled)="toggleFavorite.emit()"
   />
+
+  <div class="hero-content">
+    <h1>{{ restaurant().name }}</h1>
+    <div class="meta">
+      <span>★ {{ restaurant().averageRating | number: '1.1-1' }}</span>
+      <span i18n="@@restaurantHero.reviewCount">({{ restaurant().totalReviews }} reviews)</span>
+      <span aria-hidden="true">·</span>
+      <span>{{ restaurant().priceRange }}</span>
+      <span aria-hidden="true">·</span>
+      <span>{{ restaurant().city }}</span>
+    </div>
+    @if (restaurant().categories.length > 0) {
+      <ul class="category-pills">
+        @for (category of restaurant().categories; track category.id) {
+          <li>{{ category.name }}</li>
+        }
+      </ul>
+    }
+  </div>
 </div>
 
-<app-category-chips [categories]="restaurant().categories" />
-
-<p>{{ restaurant().description }}</p>
+<p class="description">{{ restaurant().description }}</p>
 
 <div class="details">
-  <div>
+  <div class="detail-group">
+    <h3 class="label" i18n="@@restaurantHero.addressLabel">Address</h3>
     <address>
       {{ restaurant().address }}<br />
       {{ restaurant().city }}, {{ restaurant().state }} {{ restaurant().postalCode }}<br />
@@ -32,25 +55,37 @@
     <a [href]="mapsUrl()" target="_blank" rel="noopener" i18n="@@restaurantHero.openInMaps">
       Open in Maps
     </a>
-
-    @if (restaurant().phone) {
-      <p>
-        <a [href]="'tel:' + restaurant().phone">{{ restaurant().phone }}</a>
-      </p>
-    }
-    @if (restaurant().email) {
-      <p>
-        <a [href]="'mailto:' + restaurant().email">{{ restaurant().email }}</a>
-      </p>
-    }
-    @if (restaurant().website) {
-      <p>
-        <a [href]="restaurant().website" target="_blank" rel="noopener">{{
-          restaurant().website
-        }}</a>
-      </p>
-    }
   </div>
 
-  <app-opening-hours-table [openingHours]="restaurant().openingHours" />
+  <div class="divider" aria-hidden="true"></div>
+
+  <div class="detail-group">
+    <h3 class="label" i18n="@@restaurantHero.hoursLabel">Hours</h3>
+    <app-opening-hours-table [openingHours]="restaurant().openingHours" />
+  </div>
+
+  @if (restaurant().phone || restaurant().email || restaurant().website) {
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="detail-group">
+      <h3 class="label" i18n="@@restaurantHero.contactLabel">Contact</h3>
+      @if (restaurant().phone) {
+        <p>
+          <a [href]="'tel:' + restaurant().phone">{{ restaurant().phone }}</a>
+        </p>
+      }
+      @if (restaurant().email) {
+        <p>
+          <a [href]="'mailto:' + restaurant().email">{{ restaurant().email }}</a>
+        </p>
+      }
+      @if (restaurant().website) {
+        <p>
+          <a [href]="restaurant().website" target="_blank" rel="noopener">{{
+            restaurant().website
+          }}</a>
+        </p>
+      }
+    </div>
+  }
 </div>

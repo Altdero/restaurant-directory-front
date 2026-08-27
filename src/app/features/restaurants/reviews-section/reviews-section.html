@@ -1,5 +1,15 @@
 <h2 i18n="@@reviewsSection.title">Reviews</h2>
 
+@if (totalReviews() > 0) {
+  <div class="summary">
+    <span class="summary-rating">{{ averageRating() | number: '1.1-1' }}</span>
+    <div class="summary-meta">
+      <app-rating-stars [rating]="averageRating()" />
+      <span i18n="@@reviewsSection.reviewCount">{{ totalReviews() }} reviews</span>
+    </div>
+  </div>
+}
+
 @if (isFormOpen()) {
   <app-review-form
     [review]="myReview()"
@@ -10,29 +20,33 @@
   />
 } @else if (isAuthenticated()) {
   @if (myReview(); as mine) {
-    <div class="my-review">
-      <div class="review-header">
-        <span class="username" i18n="@@reviewsSection.yourReview">Your review</span>
+    <div class="review-card my-review">
+      <span class="avatar" aria-hidden="true">{{ initials(mine.username) }}</span>
+      <div class="review-body">
+        <div class="review-header">
+          <span class="username" i18n="@@reviewsSection.yourReview">Your review</span>
+        </div>
         <app-rating-stars [rating]="mine.rating" />
-      </div>
-      <p class="comment">{{ mine.comment }}</p>
-      <div class="actions">
-        <button mat-button type="button" (click)="openForm.emit()" i18n="@@reviewsSection.edit">
-          Edit
-        </button>
-        <button
-          mat-button
-          type="button"
-          (click)="deleteReview.emit()"
-          i18n="@@reviewsSection.delete"
-        >
-          Delete
-        </button>
+        <p class="comment">{{ mine.comment }}</p>
+        <div class="actions">
+          <button mat-button type="button" (click)="openForm.emit()" i18n="@@reviewsSection.edit">
+            Edit
+          </button>
+          <button
+            mat-button
+            type="button"
+            (click)="deleteReview.emit()"
+            i18n="@@reviewsSection.delete"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   } @else {
     <button
       mat-stroked-button
+      class="pill"
       type="button"
       (click)="openForm.emit()"
       i18n="@@reviewsSection.writeReview"
@@ -61,13 +75,16 @@
 } @else {
   <ul>
     @for (review of otherReviews(); track review.id) {
-      <li>
-        <div class="review-header">
-          <span class="username">{{ review.username }}</span>
+      <li class="review-card">
+        <span class="avatar" aria-hidden="true">{{ initials(review.username) }}</span>
+        <div class="review-body">
+          <div class="review-header">
+            <span class="username">{{ review.username }}</span>
+            <span class="date">{{ review.createdAt | date: 'mediumDate' }}</span>
+          </div>
           <app-rating-stars [rating]="review.rating" />
-          <span class="date">{{ review.createdAt | date: 'mediumDate' }}</span>
+          <p class="comment">{{ review.comment }}</p>
         </div>
-        <p class="comment">{{ review.comment }}</p>
       </li>
     }
   </ul>

@@ -8,13 +8,26 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [MatButtonModule, MatProgressSpinnerModule],
   template: `
     @if (hasMore()) {
-      <button mat-stroked-button type="button" [disabled]="isLoading()" (click)="loadMore.emit()">
+      <button
+        mat-stroked-button
+        class="pill"
+        type="button"
+        [disabled]="isLoading()"
+        (click)="loadMore.emit()"
+      >
         @if (isLoading()) {
           <mat-progress-spinner diameter="20" mode="indeterminate" />
         } @else {
           <span i18n="@@cursorLoadMore.label">Load more</span>
         }
       </button>
+    }
+  `,
+  styles: `
+    .pill {
+      border-radius: var(--mat-sys-corner-full);
+      height: 2.75rem;
+      padding: 0 1.5rem;
     }
   `,
 })

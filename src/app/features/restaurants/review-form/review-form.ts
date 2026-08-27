@@ -38,7 +38,7 @@ const RATINGS = [1, 2, 3, 4, 5] as const;
     form {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 1rem;
       max-width: 24rem;
     }
 

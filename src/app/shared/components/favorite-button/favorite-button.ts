@@ -19,6 +19,7 @@ const HEART_PATH =
       <button
         type="button"
         class="favorite-button"
+        [class.lg]="size() === 'lg'"
         [class.favorited]="isFavorited()"
         [attr.aria-pressed]="isFavorited()"
         [attr.aria-label]="isFavorited() ? unfavoriteLabel : favoriteLabel"
@@ -29,6 +30,7 @@ const HEART_PATH =
     } @else {
       <a
         class="favorite-button"
+        [class.lg]="size() === 'lg'"
         [routerLink]="['/login']"
         [queryParams]="{ returnUrl: loginReturnUrl() }"
         [attr.aria-label]="favoriteLabel"
@@ -50,12 +52,24 @@ const HEART_PATH =
       padding: 0;
     }
 
+    .favorite-button.lg {
+      width: 2.75rem;
+      height: 2.75rem;
+      background-color: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 2px 10px rgb(var(--app-ink-rgb) / 18%);
+    }
+
     svg {
       width: 1.1rem;
       height: 1.1rem;
       fill: none;
       stroke: var(--mat-sys-on-surface);
       stroke-width: 1.8;
+    }
+
+    .lg svg {
+      width: 1.35rem;
+      height: 1.35rem;
     }
 
     .favorited {
@@ -72,6 +86,8 @@ export class FavoriteButton {
   readonly isFavorited = input.required<boolean>();
   readonly isAuthenticated = input.required<boolean>();
   readonly loginReturnUrl = input<string>('/');
+  /** `'lg'` for a hero-image overlay (`RestaurantHero`); `'sm'` (default) for a card corner (`RestaurantCard`). */
+  readonly size = input<'sm' | 'lg'>('sm');
 
   readonly toggled = output<void>();
 

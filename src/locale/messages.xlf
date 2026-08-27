@@ -699,7 +699,7 @@
     </unit>
     <unit id="menuSection.unavailable">
       <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.html:19,21</note>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.html:26,28</note>
       </notes>
       <segment>
         <source>(Unavailable)</source>
@@ -707,7 +707,7 @@
     </unit>
     <unit id="menuSection.emptyMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:83</note>
+        <note category="location">src/app/features/restaurants/menu-section/menu-section.ts:134</note>
       </notes>
       <segment>
         <source>This restaurant hasn&apos;t added a menu yet.</source>
@@ -723,7 +723,7 @@
     </unit>
     <unit id="restaurantDetailPage.metaTitle">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:124</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:127</note>
       </notes>
       <segment>
         <source><ph id="0" equiv="name" disp="restaurant.name"/> | Restaurant Directory</source>
@@ -731,7 +731,7 @@
     </unit>
     <unit id="restaurantDetailPage.deleteReviewTitle">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:179</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:182</note>
       </notes>
       <segment>
         <source>Delete your review?</source>
@@ -739,7 +739,7 @@
     </unit>
     <unit id="restaurantDetailPage.deleteReviewMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:180</note>
+        <note category="location">src/app/features/restaurants/restaurant-detail-page/restaurant-detail-page.ts:183</note>
       </notes>
       <segment>
         <source>This can&apos;t be undone.</source>
@@ -843,18 +843,42 @@
     </unit>
     <unit id="restaurantHero.reviewCount">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:11,12</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:22,23</note>
       </notes>
       <segment>
-        <source> (<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/> reviews) </source>
+        <source>(<ph id="0" equiv="INTERPOLATION" disp="{{ restaurant().totalReviews }}"/> reviews)</source>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.addressLabel">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:42,44</note>
+      </notes>
+      <segment>
+        <source>Address</source>
       </segment>
     </unit>
     <unit id="restaurantHero.openInMaps">
       <notes>
-        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:33,36</note>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:49,53</note>
       </notes>
       <segment>
         <source> Open in Maps </source>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.hoursLabel">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:56,57</note>
+      </notes>
+      <segment>
+        <source>Hours</source>
+      </segment>
+    </unit>
+    <unit id="restaurantHero.contactLabel">
+      <notes>
+        <note category="location">src/app/features/restaurants/restaurant-hero/restaurant-hero.html:64,66</note>
+      </notes>
+      <segment>
+        <source>Contact</source>
       </segment>
     </unit>
     <unit id="restaurantListPage.title">
@@ -929,9 +953,17 @@
         <source>Reviews</source>
       </segment>
     </unit>
+    <unit id="reviewsSection.reviewCount">
+      <notes>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:8,9</note>
+      </notes>
+      <segment>
+        <source><ph id="0" equiv="INTERPOLATION" disp="{{ totalReviews() }}"/> reviews</source>
+      </segment>
+    </unit>
     <unit id="reviewsSection.yourReview">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:15,16</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:27,29</note>
       </notes>
       <segment>
         <source>Your review</source>
@@ -939,7 +971,7 @@
     </unit>
     <unit id="reviewsSection.edit">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:21,23</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:33,35</note>
       </notes>
       <segment>
         <source> Edit </source>
@@ -947,7 +979,7 @@
     </unit>
     <unit id="reviewsSection.delete">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:29,31</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:41,43</note>
       </notes>
       <segment>
         <source> Delete </source>
@@ -955,7 +987,7 @@
     </unit>
     <unit id="reviewsSection.writeReview">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:40,45</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:54,59</note>
       </notes>
       <segment>
         <source> Write a review </source>
@@ -963,7 +995,7 @@
     </unit>
     <unit id="reviewsSection.loginPrompt">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:50,55</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:64,69</note>
       </notes>
       <segment>
         <source> Log in to write a review </source>
@@ -971,7 +1003,7 @@
     </unit>
     <unit id="reviewsSection.loading">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:58,59</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.html:72,73</note>
       </notes>
       <segment>
         <source>Loading reviews…</source>
@@ -979,7 +1011,7 @@
     </unit>
     <unit id="reviewsSection.emptyMessage">
       <notes>
-        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.ts:108</note>
+        <note category="location">src/app/features/restaurants/reviews-section/reviews-section.ts:176</note>
       </notes>
       <segment>
         <source>No reviews yet.</source>
@@ -1075,7 +1107,7 @@
     </unit>
     <unit id="cursorLoadMore.label">
       <notes>
-        <note category="location">src/app/shared/components/cursor-load-more/cursor-load-more.ts:15,18</note>
+        <note category="location">src/app/shared/components/cursor-load-more/cursor-load-more.ts:21,24</note>
       </notes>
       <segment>
         <source>Load more</source>
@@ -1099,7 +1131,7 @@
     </unit>
     <unit id="favoriteButton.add">
       <notes>
-        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:79</note>
+        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:95</note>
       </notes>
       <segment>
         <source>Add to favorites</source>
@@ -1107,7 +1139,7 @@
     </unit>
     <unit id="favoriteButton.remove">
       <notes>
-        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:80</note>
+        <note category="location">src/app/shared/components/favorite-button/favorite-button.ts:96</note>
       </notes>
       <segment>
         <source>Remove from favorites</source>
