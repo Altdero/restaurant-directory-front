@@ -58,9 +58,13 @@ const HEART_PATH =
       stroke-width: 1.8;
     }
 
+    .favorited {
+      background-color: var(--mat-sys-primary);
+    }
+
     .favorited svg {
-      fill: var(--mat-sys-primary);
-      stroke: var(--mat-sys-primary);
+      fill: #fff;
+      stroke: #fff;
     }
   `,
 })

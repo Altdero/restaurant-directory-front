@@ -26,7 +26,8 @@ import { Component } from '@angular/core';
     .skeleton-card {
       border-radius: var(--mat-sys-corner-medium);
       overflow: hidden;
-      background-color: var(--mat-sys-surface-container);
+      background-color: var(--mat-sys-surface-container-low);
+      box-shadow: var(--app-card-shadow);
     }
 
     .image {

@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Restaurant } from '@core/models/restaurant.model';
 import { CategoryChips } from '@shared/components/category-chips/category-chips';
@@ -11,6 +11,7 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
   selector: 'app-restaurant-card',
   imports: [
     NgOptimizedImage,
+    DecimalPipe,
     RouterLink,
     RatingStars,
     PriceRangeBadge,
@@ -23,6 +24,7 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
       border-radius: var(--mat-sys-corner-medium);
       overflow: hidden;
       background-color: var(--mat-sys-surface-container-low);
+      box-shadow: var(--app-card-shadow);
     }
 
     .card-link {
@@ -33,6 +35,32 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
 
     .cover-wrap {
       position: relative;
+    }
+
+    .cover-overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 4rem;
+      background: linear-gradient(
+        to top,
+        rgb(var(--app-ink-rgb) / 50%),
+        rgb(var(--app-ink-rgb) / 0%)
+      );
+    }
+
+    .rating-badge {
+      position: absolute;
+      top: 0.625rem;
+      left: 0.625rem;
+      height: 1.625rem;
+      padding: 0 0.625rem;
+      border-radius: var(--mat-sys-corner-full);
+      background: rgb(var(--app-ink-rgb) / 60%);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font: var(--mat-sys-label-medium);
+      display: flex;
+      align-items: center;
     }
 
     .heart-overlay {
@@ -56,7 +84,7 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
       padding: 0.75rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.625rem;
     }
 
     h3 {
@@ -74,11 +102,23 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      padding-top: 0.625rem;
+      border-top: 1px solid var(--mat-sys-outline-variant);
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
     }
 
     .review-count {
       font: var(--mat-sys-body-small);
       color: var(--mat-sys-on-surface-variant);
+    }
+
+    .price {
+      margin-left: auto;
     }
   `,
 })

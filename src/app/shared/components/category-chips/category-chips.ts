@@ -28,10 +28,11 @@ import { Category } from '@core/models/category.model';
 
     li {
       font: var(--mat-sys-label-small);
-      background-color: var(--mat-sys-surface-container);
-      color: var(--mat-sys-on-surface-variant);
+      font-weight: 500;
+      background-color: var(--app-chip-teal-bg);
+      color: var(--app-chip-teal-fg);
       border-radius: var(--mat-sys-corner-full);
-      padding: 0.125rem 0.625rem;
+      padding: 0.25rem 0.625rem;
     }
   `,
 })

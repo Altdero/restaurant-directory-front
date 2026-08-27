@@ -13,7 +13,8 @@ import { PriceRange } from '@core/models/restaurant.model';
   styles: `
     .price-range-badge {
       font: var(--mat-sys-label-medium);
-      color: var(--mat-sys-on-surface-variant);
+      font-weight: 600;
+      color: var(--mat-sys-primary);
     }
   `,
 })

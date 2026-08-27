@@ -33,10 +33,27 @@ $primary-light: #c2410c;
 $muted-light: #78716c;
 $border-light: #e7e0d6;
 
+// A fourth, more visually severe instance of the same drift, only caught by
+// actually rendering `RestaurantCard` (a real screenshot, not the Sass
+// source): the generator's light-scheme "container" surfaces — the role
+// every card/placeholder background in the app reads — land as saturated
+// pink (`surface-container-low: #fff1ed`, `-high: #fce3db`, confirmed
+// against the compiled build), nowhere near the reference's near-white
+// card (`#FFFDFA`) and pale tan placeholder swatch. `surface-variant` gets
+// the same placeholder-tan value — it's the token `ImageUploader`'s empty
+// state already reads, an older M2-era alias for the same "muted surface"
+// role `surface-container-high` fills for a placeholder.
+$surface-container-light: #fffdfa;
+$surface-container-high-light: #f0eae1;
+
 @mixin light-role-overrides {
   --mat-sys-primary: #{$primary-light};
   --mat-sys-on-surface-variant: #{$muted-light};
   --mat-sys-outline-variant: #{$border-light};
+  --mat-sys-surface-container: #{$surface-container-light};
+  --mat-sys-surface-container-low: #{$surface-container-light};
+  --mat-sys-surface-container-high: #{$surface-container-high-light};
+  --mat-sys-surface-variant: #{$surface-container-high-light};
 }
 
 // Design-system tokens from PLAN.md § Option A visual restyle

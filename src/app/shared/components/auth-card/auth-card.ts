@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
   imports: [MatCardModule],
   template: `
     <mat-card class="auth-card">
-      <mat-card-header>
+      <mat-card-header class="auth-card-header">
         <mat-card-title>{{ title() }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -24,8 +24,14 @@ import { MatCardModule } from '@angular/material/card';
   `,
   styles: `
     .auth-card {
-      max-width: 24rem;
+      max-width: 27.5rem;
       margin: 2rem auto;
+      border-radius: var(--mat-sys-corner-large);
+      box-shadow: var(--app-card-shadow);
+
+      .auth-card-header {
+        padding-bottom: 1rem;
+      }
     }
   `,
 })

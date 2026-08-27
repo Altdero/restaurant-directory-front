@@ -1,8 +1,15 @@
 <div class="image-uploader">
   @if (imageUrl()) {
-    <img class="preview" [ngSrc]="imageUrl()" width="200" height="120" alt="" />
+    <img
+      class="preview"
+      [class.circle]="shape() === 'circle'"
+      [ngSrc]="imageUrl()"
+      width="200"
+      height="120"
+      alt=""
+    />
   } @else {
-    <div class="preview placeholder" aria-hidden="true"></div>
+    <div class="preview placeholder" [class.circle]="shape() === 'circle'" aria-hidden="true"></div>
   }
 
   <label class="upload-button" [class.disabled]="isUploading()">

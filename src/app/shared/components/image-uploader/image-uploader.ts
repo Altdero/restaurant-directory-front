@@ -30,7 +30,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       width: 6rem;
       height: 4rem;
       object-fit: cover;
-      border-radius: 4px;
+      border-radius: var(--mat-sys-corner-small);
+    }
+
+    .preview.circle {
+      width: 5.5rem;
+      height: 5.5rem;
+      border-radius: var(--mat-sys-corner-full);
     }
 
     .preview.placeholder {
@@ -41,9 +47,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--mat-sys-outline);
-      border-radius: 4px;
+      height: 2.5rem;
+      padding: 0 1.25rem;
+      border: 1px solid var(--mat-sys-primary);
+      border-radius: var(--mat-sys-corner-full);
+      color: var(--mat-sys-primary);
       cursor: pointer;
       font: var(--mat-sys-label-large);
     }
@@ -61,6 +69,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class ImageUploader {
   readonly imageUrl = input<string>('');
   readonly isUploading = input<boolean>(false);
+  /** `'circle'` for an avatar-style preview (`ProfileForm`); `'rect'` (default) for a cover-photo thumbnail. */
+  readonly shape = input<'rect' | 'circle'>('rect');
 
   readonly fileSelected = output<File>();
 

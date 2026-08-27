@@ -6,6 +6,10 @@
       } @else {
         <div class="cover placeholder" aria-hidden="true"></div>
       }
+      <div class="cover-overlay" aria-hidden="true"></div>
+      <div class="rating-badge" aria-hidden="true">
+        ★ {{ restaurant().averageRating | number: '1.1-1' }}
+      </div>
     </a>
     <app-favorite-button
       class="heart-overlay"
@@ -21,15 +25,17 @@
       <h3>{{ restaurant().name }}</h3>
       <p class="location">{{ restaurant().city }}</p>
 
-      <div class="meta">
-        <app-rating-stars [rating]="restaurant().averageRating" />
-        <span class="review-count" i18n="@@restaurantCard.reviewCount">
-          ({{ restaurant().totalReviews }})
-        </span>
-        <app-price-range-badge [priceRange]="restaurant().priceRange" />
-      </div>
-
       <app-category-chips [categories]="restaurant().categories" />
+
+      <div class="meta">
+        <span class="rating">
+          <app-rating-stars [rating]="restaurant().averageRating" />
+          <span class="review-count" i18n="@@restaurantCard.reviewCount">
+            ({{ restaurant().totalReviews }})
+          </span>
+        </span>
+        <app-price-range-badge class="price" [priceRange]="restaurant().priceRange" />
+      </div>
     </div>
   </a>
 </article>

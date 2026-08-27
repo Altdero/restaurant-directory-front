@@ -45,6 +45,7 @@ import { MatButtonModule } from '@angular/material/button';
       justify-content: center;
       gap: 0.5rem;
       font: var(--mat-sys-body-medium);
+      color: var(--mat-sys-on-surface-variant);
     }
   `,
 })
