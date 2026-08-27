@@ -41,7 +41,7 @@ const SKELETON_COUNT = [0, 1, 2, 3, 4, 5];
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-      gap: 1rem;
+      gap: 1.5rem;
     }
   `,
 })

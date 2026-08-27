@@ -228,7 +228,11 @@ Verified against the live backend for what doesn't need authenticated credential
 
 `FavoritesPage` reuses `RestaurantGrid` rather than a new list component — needed one small, backward-compatible widening: `RestaurantGrid.emptyMessage` became an optional override `input<string>()` (falling back to the existing generic "No restaurants match your filters." text) so this page can show its own "You haven't added any favorites yet." instead.
 
-## E2E testing (mocked suite)
+### Favorites page restyle (commit 26)
+
+Nearly free once commits 23–24 landed: a screenshot with a real favorited restaurant confirmed `FavoriteButton`'s solid-terracotta favorited state (added in commit 23) renders correctly here, since this page is the one place every card is always in that state. Two changes: `h1` sized to `2.375rem` — the section-header size the reference uses consistently for `/restaurants`, `/favorites`, `/my/restaurants` (established here, reused as-is in commits 27 and 31) — and `RestaurantGrid`'s card gap bumped from `1rem` to `1.5rem` to match the reference's `24px` grid gutter. `RestaurantGrid` is a `features/restaurants/` component, not one of commit 23's `shared/components/` list, but it's shared by `/`, `/restaurants`, and `/favorites`, so the fix benefits all three retroactively.
+
+Deliberately **not** added: a "N saved places" count subtitle under the heading, even though the reference shows one on this exact page and `favoritesCount()` is already computed and available. Every existing count-with-a-number display in this app (`PaginatorBar`'s "Page N of M", `RestaurantCard`'s review-count parens) is phrased to avoid a pluralizing noun, sidestepping ICU plural-rule i18n entirely; "N saved places" doesn't have that luxury ("1 saved place" vs "6 saved places"). Adding real ICU-plural i18n for one subtitle, only on this page, was more scope than a pure restyle commit should carry — left out rather than half-built.
 
 `playwright.config.ts` + `e2e/` (`fixtures/`, `mocks/`, `specs/`) — a mocked Playwright suite covering the flows commits 10–14 shipped, backfilled as its own commit rather than landing per-commit as AGENTS.md's workflow rules call for (an unrecorded process gap, distinct from the `ng serve` gap below, which is a deliberate, documented deferral).
 

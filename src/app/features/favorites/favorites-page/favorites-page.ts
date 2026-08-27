@@ -28,6 +28,11 @@ const PAGE_SIZE = 10;
       max-width: 75rem;
       margin: 0 auto;
     }
+
+    h1 {
+      font-size: 2.375rem;
+      margin: 0;
+    }
   `,
 })
 export class FavoritesPage {
