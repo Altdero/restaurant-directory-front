@@ -41,9 +41,17 @@ import { ErrorState } from '@shared/components/error-state/error-state';
   templateUrl: './restaurant-form-page.html',
   styles: `
     .restaurant-form-page {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
       max-width: 40rem;
       margin: 0 auto;
       padding: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.375rem;
+      margin: 0;
     }
   `,
 })
