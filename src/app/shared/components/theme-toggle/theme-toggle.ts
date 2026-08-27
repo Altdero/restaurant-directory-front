@@ -32,6 +32,20 @@ import { ThemeService } from '@core/services/theme/theme.service';
       }
     </button>
   `,
+  styles: `
+    button {
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--mat-sys-corner-full);
+      background: none;
+      color: var(--mat-sys-on-surface-variant);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  `,
 })
 export class ThemeToggle {
   protected readonly theme = inject(ThemeService);

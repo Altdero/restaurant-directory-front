@@ -24,6 +24,17 @@ const LOCALE_LABELS: Record<Locale, string> = { es: 'Español', en: 'English' };
       {{ alternateLabel }}
     </a>
   `,
+  styles: `
+    a {
+      font: var(--mat-sys-label-large);
+      color: var(--mat-sys-on-surface-variant);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--mat-sys-primary);
+    }
+  `,
 })
 export class LanguageSwitcher {
   private readonly document = inject(DOCUMENT);
