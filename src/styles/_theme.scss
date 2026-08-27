@@ -45,6 +45,8 @@ html {
     )
   );
   @include tokens.surface-overrides(tokens.$surface-light, tokens.$ink-light);
+  @include tokens.light-role-overrides;
+  @include tokens.app-tokens;
 
   @media (prefers-color-scheme: dark) {
     @include _color-scheme(dark);
@@ -54,6 +56,7 @@ html {
   &[data-theme='light'] {
     @include _color-scheme(light);
     @include tokens.surface-overrides(tokens.$surface-light, tokens.$ink-light);
+    @include tokens.light-role-overrides;
   }
 
   &[data-theme='dark'] {

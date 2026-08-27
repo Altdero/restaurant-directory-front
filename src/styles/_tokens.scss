@@ -19,3 +19,50 @@ $ink-dark: $surface-light;
   --mat-sys-surface: #{$surface};
   --mat-sys-on-surface: #{$on-surface};
 }
+
+// Same rationale as surface/ink above, for three more roles found to drift
+// during the Option A visual restyle (PLAN.md): the M3 generator's computed
+// light-scheme values (`--mat-sys-primary: #ac3400`, `-on-surface-variant:
+// #59413a`, `-outline-variant: #e1bfb5` — confirmed against a real compiled
+// build, not assumed) are all noticeably duller/browner than the approved
+// palette. Light-mode only, deliberately: dark mode keeps whatever the
+// generator already produces for these roles, unchanged and unexamined here,
+// consistent with `$surface-dark`/`$ink-dark` above not attempting their own
+// hand-picked dark variant either.
+$primary-light: #c2410c;
+$muted-light: #78716c;
+$border-light: #e7e0d6;
+
+@mixin light-role-overrides {
+  --mat-sys-primary: #{$primary-light};
+  --mat-sys-on-surface-variant: #{$muted-light};
+  --mat-sys-outline-variant: #{$border-light};
+}
+
+// Design-system tokens from PLAN.md § Option A visual restyle
+// (design-brief.md / design-reference.html, both gitignored, local-only —
+// see the plan) that the M3 generator has no equivalent for: everywhere else
+// a color is needed, an existing `--mat-sys-*` role is reused instead (so it
+// keeps flipping correctly in dark mode), and these are the only genuinely
+// new values. They are light-mode-tuned only — `$ink-light`'s RGB channels,
+// not a scheme-aware token — which is a deliberate, documented gap rather
+// than a new dark theme: applied once, unconditionally, not swapped per
+// scheme the way `surface-overrides` above is.
+// Space-separated (not comma) so consumers can drop it straight into the
+// modern `rgb(<channels> / <alpha>)` syntax, e.g. `rgb(var(--app-ink-rgb) / 60%)`
+// — a plain 4-arg `rgba(var(--x), a)` doesn't work, since the substituted
+// custom property occupies a single argument slot rather than three.
+$ink-light-rgb: 28 25 23; // #1c1917 as R G B
+// `#{'...'}` (not a bare `rgb(...)` call) so Sass treats this as an opaque
+// string rather than trying to parse `$ink-light-rgb`'s space-list as the
+// individual r/g/b arguments of its own color function.
+$card-shadow: 0 2px 10px #{'rgb(#{$ink-light-rgb} / 5%)'};
+$chip-teal-bg: #e6f2f1;
+$chip-teal-fg: #0f766e; // matches $tertiary-palette's seed; called out explicitly since chip contrast was hand-checked against this bg, not re-derived from the generated palette
+
+@mixin app-tokens {
+  --app-ink-rgb: #{$ink-light-rgb};
+  --app-card-shadow: #{$card-shadow};
+  --app-chip-teal-bg: #{$chip-teal-bg};
+  --app-chip-teal-fg: #{$chip-teal-fg};
+}
