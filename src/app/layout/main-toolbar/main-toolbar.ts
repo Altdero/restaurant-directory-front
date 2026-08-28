@@ -6,6 +6,7 @@ import { LanguageSwitcher } from '@shared/components/language-switcher/language-
 import { ThemeToggle } from '@shared/components/theme-toggle/theme-toggle';
 
 import { UserMenu } from '../user-menu/user-menu';
+import { AppLogo } from '@shared/components/app-logo/app-logo';
 
 /**
  * Gated on `authStore.initialized()` so the toolbar doesn't flash
@@ -24,10 +25,11 @@ import { UserMenu } from '../user-menu/user-menu';
     LanguageSwitcher,
     ThemeToggle,
     UserMenu,
+    AppLogo,
   ],
   template: `
     <mat-toolbar>
-      <a routerLink="/" class="wordmark" i18n="@@nav.wordmark">Restaurant Directory</a>
+      <app-logo />
       <a routerLink="/restaurants" routerLinkActive="active" i18n="@@nav.restaurants">
         Restaurants
       </a>
@@ -51,27 +53,19 @@ import { UserMenu } from '../user-menu/user-menu';
       border-bottom: 1px solid var(--mat-sys-outline-variant);
     }
 
-    a:not(.wordmark) {
+    a {
       color: var(--mat-sys-on-surface);
       text-decoration: none;
       font: var(--mat-sys-label-large);
     }
 
-    a:not(.wordmark):hover {
+    a:hover {
       color: var(--mat-sys-primary);
     }
 
     a.active {
       color: var(--mat-sys-primary);
       font-weight: 600;
-    }
-
-    .wordmark {
-      font-family: 'Fraunces Variable', serif;
-      font-weight: 700;
-      font-size: 1.375rem;
-      text-decoration: none;
-      color: var(--mat-sys-on-surface);
     }
 
     .spacer {
