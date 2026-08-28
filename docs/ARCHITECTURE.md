@@ -236,6 +236,16 @@ The smallest of the page-level restyle commits: a screenshot of the existing pag
 
 `RestaurantCard` doesn't yet link to `/restaurants/:id` — that route lands in commit 12; same reasoning as `MainToolbar` deferring auth links in commit 9 until `/login`/`/register` existed.
 
+### Restaurant list layout follow-up (commit 37)
+
+A direct comparison against `design-reference.html`'s `/restaurants` frame (not a screenshot-and-guess pass) found two layout gaps beyond the already-fixed field shape (commit 36):
+
+- **`RestaurantFilters`** — the search field wasn't visually separated from the dropdown filters; the reference gives it its own full-width row above a separate row of the other four fields. Fixed by wrapping the search field in its own `.restaurant-filters-search-bar` container and the rest in `.restaurant-filters-others`, a CSS grid that's single-column by default and switches to `repeat(4, 1fr)` at `min-width: 1024px` — matching the reference's "search on its own line, four fields in a row" desktop layout while staying single-column (and full-bleed per field) below that.
+- **`RestaurantGrid`** — `repeat(auto-fill, minmax(16rem, 1fr))` is fluid at _any_ width, so a wide desktop monitor could render more than the reference's fixed 3-column layout. Changed to a single column by default, switching to `repeat(auto-fill, minmax(calc((100% - 16rem) / 3), 1fr))` at `min-width: 1024px` — a 3-column layout at typical desktop widths without an arbitrary hard column count that would look wrong on an unusually narrow or wide "desktop" viewport.
+- `RestaurantListPage`'s `h1` picked up `margin: 1rem 0` (was `0`) and `line-height: 1`, matching the reference's header spacing more closely.
+
+Verified: `ng lint && npm run build` clean, no bundle-budget warning (no new Material modules, pure CSS); `npm test` — 215/215 pass; `npm run e2e` — 39/40 pass, the one failure the already-documented `restaurant-listing.spec.ts` flake, reconfirmed clean on a solo rerun (6/6 pass). Manual check: full-page screenshots of `/en/restaurants` at 1280px and 390px confirmed the 3-column desktop grid, the search-bar-then-4-field-row filter layout, and no mobile horizontal overflow.
+
 ## Restaurant detail
 
 `/restaurants/:id` (`RestaurantDetailPage`) is display-only in this commit — `RestaurantHero`, `MenuSection`, `ReviewsSection`. Creating/editing/deleting a review (`ReviewForm`) is commit 13's job, per PLAN.md's commit plan.

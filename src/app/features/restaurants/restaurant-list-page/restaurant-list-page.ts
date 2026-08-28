@@ -46,7 +46,8 @@ function toPage(value: unknown): number {
 
     h1 {
       font-size: 2.375rem;
-      margin: 0;
+      line-height: 1;
+      margin: 1rem 0;
     }
   `,
 })

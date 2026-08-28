@@ -40,8 +40,13 @@ const SKELETON_COUNT = [0, 1, 2, 3, 4, 5];
   styles: `
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+      grid-template-columns: 1fr;
       gap: 1.5rem;
+      width: 100%;
+
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(auto-fill, minmax(calc((100% - 16rem) / 3), 1fr));
+      }
     }
   `,
 })

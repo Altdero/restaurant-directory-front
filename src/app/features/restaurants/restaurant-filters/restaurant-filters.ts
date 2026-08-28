@@ -39,15 +39,41 @@ const RATINGS = [1, 2, 3, 4, 5] as const;
   styles: `
     .restaurant-filters {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: flex-start;
       gap: 0.75rem;
+    }
+
+    .restaurant-filters-search-bar {
+      display: flex;
+      width: 100%;
+
+      .search-bar {
+        width: 100%;
+      }
+    }
+
+    .restaurant-filters-others {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      width: 100%;
+
+      mat-form-field {
+        width: 100%;
+      }
     }
 
     .actions {
       display: flex;
       gap: 0.5rem;
       padding-top: 0.5rem;
+    }
+
+    @media (min-width: 1024px) {
+      .restaurant-filters-others {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   `,
 })
