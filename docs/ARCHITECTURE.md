@@ -162,6 +162,14 @@ The authenticated branch inside the mobile panel embeds `<app-user-menu>` as-is 
 
 Verified: `ng lint && npm run build` clean; `npm test` — 215/215 pass, no new specs (matches this project's no-double-coverage convention — `main-toolbar.ts` has no spec today, either before or after); `npm run e2e` — 40/40 pass unmodified, since the suite runs against `devices['Desktop Chrome']` where the pre-existing desktop row (and its `Log in`/`Register` selectors) is unaffected. Re-ran the same 390×844 Playwright screenshot check post-fix: `scrollWidth` is exactly 390 on `/`, `/restaurants`, and `/login` (no horizontal overflow), and a screenshot of the opened panel confirmed all four collapsed items (Restaurants, Log in, Register, theme toggle, language switcher) render correctly with no clipping.
 
+### Auth card mobile gutter (commit 35)
+
+Same mobile audit as commit 34 turned up a second, smaller gap: `AuthCard`'s `.auth-card` rule was `max-width: 27.5rem; margin: 2rem auto;` with nothing constraining it below that width. `margin: auto` only produces visible space when the element is narrower than its container — once the viewport itself drops under ~440px the card already fills 100% of the available width, so the auto margins collapse to zero and the card stretches edge-to-edge, losing its rounded corners and shadow entirely (the reference shows a consistent ~20px inset on every mobile auth frame).
+
+Fixed with one added rule: `@media (max-width: 480px) { .auth-card { margin: 1.25rem; } }`, giving the card a real inset below that width instead of relying on auto-centering math that only works above it.
+
+Verified: `ng lint && npm run build` clean; `npm test` — 215/215 pass, no template/logic changes so no new specs needed. Manual check: rebuilt, served via `serve:ssr:restaurant-directory`, loaded `/en/login` at 390×844 and read `.auth-card`'s bounding box directly (`{ x: 20, width: 350 }` — a 20px gutter on both sides, matching the reference) rather than eyeballing the screenshot alone.
+
 ## Models
 
 Each resource has one `*.model.ts` file in `core/models/` holding three things together: the raw `*Dto` interface (snake_case, matching the API's wire format exactly — decimals and dates as strings), the app-facing model (camelCase, decimals parsed to `number`, timestamps parsed to `Date`), and a `to*()` mapper function between them. Resources whose write shape differs from their read shape (`RestaurantWrite` vs. `Restaurant`, `ReviewCreate`/`ReviewUpdate` vs. `Review`) get separate write types rather than one interface with optional fields — see `docs/API.md` for which resources this applies to.

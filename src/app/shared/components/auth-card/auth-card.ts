@@ -33,6 +33,15 @@ import { MatCardModule } from '@angular/material/card';
         padding-bottom: 1rem;
       }
     }
+
+    /* Below this width, "margin: auto" has no room to produce a visible
+       gutter, so the card stretches edge-to-edge and loses its corners and
+       shadow — force a real inset instead. */
+    @media (max-width: 480px) {
+      .auth-card {
+        margin: 1.25rem;
+      }
+    }
   `,
 })
 export class AuthCard {
