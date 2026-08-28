@@ -1,0 +1,42 @@
+// Global Option A shape for `mat-form-field` (PLAN.md § Option A visual
+// restyle — design-brief.md's field spec: 52px height, 8px radius). Neither
+// value differs between light/dark or needs a new custom property — both
+// map onto the official `mat.form-field-overrides()` token API, so this is
+// a component-shape override, not a design token, and applies unconditionally
+// (unlike `_tokens.scss`'s light-mode-only color corrections).
+//
+// The spec's third property, a cream field *fill*, is deliberately not
+// applied here: outlined fields (the only appearance this app uses) have no
+// container-color token at all in Angular Material's M3 tokens — confirmed
+// by reading `@angular/material/form-field/_m3-form-field.scss`, where only
+// the *filled* variant defines `form-field-filled-container-color`. Faking
+// one by overriding the internal `.mat-mdc-text-field-wrapper` DOM class
+// would pierce a private implementation detail for a difference that reads
+// as negligible in practice anyway — every field already sits on a surface
+// that's the same cream/near-white the spec asks for.
+@use '@angular/material' as mat;
+
+@mixin overrides {
+  @include mat.form-field-overrides(
+    (
+      container-height: 52px,
+      // Material's own density scale pairs each container-height step with a
+      // matched vertical-padding step (see `_m3-form-field.scss`:
+      // 56px/16px, 52px/14px, 48px/12px, ...) — without this, the infix's
+      // unpaired 16px default padding pushes content past the 52px floor
+      // and the box grows back to ~56px anyway.
+      container-vertical-padding: 14px,
+      outlined-container-shape: 8px,
+    )
+  );
+
+  // The token above only drives `.mat-mdc-form-field-infix`'s min-height —
+  // the outlined variant's outer box has its own hardcoded `height: 56px`
+  // in Material's structural CSS (confirmed by reading the compiled build's
+  // inlined component styles; no token references it at all). This is the
+  // only way to actually change it; `.mdc-text-field--outlined` is MDC's
+  // own stable, public class name, not a private/hashed one.
+  .mdc-text-field--outlined {
+    height: 52px;
+  }
+}

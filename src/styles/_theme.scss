@@ -11,6 +11,7 @@
 @use '@angular/material' as mat;
 @use './theme-colors' as theme-colors;
 @use './tokens';
+@use './form-fields';
 
 @mixin _color-scheme($type) {
   @include mat.theme(
@@ -47,6 +48,7 @@ html {
   @include tokens.surface-overrides(tokens.$surface-light, tokens.$ink-light);
   @include tokens.light-role-overrides;
   @include tokens.app-tokens;
+  @include form-fields.overrides;
 
   @media (prefers-color-scheme: dark) {
     @include _color-scheme(dark);
