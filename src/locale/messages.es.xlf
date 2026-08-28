@@ -55,6 +55,12 @@
         <target>Registrarse</target>
       </segment>
     </unit>
+    <unit id="nav.openMenu">
+      <segment>
+        <source>Open menu</source>
+        <target>Abrir menú</target>
+      </segment>
+    </unit>
     <unit id="auth.login.title">
       <segment>
         <source>Log in</source>

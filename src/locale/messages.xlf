@@ -1041,17 +1041,10 @@
         <source>No reviews yet.</source>
       </segment>
     </unit>
-    <unit id="nav.wordmark">
-      <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:30,31</note>
-      </notes>
-      <segment>
-        <source>Restaurant Directory</source>
-      </segment>
-    </unit>
     <unit id="nav.restaurants">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:32,34</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:36,38</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:69,70</note>
       </notes>
       <segment>
         <source> Restaurants </source>
@@ -1059,7 +1052,8 @@
     </unit>
     <unit id="nav.login">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:39,40</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:44,45</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:76,77</note>
       </notes>
       <segment>
         <source>Log in</source>
@@ -1067,10 +1061,19 @@
     </unit>
     <unit id="nav.register">
       <notes>
-        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:40,43</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:45,48</note>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:77,80</note>
       </notes>
       <segment>
         <source>Register</source>
+      </segment>
+    </unit>
+    <unit id="nav.openMenu">
+      <notes>
+        <note category="location">src/app/layout/main-toolbar/main-toolbar.ts:56,58</note>
+      </notes>
+      <segment>
+        <source>Open menu</source>
       </segment>
     </unit>
     <unit id="footer.tagline">
@@ -1111,6 +1114,14 @@
       </notes>
       <segment>
         <source>Log out</source>
+      </segment>
+    </unit>
+    <unit id="nav.wordmark">
+      <notes>
+        <note category="location">src/app/shared/components/app-logo/app-logo.ts:33,36</note>
+      </notes>
+      <segment>
+        <source>Restaurant Directory</source>
       </segment>
     </unit>
     <unit id="confirmDialog.cancel">
