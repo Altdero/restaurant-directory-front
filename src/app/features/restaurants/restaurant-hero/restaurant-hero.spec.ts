@@ -32,12 +32,16 @@ const BASE: Restaurant = {
 };
 
 describe('RestaurantHero', () => {
-  function mapsUrl(restaurant: Restaurant): string {
+  function createFixture(restaurant: Restaurant) {
     TestBed.configureTestingModule({ providers: [provideRouter([])] });
     const fixture = TestBed.createComponent(RestaurantHero);
     fixture.componentRef.setInput('restaurant', restaurant);
     fixture.detectChanges();
-    return fixture.componentInstance['mapsUrl']();
+    return fixture;
+  }
+
+  function mapsUrl(restaurant: Restaurant): string {
+    return createFixture(restaurant).componentInstance['mapsUrl']();
   }
 
   it('links to a coordinate-based Maps search when lat/lng are present', () => {
@@ -51,5 +55,24 @@ describe('RestaurantHero', () => {
       'https://www.google.com/maps/search/?api=1&query=' +
         encodeURIComponent('123 Main St, Mexico City, Mexico'),
     );
+  });
+
+  it('omits the Contact block when phone, email and website are all empty', () => {
+    const fixture = createFixture(BASE);
+
+    expect(fixture.nativeElement.textContent).not.toContain('Contact');
+    expect(fixture.nativeElement.querySelector('a[href^="tel:"]')).toBeNull();
+    expect(fixture.nativeElement.querySelector('a[href^="mailto:"]')).toBeNull();
+  });
+
+  it('renders only the contact fields that are present', () => {
+    const fixture = createFixture({ ...BASE, phone: '+52 55 1234 5678' });
+
+    // The "Open in Maps" link also carries target="_blank", so a count of 1
+    // (not 0) is what proves the website link — the only other one — is absent.
+    expect(fixture.nativeElement.textContent).toContain('Contact');
+    expect(fixture.nativeElement.querySelector('a[href^="tel:"]')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('a[href^="mailto:"]')).toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('a[target="_blank"]').length).toBe(1);
   });
 });

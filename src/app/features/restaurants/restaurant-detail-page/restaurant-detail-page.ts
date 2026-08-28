@@ -11,6 +11,7 @@ import { buildRestaurantJsonLd } from '@core/utils/restaurant-json-ld';
 import { environment } from '@environments/environment';
 import { MenuSection } from '@features/restaurants/menu-section/menu-section';
 import { ReviewFormValue } from '@features/restaurants/review-form/review-form';
+import { RestaurantCover } from '@features/restaurants/restaurant-cover/restaurant-cover';
 import { RestaurantHero } from '@features/restaurants/restaurant-hero/restaurant-hero';
 import { ReviewsSection } from '@features/restaurants/reviews-section/reviews-section';
 import { ConfirmDialog } from '@shared/components/confirm-dialog/confirm-dialog';
@@ -27,7 +28,7 @@ const MENU_ITEM_LIMIT = 100;
 
 @Component({
   selector: 'app-restaurant-detail-page',
-  imports: [RestaurantHero, MenuSection, ReviewsSection, ErrorState],
+  imports: [RestaurantCover, RestaurantHero, MenuSection, ReviewsSection, ErrorState],
   templateUrl: './restaurant-detail-page.html',
   styles: `
     .restaurant-detail-page {

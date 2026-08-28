@@ -32,7 +32,7 @@ function dayLabel(day: WeekDay): string {
           <tr>
             <th scope="row">{{ dayLabel(day) }}</th>
             @if (openingHours()[day]; as hours) {
-              <td>{{ hours.open }}–{{ hours.close }}</td>
+              <td>{{ hours.open }} – {{ hours.close }}</td>
             } @else {
               <td i18n="@@openingHours.closed">Closed</td>
             }

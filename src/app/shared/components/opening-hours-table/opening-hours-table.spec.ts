@@ -17,7 +17,7 @@ describe('OpeningHoursTable', () => {
 
   it('shows the hours for a day present in the schedule', () => {
     const result = rows({ mon: { open: '09:00', close: '22:00' } });
-    expect(result[0]).toBe('Monday 09:00–22:00');
+    expect(result[0]).toBe('Monday 09:00 – 22:00');
   });
 
   it('shows Closed for a day absent from the schedule, not an error', () => {
