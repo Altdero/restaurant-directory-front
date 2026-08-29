@@ -16,7 +16,13 @@ const STAR_PATH = 'M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.6l-6.2 3.6 1.6-6.9
           <path [attr.d]="STAR_PATH" [attr.transform]="'translate(' + position * 24 + ',0)'" />
         }
       </svg>
-      <svg class="fill" [style.width.%]="fillPercent()" viewBox="0 0 120 24" aria-hidden="true">
+      <svg
+        class="fill"
+        [style.width.%]="fillPercent()"
+        viewBox="0 0 120 24"
+        preserveAspectRatio="xMinYMid slice"
+        aria-hidden="true"
+      >
         @for (position of stars; track position) {
           <path [attr.d]="STAR_PATH" [attr.transform]="'translate(' + position * 24 + ',0)'" />
         }

@@ -190,6 +190,14 @@ Fixed by exempting textareas from the fixed height: `.mdc-text-field--outlined:h
 
 Verified: `ng lint && npm run build` clean; `npm test` — 224/224 pass, no logic changed. Manual check: rendered `ReviewForm`'s comment field with both a short and a long (multi-line) comment — the wrapper now grows to match the textarea's real height (52px floor confirmed via `getComputedStyle` down to a measured 124px for a 4-line comment), the resize grip sits inside the rounded corner in both cases, and the floating label position is unaffected.
 
+### RatingStars partial-fill clipping (commit 40)
+
+Also found while restyling `/restaurants/:id`, but unrelated to the textarea fix — the partial-fill overlay technique in `RatingStars` (two stacked SVGs, the top one width-clipped to the rating fraction) had no `preserveAspectRatio` set on the fill SVG. The SVG default, `xMidYMid meet`, doesn't crop when a viewport shrinks below its viewBox's aspect ratio — it scales the _entire_ viewBox content down to fit and centers it. So instead of revealing an exact left-aligned slice of the star row, shrinking the fill SVG's width scaled and re-centered all 5 stars into the narrower box, producing compressed, overlapping stars misaligned with the track underneath (confirmed with a zoomed screenshot before the fix).
+
+Fixed with `preserveAspectRatio="xMinYMid slice"` on the fill SVG: `xMin` anchors it to the left edge (matching the track), and `slice` scales to _cover_ rather than _fit_, cropping the overflow instead of shrinking it — the standard technique for a reveal-by-width effect. `RatingStars` is shared across `RestaurantCard`, `MyRestaurantsPage`, and `ReviewsSection`, so this is a cross-cutting bug fix, not specific to the detail page.
+
+Verified: `ng lint && npm run build` clean, no budget warning; `npm test` — 224/224 pass. Manual check: zoomed screenshot of a 3.5 rating now shows exactly 3 full stars, one precisely half-filled, one empty — no overlap, no compression.
+
 ## Models
 
 Each resource has one `*.model.ts` file in `core/models/` holding three things together: the raw `*Dto` interface (snake_case, matching the API's wire format exactly — decimals and dates as strings), the app-facing model (camelCase, decimals parsed to `number`, timestamps parsed to `Date`), and a `to*()` mapper function between them. Resources whose write shape differs from their read shape (`RestaurantWrite` vs. `Restaurant`, `ReviewCreate`/`ReviewUpdate` vs. `Review`) get separate write types rather than one interface with optional fields — see `docs/API.md` for which resources this applies to.
