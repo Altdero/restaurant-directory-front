@@ -36,7 +36,24 @@
   // inlined component styles; no token references it at all). This is the
   // only way to actually change it; `.mdc-text-field--outlined` is MDC's
   // own stable, public class name, not a private/hashed one.
+  //
+  // A fixed 52px breaks any `<textarea matInput>` (e.g. ReviewForm's
+  // comment field): the wrapper got clamped to a single-line height while
+  // the `rows="4"` textarea inside it stayed taller, so the content
+  // overflowed the clipped box and the browser's native resize handle
+  // ended up rendered outside the field's rounded corner instead of inside
+  // it. `:has(.mat-mdc-form-field-textarea-control)` targets exactly that
+  // case — `MatInput` itself applies that class only when
+  // `_isInFormField && _isTextarea` (confirmed in
+  // `@angular/material/fesm2022/input.mjs`, a public host binding, not a
+  // private/hashed class) — and lets the wrapper grow with the textarea's
+  // real height instead, keeping the same 52px as a floor.
   .mdc-text-field--outlined {
     height: 52px;
+
+    &:has(.mat-mdc-form-field-textarea-control) {
+      height: auto;
+      min-height: 52px;
+    }
   }
 }
