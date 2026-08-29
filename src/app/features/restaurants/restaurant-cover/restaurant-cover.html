@@ -24,21 +24,23 @@
 
   <div class="hero-content">
     <h1>{{ restaurant().name }}</h1>
-    <div class="meta">
-      <span>★ {{ restaurant().averageRating | number: '1.1-1' }}</span>
-      <span i18n="@@restaurantHero.reviewCount">({{ restaurant().totalReviews }} reviews)</span>
-      <span aria-hidden="true">·</span>
-      <span>{{ restaurant().priceRange }}</span>
-      <span aria-hidden="true">·</span>
-      <span>{{ restaurant().city }}</span>
+    <div class="meta-category">
+      <div class="meta">
+        <span>★ {{ restaurant().averageRating | number: '1.1-1' }}</span>
+        <span i18n="@@restaurantHero.reviewCount">({{ restaurant().totalReviews }} reviews)</span>
+        <span aria-hidden="true">·</span>
+        <span>{{ restaurant().priceRange }}</span>
+        <span aria-hidden="true">·</span>
+        <span>{{ restaurant().city }}</span>
+      </div>
+      @if (restaurant().categories.length > 0) {
+        <ul class="category-pills">
+          @for (category of restaurant().categories; track category.id) {
+            <li>{{ category.name }}</li>
+          }
+        </ul>
+      }
     </div>
-    @if (restaurant().categories.length > 0) {
-      <ul class="category-pills">
-        @for (category of restaurant().categories; track category.id) {
-          <li>{{ category.name }}</li>
-        }
-      </ul>
-    }
     <p class="description">{{ restaurant().description }}</p>
   </div>
 </div>

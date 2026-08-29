@@ -12,33 +12,37 @@
       (toggleFavorite)="toggleFavorite()"
     />
 
-    <app-restaurant-hero [restaurant]="loadedRestaurant" />
+    <div class="hero-menu-reviews-layout">
+      <div class="menu-reviews">
+        <app-menu-section
+          [menuItems]="menuItemsPage()?.results ?? []"
+          [isLoading]="menuItems.isLoading()"
+          [error]="menuItems.error()"
+        />
 
-    <app-menu-section
-      [menuItems]="menuItemsPage()?.results ?? []"
-      [isLoading]="menuItems.isLoading()"
-      [error]="menuItems.error()"
-    />
+        <app-reviews-section
+          [averageRating]="loadedRestaurant.averageRating"
+          [totalReviews]="loadedRestaurant.totalReviews"
+          [reviews]="reviews()"
+          [isLoading]="reviewsIsLoading()"
+          [error]="reviewsError()"
+          [hasMore]="hasMoreReviews()"
+          [isLoadingMore]="isLoadingMoreReviews()"
+          [isAuthenticated]="isAuthenticated()"
+          [myReview]="myReview()"
+          [loginReturnUrl]="loginReturnUrl()"
+          [isFormOpen]="isReviewFormOpen()"
+          [formPending]="reviewFormPending()"
+          [formError]="reviewFormError()"
+          (loadMore)="loadMoreReviews()"
+          (openForm)="isReviewFormOpen.set(true)"
+          (cancelForm)="isReviewFormOpen.set(false)"
+          (submitForm)="submitReview($event)"
+          (deleteReview)="confirmDeleteReview()"
+        />
+      </div>
 
-    <app-reviews-section
-      [averageRating]="loadedRestaurant.averageRating"
-      [totalReviews]="loadedRestaurant.totalReviews"
-      [reviews]="reviews()"
-      [isLoading]="reviewsIsLoading()"
-      [error]="reviewsError()"
-      [hasMore]="hasMoreReviews()"
-      [isLoadingMore]="isLoadingMoreReviews()"
-      [isAuthenticated]="isAuthenticated()"
-      [myReview]="myReview()"
-      [loginReturnUrl]="loginReturnUrl()"
-      [isFormOpen]="isReviewFormOpen()"
-      [formPending]="reviewFormPending()"
-      [formError]="reviewFormError()"
-      (loadMore)="loadMoreReviews()"
-      (openForm)="isReviewFormOpen.set(true)"
-      (cancelForm)="isReviewFormOpen.set(false)"
-      (submitForm)="submitReview($event)"
-      (deleteReview)="confirmDeleteReview()"
-    />
+      <app-restaurant-hero [restaurant]="loadedRestaurant" class="hero" />
+    </div>
   }
 </div>

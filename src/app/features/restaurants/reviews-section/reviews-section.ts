@@ -34,9 +34,19 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
   ],
   templateUrl: './reviews-section.html',
   styles: `
-    h2 {
-      font-size: 1.625rem;
-      margin: 0 0 1.25rem;
+    .reviews-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        font-size: 1.625rem;
+        margin: 0 0 1.25rem;
+      }
+    }
+
+    .margin-bottom {
+      margin-bottom: 1.25rem;
     }
 
     .summary {
@@ -106,6 +116,13 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
       display: flex;
       flex-direction: column;
       gap: 0.375rem;
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
     }
 
     .review-header {
@@ -134,7 +151,6 @@ import { RatingStars } from '@shared/components/rating-stars/rating-stars';
     .actions {
       display: flex;
       gap: 0.5rem;
-      margin-top: 0.25rem;
     }
 
     .pill {

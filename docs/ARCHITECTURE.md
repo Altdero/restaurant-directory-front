@@ -302,6 +302,12 @@ Both files still carried the old component's single two-paragraph header comment
 
 Verified: `ng lint && npm run build` clean; `npm test` — 224/224 pass (was 215 — 8 new `RestaurantCover`/`RestaurantHero` cases, 1 fixed `opening-hours-table` assertion); `npm run e2e` — 39/40 pass (plus the new favorite-toggle test passing), the one failure the already-documented `restaurant-listing.spec.ts`/`auth.spec.ts` flakes (whichever surfaces that run), reconfirmed clean on a solo rerun both times.
 
+### Restaurant detail layout follow-up (commit 41)
+
+A direct comparison against `design-reference.html`'s `/restaurants/:id` frame: the page was one long vertical stack (cover, hero sidebar, menu, reviews); the reference puts menu+reviews in a main column alongside the address/hours/contact sidebar as a second column. `RestaurantDetailPage` gained a `.hero-menu-reviews-layout` grid — single-column with the sidebar (`order: 1`) above menu/reviews (`order: 2`) below `1024px`, switching to a `1fr 370px` two-column grid with the sidebar second at `1024px` and up. `RestaurantHero`'s `max-width: 24rem` was dropped so it fills its new grid column instead of fighting a second width constraint. `ReviewsSection`'s "my review" card moved its Edit/Delete buttons up next to the header (a `.top` flex row) instead of below the comment, and `ReviewForm`/`OpeningHoursTable` picked up small spacing/alignment fixes (`margin-bottom` on the actions row, full-width + right-aligned hours cells) to match the reference more closely.
+
+Verified: `ng lint && npm run build` clean, no budget warning; `npm test` — 224/224 pass, no logic changed (pure layout/template); `npm run e2e` — 40/40 pass except the already-documented `restaurant-listing.spec.ts` flake, reconfirmed clean on a solo rerun.
+
 ## Review write flow
 
 A user has at most one review per restaurant (server-enforced — see `docs/API.md`), so create and edit are the same UI slot, never two separate flows. `RestaurantDetailPage` derives `myReview` by matching `AuthStore.user()?.id` against the loaded reviews and owns the `create`/`update`/`remove` mutations plus a single `isReviewFormOpen` toggle; `ReviewsSection` (still presentational) derives `otherReviews` by excluding `myReview`, so it's never rendered twice. `ReviewForm` is presentational and mode-agnostic — an input `review: Review | undefined` (present = edit, absent = create) is all it needs; the parent decides which mutation to call, same pattern as `LoginPage`/`RegisterPage` (commit 10).

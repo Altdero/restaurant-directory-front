@@ -38,6 +38,36 @@ const MENU_ITEM_LIMIT = 100;
       max-width: 60rem;
       margin: 0 auto;
       padding: 1.5rem;
+
+      .hero-menu-reviews-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+
+        .menu-reviews {
+          display: flex;
+          flex-direction: column;
+          gap: 2.5rem;
+          order: 2;
+        }
+
+        .hero {
+          order: 1;
+        }
+
+        @media (min-width: 1024px) {
+          flex-direction: row;
+          grid-template-columns: 1fr 370px;
+
+          .menu-reviews {
+            order: 1;
+          }
+
+          .hero {
+            order: 2;
+          }
+        }
+      }
     }
   `,
 })

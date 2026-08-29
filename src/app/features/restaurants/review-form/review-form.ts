@@ -45,6 +45,7 @@ const RATINGS = [1, 2, 3, 4, 5] as const;
     .actions {
       display: flex;
       gap: 0.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .error {

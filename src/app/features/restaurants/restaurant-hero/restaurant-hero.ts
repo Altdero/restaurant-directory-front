@@ -20,7 +20,6 @@ const MAPS_SEARCH_URL = 'https://www.google.com/maps/search/?api=1&query=';
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
-      max-width: 24rem;
       padding: 1.5rem;
       background-color: var(--mat-sys-surface-container-low);
       border: 1px solid var(--mat-sys-outline-variant);

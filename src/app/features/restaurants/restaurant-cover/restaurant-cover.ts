@@ -68,39 +68,56 @@ import { Restaurant } from '@core/models/restaurant.model';
           letter-spacing: -0.02em;
         }
 
-        .meta {
+        .meta-category {
           display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: rgb(255 255 255 / 90%);
-          font: var(--mat-sys-body-medium);
-        }
+          flex-direction: column;
+          gap: 1rem;
 
-        .category-pills {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin: 0;
-          padding: 0;
-          list-style: none;
+          @media (min-width: 1024px) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
 
-          li {
-            height: 1.75rem;
-            padding: 0 0.75rem;
+          .meta {
             display: flex;
             align-items: center;
-            border-radius: var(--mat-sys-corner-full);
-            background-color: rgb(255 255 255 / 18%);
-            border: 1px solid rgb(255 255 255 / 30%);
-            backdrop-filter: blur(4px);
-            color: #fff;
-            font: var(--mat-sys-label-medium);
+            gap: 0.5rem;
+            color: rgb(255 255 255 / 90%);
+            font: var(--mat-sys-body-medium);
+          }
+
+          .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: end;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            @media (min-width: 1024px) {
+              justify-content: start;
+            }
+
+            li {
+              height: 1.75rem;
+              padding: 0 0.75rem;
+              display: flex;
+              align-items: center;
+              border-radius: var(--mat-sys-corner-full);
+              background-color: rgb(255 255 255 / 18%);
+              border: 1px solid rgb(255 255 255 / 30%);
+              backdrop-filter: blur(4px);
+              color: #fff;
+              font: var(--mat-sys-label-medium);
+            }
           }
         }
       }
 
       .description {
-        margin: 0.5rem 0 0;
+        margin: 0;
       }
     }
   `,

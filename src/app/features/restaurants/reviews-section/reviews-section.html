@@ -1,4 +1,19 @@
-<h2 i18n="@@reviewsSection.title">Reviews</h2>
+<div class="reviews-title" [class.margin-bottom]="!myReview()">
+  <h2 i18n="@@reviewsSection.title">Reviews</h2>
+  @if (isAuthenticated()) {
+    @if (!myReview()) {
+      <button
+        mat-stroked-button
+        class="pill"
+        type="button"
+        (click)="openForm.emit()"
+        i18n="@@reviewsSection.writeReview"
+      >
+        Write a review
+      </button>
+    }
+  }
+</div>
 
 @if (totalReviews() > 0) {
   <div class="summary">
@@ -23,36 +38,30 @@
     <div class="review-card my-review">
       <span class="avatar" aria-hidden="true">{{ initials(mine.username) }}</span>
       <div class="review-body">
-        <div class="review-header">
-          <span class="username" i18n="@@reviewsSection.yourReview">Your review</span>
+        <div class="top">
+          <div>
+            <div class="review-header">
+              <span class="username" i18n="@@reviewsSection.yourReview">Your review</span>
+            </div>
+            <app-rating-stars [rating]="mine.rating" />
+          </div>
+          <div class="actions">
+            <button mat-button type="button" (click)="openForm.emit()" i18n="@@reviewsSection.edit">
+              Edit
+            </button>
+            <button
+              mat-button
+              type="button"
+              (click)="deleteReview.emit()"
+              i18n="@@reviewsSection.delete"
+            >
+              Delete
+            </button>
+          </div>
         </div>
-        <app-rating-stars [rating]="mine.rating" />
         <p class="comment">{{ mine.comment }}</p>
-        <div class="actions">
-          <button mat-button type="button" (click)="openForm.emit()" i18n="@@reviewsSection.edit">
-            Edit
-          </button>
-          <button
-            mat-button
-            type="button"
-            (click)="deleteReview.emit()"
-            i18n="@@reviewsSection.delete"
-          >
-            Delete
-          </button>
-        </div>
       </div>
     </div>
-  } @else {
-    <button
-      mat-stroked-button
-      class="pill"
-      type="button"
-      (click)="openForm.emit()"
-      i18n="@@reviewsSection.writeReview"
-    >
-      Write a review
-    </button>
   }
 } @else {
   <p>

@@ -45,6 +45,7 @@ function dayLabel(day: WeekDay): string {
     .opening-hours-table {
       border-collapse: collapse;
       font: var(--mat-sys-body-medium);
+      width: 100%;
     }
 
     th {
@@ -56,6 +57,7 @@ function dayLabel(day: WeekDay): string {
     td {
       color: var(--mat-sys-on-surface-variant);
       padding: 0.125rem 0;
+      text-align: end;
     }
   `,
 })
