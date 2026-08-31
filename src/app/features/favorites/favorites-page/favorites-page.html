@@ -1,23 +1,33 @@
 <div class="favorites-page">
-  <h1 i18n="@@favoritesPage.title">Your favorites</h1>
+  @if (restaurants().length > 0) {
+    <h1 i18n="@@favoritesPage.title">Favorites</h1>
 
-  <app-restaurant-grid
-    [restaurants]="restaurants()"
-    [isLoading]="favorites.isLoading()"
-    [error]="favorites.error()"
-    [favoritedIds]="favoritedIds()"
-    [isAuthenticated]="true"
-    [emptyMessage]="emptyMessage"
-    (retry)="favorites.reload()"
-    (toggleFavorite)="onToggleFavorite($event)"
-  />
-
-  @if (favoritesCount() > pageSize) {
-    <app-paginator-bar
-      [count]="favoritesCount()"
-      [pageSize]="pageSize"
-      [page]="page()"
-      (pageChange)="page.set($event)"
+    <app-restaurant-grid
+      [restaurants]="restaurants()"
+      [isLoading]="favorites.isLoading()"
+      [error]="favorites.error()"
+      [favoritedIds]="favoritedIds()"
+      [isAuthenticated]="true"
+      (retry)="favorites.reload()"
+      (toggleFavorite)="onToggleFavorite($event)"
     />
+
+    @if (favoritesCount() > pageSize) {
+      <app-paginator-bar
+        [count]="favoritesCount()"
+        [pageSize]="pageSize"
+        [page]="page()"
+        (pageChange)="page.set($event)"
+      />
+    }
+  } @else {
+    <div class="no-favorites">
+      <div class="favorites-icon">♥</div>
+      <h2 i18n="@@favoritesPage.emptyMessage">No favorites yet</h2>
+      <p i18n="@@favoritesPage.tapToAddFavorite">
+        Tap the heart on any restaurant to keep it here.
+      </p>
+      <a mat-flat-button routerLink="/restaurants" i18n="@@homePage.heroCta">Browse restaurants</a>
+    </div>
   }
 </div>

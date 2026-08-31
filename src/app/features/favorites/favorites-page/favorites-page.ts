@@ -3,6 +3,8 @@ import { FAVORITE_DATA } from '@core/interfaces/tokens';
 import { FavoritesStore } from '@core/services/favorites/favorites-store';
 import { RestaurantGrid } from '@features/restaurants/restaurant-grid/restaurant-grid';
 import { PaginatorBar } from '@shared/components/paginator-bar/paginator-bar';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 const PAGE_SIZE = 10;
 
@@ -17,7 +19,7 @@ const PAGE_SIZE = 10;
  */
 @Component({
   selector: 'app-favorites-page',
-  imports: [RestaurantGrid, PaginatorBar],
+  imports: [RestaurantGrid, PaginatorBar, MatButton, RouterLink],
   templateUrl: './favorites-page.html',
   styles: `
     .favorites-page {
@@ -32,6 +34,38 @@ const PAGE_SIZE = 10;
     h1 {
       font-size: 2.375rem;
       margin: 0;
+    }
+
+    .no-favorites {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+
+      .favorites-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 999px;
+        background: var(--mat-sys-primary-container);
+        color: var(--mat-sys-primary);
+        font-size: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h2 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.75rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--mat-sys-on-surface-variant);
+      }
     }
   `,
 })
@@ -59,8 +93,6 @@ export class FavoritesPage {
   );
   protected readonly favoritesCount = computed(() => this.favoritesPage()?.count ?? 0);
   protected readonly favoritedIds = this.favoritesStore.favoritedIds;
-
-  protected readonly emptyMessage = $localize`:@@favoritesPage.emptyMessage:You haven't added any favorites yet.`;
 
   protected async onToggleFavorite(restaurantId: string): Promise<void> {
     await this.favoritesStore.toggle(restaurantId);

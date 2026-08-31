@@ -555,14 +555,20 @@
     </unit>
     <unit id="favoritesPage.title">
       <segment>
-        <source>Your favorites</source>
-        <target>Tus favoritos</target>
+        <source>Favorites</source>
+        <target>Mis favoritos</target>
       </segment>
     </unit>
     <unit id="favoritesPage.emptyMessage">
       <segment>
-        <source>You haven&apos;t added any favorites yet.</source>
+        <source>No favorites yet</source>
         <target>Aún no has agregado favoritos.</target>
+      </segment>
+    </unit>
+    <unit id="favoritesPage.tapToAddFavorite">
+      <segment>
+        <source>Tap the heart on any restaurant to keep it here.</source>
+        <target>Toca el corazón de cualquier restaurante para añadirlo aquí.</target>
       </segment>
     </unit>
     <unit id="userMenu.favorites">

@@ -59,7 +59,7 @@ test.describe('favorites', () => {
 
     await page.goto('/en/favorites');
 
-    await expect(page.getByRole('heading', { name: 'Your favorites' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Favorites' })).toBeVisible();
     await expect(page.getByRole('article')).toHaveCount(1);
 
     await mockMethod(page, '/favorites/toggle/', 'POST', { favorited: false });
@@ -67,6 +67,6 @@ test.describe('favorites', () => {
 
     await page.getByRole('button', { name: 'Remove from favorites' }).click();
 
-    await expect(page.getByText("You haven't added any favorites yet.")).toBeVisible();
+    await expect(page.getByText('No favorites yet')).toBeVisible();
   });
 });
