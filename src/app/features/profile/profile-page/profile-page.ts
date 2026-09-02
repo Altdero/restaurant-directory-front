@@ -28,6 +28,7 @@ import { ProfileForm, ProfileFormValue } from '@features/profile/profile-form/pr
     h1 {
       font-size: 2.375rem;
       margin: 0;
+      line-height: 1;
     }
 
     .subtitle {

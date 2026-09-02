@@ -915,8 +915,8 @@
     </unit>
     <unit id="profilePage.title">
       <segment>
-        <source>Your profile</source>
-        <target>Tu perfil</target>
+        <source>Profile</source>
+        <target>Mi perfil</target>
       </segment>
     </unit>
     <unit id="profilePage.subtitle">

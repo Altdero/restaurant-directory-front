@@ -67,6 +67,10 @@ export interface ProfileFormValue {
       margin: 0;
     }
 
+    .margin-bottom {
+      margin-bottom: 1rem;
+    }
+
     .read-only span {
       font-weight: 500;
       color: var(--mat-sys-on-surface);

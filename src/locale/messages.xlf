@@ -703,7 +703,7 @@
         <note category="location">src/app/features/profile/profile-page/profile-page.html:2,3</note>
       </notes>
       <segment>
-        <source>Your profile</source>
+        <source>Profile</source>
       </segment>
     </unit>
     <unit id="profilePage.subtitle">

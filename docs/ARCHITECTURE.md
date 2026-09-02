@@ -438,6 +438,12 @@ The first real use of `ImageUploader`'s `shape` input added back in commit 23 sp
 
 No unit spec for `ProfilePage` — thin orchestration only (same reasoning as `RestaurantFormPage`/`MenuManagerPage`), real coverage from `e2e/specs/profile.spec.ts` (view current values, edit + avatar upload asserted against the real captured PATCH body).
 
+### Profile page follow-up (commit 44)
+
+Small reference-comparison fixes: `h1` shortened from "Your profile" to "Profile" (translation updated: "Mi perfil"), `h1` gained `line-height: 1` (same convention used elsewhere to stop Fraunces's default line-height adding visible extra space above/below a large heading), and the read-only "Role" line gained its own bottom margin so it doesn't sit flush against the first real form field below it.
+
+Verified: `ng lint && npm run build` clean; `npm test` — 224/224 pass, no logic changed; `npx playwright test e2e/specs/profile.spec.ts` — 2/2 pass (neither test asserts the `h1` text or read-only-block spacing, both dynamic-value-driven).
+
 ## SEO
 
 Scoped to the two real public/server-rendered pages this app has: `/restaurants` and `/restaurants/:id`. PLAN.md's original route table also lists `/`, `/categories`, `/categories/:slug` — none were ever built (`CLAUDE.md`'s documented gap: no `path: ''` route exists) — out of scope, same as a 404 page.
