@@ -410,6 +410,12 @@ Bundle budget checked via `stats.json`, not assumed: real eager weight ~718kB (`
 
 This closes out PLAN.md's Phase 3 (commits 22–33): every screen in the app now reads from the same design-system tokens established in commit 22, with five documented, deliberate exceptions where a reference detail was a genuinely different widget or behavior, not a restyle of the same one (the restaurant-list search pill/price-toggle, the auth pages' password-visibility toggle, `ProfilePage`'s Cancel button and faked-disabled email, `MyRestaurantsPage`'s kebab-menu Delete, and this commit's inline-vs-modal menu-item form) — each traded off in favor of not touching tested behavior or expanding scope beyond a pure visual pass, and each recorded here and in PLAN.md at the point it came up rather than silently.
 
+### ImageUploader rules hint (commit 43)
+
+Found while restyling `/profile`, but a shared-component change, not a profile-specific one: `ImageUploader` gave no indication of what file types or size it actually accepts, matching `design-reference.html`'s upload widgets, which all show a small hint line below the button. Added a `<p class="rules">JPG, JPEG or PNG, up to 2 MB</p>` under the existing `.upload-button`, both now wrapped in a new `.upload` flex column so the hint sits directly beneath the button rather than beside it. Affects all three consumers (`ProfileForm`'s avatar, `RestaurantForm`'s cover photo, `MenuItemForm`'s image) identically — no consumer-specific variation, so no new input was needed.
+
+Verified: `ng lint && npm run build` clean; `npm test` — 224/224 pass, no new specs (`ImageUploader` has none, per commit 33's own note — proven by e2e instead); `npx playwright test e2e/specs/profile.spec.ts e2e/specs/owner-crud.spec.ts e2e/specs/menu-management.spec.ts` — 11/11 pass, confirming the new wrapper markup doesn't affect any of the three consumers' file-input interaction (`input[type="file"]`, unaffected by the wrapping `<div>`).
+
 ## Profile
 
 `/profile` (`ProfilePage` → `ProfileForm`), `authGuard` (any authenticated user, not `ownerGuard` — every account has a profile) and `RenderMode.Client`, matching `/favorites`'s reasoning exactly. `UserMenu` already linked here since the favorites commit, with nothing behind it until now.

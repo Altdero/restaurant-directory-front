@@ -43,26 +43,40 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       background: var(--mat-sys-surface-variant);
     }
 
-    .upload-button {
-      display: inline-flex;
-      align-items: center;
+    .upload {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: start;
       gap: 0.5rem;
-      height: 2.5rem;
-      padding: 0 1.25rem;
-      border: 1px solid var(--mat-sys-primary);
-      border-radius: var(--mat-sys-corner-full);
-      color: var(--mat-sys-primary);
-      cursor: pointer;
-      font: var(--mat-sys-label-large);
-    }
 
-    .upload-button.disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
+      .upload-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 2.5rem;
+        padding: 0 1.25rem;
+        border: 1px solid var(--mat-sys-primary);
+        border-radius: var(--mat-sys-corner-full);
+        color: var(--mat-sys-primary);
+        cursor: pointer;
+        font: var(--mat-sys-label-large);
+      }
 
-    input[type='file'] {
-      display: none;
+      .upload-button.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      input[type='file'] {
+        display: none;
+      }
+
+      .rules {
+        margin: 0;
+        font: var(--mat-sys-body-small);
+        color: var(--mat-sys-on-surface-variant);
+      }
     }
   `,
 })

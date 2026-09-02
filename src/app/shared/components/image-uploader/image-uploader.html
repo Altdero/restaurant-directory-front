@@ -12,18 +12,21 @@
     <div class="preview placeholder" [class.circle]="shape() === 'circle'" aria-hidden="true"></div>
   }
 
-  <label class="upload-button" [class.disabled]="isUploading()">
-    <input
-      type="file"
-      accept="image/*"
-      [disabled]="isUploading()"
-      (change)="onFileChange($event)"
-    />
-    @if (isUploading()) {
-      <mat-progress-spinner diameter="16" mode="indeterminate" />
-      <span i18n="@@imageUploader.uploading">Uploading…</span>
-    } @else {
-      <span i18n="@@imageUploader.choose">Choose image</span>
-    }
-  </label>
+  <div class="upload">
+    <label class="upload-button" [class.disabled]="isUploading()">
+      <input
+        type="file"
+        accept="image/*"
+        [disabled]="isUploading()"
+        (change)="onFileChange($event)"
+      />
+      @if (isUploading()) {
+        <mat-progress-spinner diameter="16" mode="indeterminate" />
+        <span i18n="@@imageUploader.uploading">Uploading…</span>
+      } @else {
+        <span i18n="@@imageUploader.choose">Choose image</span>
+      }
+    </label>
+    <p class="rules" i18n="@@imageUploader.rules">JPG, JPEG or PNG, up to 2 MB</p>
+  </div>
 </div>

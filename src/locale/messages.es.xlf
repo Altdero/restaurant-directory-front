@@ -763,6 +763,12 @@
         <target>Subiendo…</target>
       </segment>
     </unit>
+    <unit id="imageUploader.rules">
+      <segment>
+        <source>JPG, JPEG or PNG, up to 2 MB</source>
+        <target>JPG, JPEG o PNG, hasta 2 MB</target>
+      </segment>
+    </unit>
     <unit id="menuItemForm.name">
       <segment>
         <source>Name</source>

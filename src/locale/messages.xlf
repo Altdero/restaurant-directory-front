@@ -1205,6 +1205,14 @@
         <source>Choose image</source>
       </segment>
     </unit>
+    <unit id="imageUploader.rules">
+      <notes>
+        <note category="location">src/app/shared/components/image-uploader/image-uploader.html:30,32</note>
+      </notes>
+      <segment>
+        <source>JPG, JPEG or PNG, up to 2 MB</source>
+      </segment>
+    </unit>
     <unit id="nav.switchLanguage">
       <notes>
         <note category="location">src/app/shared/components/language-switcher/language-switcher.ts:47</note>
